@@ -35,6 +35,26 @@ split_quad <- function(quad, mode)
     ))
   }
 
+filled_quad <- function(quad, points, pre_counter) {
+  if(missing(pre_counter)) {
+    pre_counter <- 0
+  }
+  p_len <- length(points)
+  p_tail <- tail(points, n=p_len-1)
+
+  if(length(points) == 0) {
+    return(0)
+  } else if(pre_counter >= 2) {
+    return(2)
+  } else {
+    if(point_in_quad(quad, points[[1]])) {
+      return(1 + filled_quad(quad, p_tail, pre_counter+1))
+    } else {
+      return(filled_quad(quad, p_tail, pre_counter))
+    }
+  }
+}
+
 apply_to_ellipsi <- function (f, ...)
   f(...)
 
@@ -60,3 +80,5 @@ split_quad(quad1, 4)
 
 apply_splitting_quad(quad1, function(i) i, list)
 apply_splitting_quad(quad1, function(i) point_in_quad(i, point2), list)
+
+filled_quad(quad1, list(point1, point2))
