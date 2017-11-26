@@ -93,9 +93,13 @@ qnode_centerOfMass <- function(node){
   x_mass <- list(unlist(x_list)*unlist(mass_list))
   y_mass <- list(unlist(y_list)*unlist(mass_list))
   mass <- sum(unlist(lapply(mass_list, function(x) if(length(x) > 0) x else 0)))
-  x <- sum(unlist(lapply(x_mass, function(x) if(length(x) > 0) x else 0)))/mass
-  y <- sum(unlist(lapply(y_mass, function(x) if(length(x) > 0) x else 0)))/mass
-  new_particle(new_point(x,y), mass)
+  if (mass == 0) {
+    new_particle(new_point(0,0),0)
+  } else {
+    x <- sum(unlist(lapply(x_mass, function(x) if(length(x) > 0) x else 0)))/mass
+    y <- sum(unlist(lapply(y_mass, function(x) if(length(x) > 0) x else 0)))/mass
+    new_particle(new_point(x,y), mass)
+  }
 }
 
 computeMassDistribution <- function(node) {
