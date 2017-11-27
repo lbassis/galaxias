@@ -46,6 +46,15 @@ qnode_data <- function(data){
   }
 }
 
+qnode_x <- qnode_data("point.x")
+qnode_y <- qnode_data("point.y")
+qnode_mass <- qnode_data("mass")
+qnode_vx <- qnode_data("velocity.x")
+qnode_vy <- qnode_data("velocity.y")
+qnode_fx <- qnode_data("force.x")
+qnode_fy <- qnode_data("force.y")
+qnode_size <- qnode_data("quadrantSize")
+
 qnode_centerOfMass <- function(node){
   node_list = list(node[[2]], node[[3]], node[[4]], node[[5]])
   x_list <- lapply(node_list, qnode_x)
