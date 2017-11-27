@@ -85,7 +85,7 @@ qnode_x <- qnode_data("point.x")
 qnode_y <- qnode_data("point.y")
 qnode_mass <- qnode_data("mass")
 qnode_vx <- qnode_data("velocity.x")
-qnode_vy <- qnode_data("velocity_y")
+qnode_vy <- qnode_data("velocity.y")
 qnode_fx <- qnode_data("force.x")
 qnode_fy <- qnode_data("force.y")
 qnode_size <- qnode_data("quadrantSize")
@@ -103,7 +103,7 @@ qnode_centerOfMass <- function(node){
   } else {
     x <- sum(unlist(lapply(x_mass, function(x) if(length(x) > 0) x else 0)))/mass
     y <- sum(unlist(lapply(y_mass, function(x) if(length(x) > 0) x else 0)))/mass
-    new_particle(new_point(x,y), mass, new_point(0, 0), new_point(0, 0), qnode_size(node))
+    new_particle(new_point(x,y), mass, new_point(qnode_vx(node), qnode_vy(node)), new_point(0, 0), qnode_size(node))
   }
 }
 
@@ -135,22 +135,27 @@ distance_y <- function(node1, node2) (qnode_y(node1) - qnode_y(node2))
 
 # For each particle, calculates the resultant force applied to it by the other particles
 computeForces <- function(root) {
+  particle_setForce <- function(particle, force) {
+    new_particle(new_point(qnode_x(particle), qnode_y(particle)), qnode_mass(particle), new_point(qnode_vx(particle), qnode_vy(particle)), force, qnode_size(particle))
+  }
   computeSingleForce <- function(node, particle) {
     #G <- 6.67408*(10^(-11))
     G <- 1
     fx <- (G*qnode_mass(node)*qnode_mass(particle))/(distance_x(node, particle)^2)
-    if (qnode_x(node) > qnode_x(particle))
+    if (qnode_x(node) < qnode_x(particle))
       fx <- fx*(-1)
+    if (qnode_x(node) == qnode_x(particle))
+      fx <- 0
     fy <- (G*qnode_mass(node)*qnode_mass(particle))/(distance_y(node, particle)^2)
-    if (qnode_y(node) > qnode_y(particle))
+    if (qnode_y(node) < qnode_y(particle))
       fy <- fy*(-1)
+    if (qnode_y(node) == qnode_y(particle))
+      fy <- 0
     new_point(fx, fy)
   }
   # Calculates the resultant force for particle "node"
   computeResultantForce <- function(node, particle) {
     if (qnode_empty(node)) {
-      new_point(0, 0)
-    } else if (qnode_nof_particles(node) == 0) {
       new_point(0, 0)
     } else if (is.data.frame(node)) {
       computeSingleForce(node, particle)
@@ -179,7 +184,9 @@ computeForces <- function(root) {
       node
     } else if (is.data.frame(node)) {
       force <- computeResultantForce(root, node)
-      new_particle(new_point(qnode_x(node), qnode_y(node)), qnode_mass(node), new_point(0, 0), force, qnode_size(node))
+      newNode <- node
+      newNode <- particle_setForce(newNode, force)
+      newNode
     } else {
       newNode <- node
       newNode[[2]] <- computeForces_r(root, node[[2]])
@@ -191,5 +198,10 @@ computeForces <- function(root) {
   }
   computeForces_r(root, root)
 }
-
-print(computeForces(root))
+#root <- new_qnode(new_particle(new_point(10, 10), 20, new_point(0, 0), new_point(0, 0), 1024))
+#root[[2]] <- new_particle(new_point(1, 2), 2, new_point(0, 0), new_point(0, 0), 0)
+#root[[5]] <- new_qnode(new_particle(new_point(5, 5.5), 20, new_point(0, 0), new_point(0, 0), 256))
+#root[[5]][[2]] <- new_particle(new_point(5, 6), 4, new_point(0, 0), new_point(0, 0), 0)
+#root[[5]][[3]] <- new_particle(new_point(5, 5), 5, new_point(0, 0), new_point(0, 0), 0)
+md <- computeMassDistribution(root)
+print(computeForces(md))
