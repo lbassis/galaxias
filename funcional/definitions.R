@@ -152,3 +152,42 @@ computeForces <- function(root) {
 distance <- function(node1, node2) ((qnode_x(node1) - qnode_x(node2))^2 + (qnode_y(node1) - qnode_y(node2))^2)^(1/2)
 distance_x <- function(node1, node2) (qnode_x(node1) - qnode_x(node2))
 distance_y <- function(node1, node2) (qnode_y(node1) - qnode_y(node2))
+
+# quad : data.frame
+#   top_left : point
+#   size : num
+new_quad <- function(top_left, size) data.frame(top_left=top_left, size=size)
+
+quad_from_input <- function(particles) {
+  big_size <- function(p, q) {
+    #print(p["point.x"])
+    #print(q["top_left.x"])
+    
+    print(abs(p["point.x"][[1]] - (q["top_left.x"][[1]] + q["size"][[1]])))
+    print(abs(p["point.y"][[1]] - (q["top_left.y"][[1]] + q["size"][[1]])))
+    
+    max(abs(p["point.x"][[1]] - (q["top_left.x"][[1]] + q["size"][[1]])),
+        abs(p["point.y"][[1]] - (q["top_left.y"][[1]] + q["size"][[1]])))
+  }
+  
+  toppest_point <- function(p,q) new_point(min(q["top_left.x"], p["point.x"]), min(q["top_left.y"], p["point.y"]))
+  
+  spread <- function (points, quad) {
+    l <- length(points)
+    tail <- tail(points, l-1)
+    #    print(quad)
+    #    print(points)
+    #    print(h)
+    #    print(h["point.x"][[1]])
+    
+    if (l == 0) quad else {
+      h <- points[[1]]
+      spread(tail, new_quad(
+        toppest_point(h, quad),
+        max(quad["size"], big_size(h, quad))
+      ))
+    }   
+  }
+  spread(points_from_particles(particles), new_quad(top_left=new_point(0,0), size=0))
+}
+
