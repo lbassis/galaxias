@@ -1,3 +1,6 @@
+library(functional)
+
+
 # point (2D) : data.frame
 #   x : float, y : float
 new_point <- function(x, y) data.frame(x=x, y=y)
@@ -35,25 +38,23 @@ qnode_nof_particles <- function(node) sum(unlist(lapply(qnode_childs(node), func
   if(is.data.frame(c)) 1 else qnode_nof_particles(c)
 })))
 
-qnode_data <- function(data){
-  function(node) {
-    if (is.data.frame(node)) # particle
-      node[data][[1]]
-    else if(!qnode_empty(node)) # non-empty qnode
-      node[[1]][data][[1]]
-    else # empty qnode
-      0
-  }
+qnode_data <- function(data, node){
+  if (is.data.frame(node)) # particle
+    node[data][[1]]
+  else if(!qnode_empty(node)) # non-empty qnode
+    node[[1]][data][[1]]
+  else # empty qnode
+    0
 }
 
-qnode_x <- qnode_data("point.x")
-qnode_y <- qnode_data("point.y")
-qnode_mass <- qnode_data("mass")
-qnode_vx <- qnode_data("velocity.x")
-qnode_vy <- qnode_data("velocity.y")
-qnode_fx <- qnode_data("force.x")
-qnode_fy <- qnode_data("force.y")
-qnode_size <- qnode_data("quadrantSize")
+qnode_x <- Curry(qnode_data, data="point.x")
+qnode_y <- Curry(qnode_data, data="point.y")
+qnode_mass <- Curry(qnode_data, data="mass")
+qnode_vx <- Curry(qnode_data, data="velocity.x")
+qnode_vy <- Curry(qnode_data, data="velocity.y")
+qnode_fx <- Curry(qnode_data, data="force.x")
+qnode_fy <- Curry(qnode_data, data="force.y")
+qnode_size <- Curry(qnode_data, data="quadrantSize")
 
 qnode_centerOfMass <- function(node){
   node_list = list(node[[2]], node[[3]], node[[4]], node[[5]])
