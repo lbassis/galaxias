@@ -205,7 +205,20 @@ updatePositionAndVelocity <- function(node, deltaT) {
   }
 }
 
-
+qnode_toList <- function (node) {
+  if (qnode_empty(node)) {
+    list()
+  } else if (is.data.frame(node)) {
+    list(node)
+  } else {
+    newNode <- node
+    newNode[[2]] <- qnode_toList(node[[2]])
+    newNode[[3]] <- qnode_toList(node[[3]])
+    newNode[[4]] <- qnode_toList(node[[4]])
+    newNode[[5]] <- qnode_toList(node[[5]])
+    c(newNode[[2]], newNode[[3]], newNode[[4]], newNode[[5]])
+  }
+}
 
 
 

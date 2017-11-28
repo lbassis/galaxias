@@ -24,4 +24,9 @@ print(qnode_nof_particles(root))
 #root[[5]][[3]] <- new_particle(new_point(5, 5), 5, new_point(0, 0), new_point(0, 0), 0)
 md <- computeMassDistribution(root)
 cf <- computeForces(md)
-print(updatePositionAndVelocity(cf, 1))
+upv <- updatePositionAndVelocity(cf, 1)
+print(upv)
+
+print("List of particles: ")
+
+print(qnode_toList(upv))
