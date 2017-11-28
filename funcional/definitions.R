@@ -100,14 +100,16 @@ computeForces <- function(root) {
   computeSingleForce <- function(node, particle) {
     #G <- 6.67408*(10^(-11))
     G <- 1
-    fx <- (G*qnode_mass(node)*qnode_mass(particle))/(distance_x(node, particle)^2)
-    if (qnode_x(node) < qnode_x(particle))
-      fx <- fx*(-1)
+    m1 <- qnode_mass(node)
+    m2 <- qnode_mass(particle)
+    d <- distance(node, particle)
+    dx <- distance_x(node, particle)
+    dy <- distance_y(node, particle)
+    f <- (G*qnode_mass(node)*qnode_mass(particle))/(distance(node, particle)^2)
+    fx <- f*dx/d
     if (qnode_x(node) == qnode_x(particle))
       fx <- 0
-    fy <- (G*qnode_mass(node)*qnode_mass(particle))/(distance_y(node, particle)^2)
-    if (qnode_y(node) < qnode_y(particle))
-      fy <- fy*(-1)
+    fy <- f*dy/d
     if (qnode_y(node) == qnode_y(particle))
       fy <- 0
     new_point(fx, fy)
@@ -161,3 +163,49 @@ computeForces <- function(root) {
 distance <- function(node1, node2) ((qnode_x(node1) - qnode_x(node2))^2 + (qnode_y(node1) - qnode_y(node2))^2)^(1/2)
 distance_x <- function(node1, node2) (qnode_x(node1) - qnode_x(node2))
 distance_y <- function(node1, node2) (qnode_y(node1) - qnode_y(node2))
+
+updatePositionAndVelocity <- function(node, deltaT) {
+  particle_setPositionAndVelocity <- function (particle, point, velocity) {
+    new_particle(point, qnode_mass(particle), velocity, new_point(qnode_fx(particle), qnode_fy(particle)), qnode_size(particle))
+  }
+  computeAcceleration <- function(node) {
+    mass <- qnode_mass(node)
+    if (mass == 0) {
+      new_point(0, 0)
+    } else {
+      ax <- qnode_fx(node)/mass
+      ay <- qnode_fy(node)/mass
+      new_point(ax, ay)
+    }
+  }
+  if (qnode_empty(node)){
+    node
+  } else if (is.data.frame(node)) {
+    a <- computeAcceleration(node)
+    ax <- a$x
+    ay <- a$y
+    vx <- qnode_vx(node)
+    vy <- qnode_vy(node)
+    calcVelocityComponent <- function (v, a, t) (v + a*t)
+    newVx <- calcVelocityComponent(vx, ax, deltaT)
+    newVy <- calcVelocityComponent(vy, ay, deltaT)
+    calcPositionComponent <- function (v, a, t, pos) (a*(t^2)/2 + v*t + pos)
+    newX <- calcPositionComponent(vx, ax, deltaT, qnode_x(node))
+    newY <- calcPositionComponent(vy, ay, deltaT, qnode_y(node))
+    newNode <- node
+    newNode <- particle_setPositionAndVelocity(node, new_point(newX, newY), new_point(newVx, newVy))
+    newNode
+  } else {
+    newNode <- node
+    newNode[[2]] <- updatePositionAndVelocity(node[[2]], deltaT)
+    newNode[[3]] <- updatePositionAndVelocity(node[[3]], deltaT)
+    newNode[[4]] <- updatePositionAndVelocity(node[[4]], deltaT)
+    newNode[[5]] <- updatePositionAndVelocity(node[[5]], deltaT)
+    newNode
+  }
+}
+
+
+
+
+
