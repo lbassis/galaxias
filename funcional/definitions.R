@@ -208,7 +208,7 @@ qnode_toList <- function (node) {
   if (qnode_empty(node)) {
     list()
   } else if (qnode_degree(node) == 0) {
-    list(node[[1]])
+    list(node)
   } else {
     newNode <- node
     newNode[[2]] <- qnode_toList(node[[2]])
