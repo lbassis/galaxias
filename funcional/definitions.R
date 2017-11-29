@@ -1,3 +1,6 @@
+library(functional)
+
+
 # point (2D) : data.frame
 #   x : float, y : float
 new_point <- function(x, y) data.frame(x=x, y=y)
@@ -35,26 +38,27 @@ qnode_nof_particles <- function(node) sum(unlist(lapply(qnode_childs(node), func
   if(is.data.frame(c)) 1 else qnode_nof_particles(c)
 })))
 
-qnode_data <- function(data){
-  function(node) {
-    if (is.data.frame(node)) # particle
-      node[data][[1]]
-    else if(!qnode_empty(node)) # non-empty qnode
-      node[[1]][data][[1]]
-    else # empty qnode
-      0
-  }
+# gets the "data" column from node's data.frame
+qnode_data <- function(data, node){
+  if (is.data.frame(node)) # particle
+    node[data][[1]]
+  else if(!qnode_empty(node)) # non-empty qnode
+    node[[1]][data][[1]]
+  else # empty qnode
+    0
 }
 
-qnode_x <- qnode_data("point.x")
-qnode_y <- qnode_data("point.y")
-qnode_mass <- qnode_data("mass")
-qnode_vx <- qnode_data("velocity.x")
-qnode_vy <- qnode_data("velocity.y")
-qnode_fx <- qnode_data("force.x")
-qnode_fy <- qnode_data("force.y")
-qnode_size <- qnode_data("quadrantSize")
+# gets a pre-defined "data" column from node's data.frame
+qnode_x <- Curry(qnode_data, data="point.x")
+qnode_y <- Curry(qnode_data, data="point.y")
+qnode_mass <- Curry(qnode_data, data="mass")
+qnode_vx <- Curry(qnode_data, data="velocity.x")
+qnode_vy <- Curry(qnode_data, data="velocity.y")
+qnode_fx <- Curry(qnode_data, data="force.x")
+qnode_fy <- Curry(qnode_data, data="force.y")
+qnode_size <- Curry(qnode_data, data="quadrantSize")
 
+# calculates the node's center of mass and its position
 qnode_centerOfMass <- function(node){
   node_list = list(node[[2]], node[[3]], node[[4]], node[[5]])
   x_list <- lapply(node_list, qnode_x)
@@ -63,7 +67,7 @@ qnode_centerOfMass <- function(node){
   x_mass <- list(unlist(x_list)*unlist(mass_list))
   y_mass <- list(unlist(y_list)*unlist(mass_list))
   mass <- sum(unlist(lapply(mass_list, function(x) if(length(x) > 0) x else 0)))
-  if (mass == 0) {
+  if (mass == 0) { # if the mass is equal to 0, avoid division by 0
     new_particle(new_point(0,0),0, new_point(0, 0), new_point(0, 0), 0)
   } else {
     x <- sum(unlist(lapply(x_mass, function(x) if(length(x) > 0) x else 0)))/mass
@@ -72,8 +76,9 @@ qnode_centerOfMass <- function(node){
   }
 }
 
+# calculates the center of mass for all qnodes
 computeMassDistribution <- function(node) {
-  if (is.data.frame(node) || qnode_empty(node))
+  if (is.data.frame(node) || qnode_empty(node)) # if the node is already a particle or if it is empty, there's no need to do anything
     node
   else {
     newNode <- node
@@ -81,7 +86,7 @@ computeMassDistribution <- function(node) {
     newNode[[3]] <- computeMassDistribution(node[[3]])
     newNode[[4]] <- computeMassDistribution(node[[4]])
     newNode[[5]] <- computeMassDistribution(node[[5]])
-    if (qnode_nof_particles(node) == 0) {
+    if (qnode_nof_particles(node) == 0) { # this should not happen, but if there is an empty qnode, there's no need to do anything
       particle <- new_particle(new_point(0, 0), 0, new_point(0, 0), new_point(0, 0), qnode_size(node))
       newNode <- list(particle, node[[2]], node[[3]], node[[4]], node[[5]])
     } else {
@@ -125,7 +130,7 @@ computeForces <- function(root) {
       d <- qnode_size(node)
       theta <- 1
       if (d/r < theta) {
-        return(computeSingleForce(node, particle))
+        computeSingleForce(node, particle)
       } else {
         f1 <- computeResultantForce(node[[2]], particle)
         f2 <- computeResultantForce(node[[3]], particle)
@@ -205,7 +210,21 @@ updatePositionAndVelocity <- function(node, deltaT) {
   }
 }
 
-
+# extracts a list of particles from a quadtree
+qnode_toList <- function (node) {
+  if (qnode_empty(node)) {
+    list()
+  } else if (is.data.frame(node)) {
+    list(node)
+  } else {
+    newNode <- node
+    newNode[[2]] <- qnode_toList(node[[2]])
+    newNode[[3]] <- qnode_toList(node[[3]])
+    newNode[[4]] <- qnode_toList(node[[4]])
+    newNode[[5]] <- qnode_toList(node[[5]])
+    c(newNode[[2]], newNode[[3]], newNode[[4]], newNode[[5]])
+  }
+}
 
 
 
