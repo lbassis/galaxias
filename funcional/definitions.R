@@ -203,8 +203,8 @@ updatePositionAndVelocity <- function(node, deltaT) {
   }
 }
 
-# extracts a list of particles from a quadtree
-qnode_toList <- function (node) {
+# extracts a list of external qnodes from a quadtree
+qnode_qList <- function (node) {
   if (qnode_empty(node)) {
     list()
   } else if (qnode_degree(node) == 0) {
