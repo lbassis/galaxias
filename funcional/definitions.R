@@ -40,7 +40,7 @@ qnode_nof_particles <- function(node) sum(unlist(lapply(qnode_childs(node), func
 
 # gets the "data" column from node's data.frame
 qnode_data <- function(data, node){
-  if (is.data.frame(node)) # particle
+  if(is.data.frame(node)) # particle
     node[data][[1]]
   else if(!qnode_empty(node)) # non-empty qnode
     node[[1]][data][[1]]
@@ -78,7 +78,7 @@ qnode_centerOfMass <- function(node){
 
 # calculates the center of mass for all qnodes
 computeMassDistribution <- function(node) {
-  if (is.data.frame(node) || qnode_empty(node)) # if the node is already a particle or if it is empty, there's no need to do anything
+  if (qnode_degree(node) == 0 || qnode_empty(node)) # if the node is already a particle or if it is empty, there's no need to do anything
     node
   else {
     newNode <- node
@@ -86,13 +86,8 @@ computeMassDistribution <- function(node) {
     newNode[[3]] <- computeMassDistribution(node[[3]])
     newNode[[4]] <- computeMassDistribution(node[[4]])
     newNode[[5]] <- computeMassDistribution(node[[5]])
-    if (qnode_nof_particles(node) == 0) { # this should not happen, but if there is an empty qnode, there's no need to do anything
-      particle <- new_particle(new_point(0, 0), 0, new_point(0, 0), new_point(0, 0), qnode_size(node))
-      newNode <- list(particle, node[[2]], node[[3]], node[[4]], node[[5]])
-    } else {
-      particle <- qnode_centerOfMass(newNode)
-      newNode <- list(particle, newNode[[2]], newNode[[3]], newNode[[4]], newNode[[5]])
-    }
+    particle <- qnode_centerOfMass(newNode)
+    newNode <- list(particle, newNode[[2]], newNode[[3]], newNode[[4]], newNode[[5]])
     newNode
   }
 }
@@ -123,14 +118,14 @@ computeForces <- function(root) {
   computeResultantForce <- function(node, particle) {
     if (qnode_empty(node)) {
       new_point(0, 0)
-    } else if (is.data.frame(node)) {
-      computeSingleForce(node, particle)
+    } else if (qnode_degree(node) == 0) {
+      computeSingleForce(node[[1]], particle)
     } else {
       r <- distance(node, particle)
       d <- qnode_size(node)
       theta <- 1
       if (d/r < theta) {
-        computeSingleForce(node, particle)
+        computeSingleForce(node[[1]], particle)
       } else {
         f1 <- computeResultantForce(node[[2]], particle)
         f2 <- computeResultantForce(node[[3]], particle)
@@ -148,11 +143,10 @@ computeForces <- function(root) {
   computeForces_r <- function(root, node) {
     if (qnode_empty(node)) {
       node
-    } else if (is.data.frame(node)) {
-      force <- computeResultantForce(root, node)
-      newNode <- node
-      newNode <- particle_setForce(newNode, force)
-      newNode
+    } else if (qnode_degree(node) == 0) {
+      force <- computeResultantForce(root, node[[1]])
+      particle <- particle_setForce(node[[1]], force)
+      newNode <- list(particle, node[[2]], node[[3]], node[[4]], node[[5]])
     } else {
       newNode <- node
       newNode[[2]] <- computeForces_r(root, node[[2]])
@@ -185,7 +179,7 @@ updatePositionAndVelocity <- function(node, deltaT) {
   }
   if (qnode_empty(node)){
     node
-  } else if (is.data.frame(node)) {
+  } else if (qnode_degree(node) == 0) {
     a <- computeAcceleration(node)
     ax <- a$x
     ay <- a$y
@@ -197,9 +191,8 @@ updatePositionAndVelocity <- function(node, deltaT) {
     calcPositionComponent <- function (v, a, t, pos) (a*(t^2)/2 + v*t + pos)
     newX <- calcPositionComponent(vx, ax, deltaT, qnode_x(node))
     newY <- calcPositionComponent(vy, ay, deltaT, qnode_y(node))
-    newNode <- node
-    newNode <- particle_setPositionAndVelocity(node, new_point(newX, newY), new_point(newVx, newVy))
-    newNode
+    particle <- particle_setPositionAndVelocity(node, new_point(newX, newY), new_point(newVx, newVy))
+    newNode <- list(particle, node[[2]], node[[3]], node[[4]], node[[5]])
   } else {
     newNode <- node
     newNode[[2]] <- updatePositionAndVelocity(node[[2]], deltaT)
@@ -214,8 +207,8 @@ updatePositionAndVelocity <- function(node, deltaT) {
 qnode_toList <- function (node) {
   if (qnode_empty(node)) {
     list()
-  } else if (is.data.frame(node)) {
-    list(node)
+  } else if (qnode_degree(node) == 0) {
+    list(node[[1]])
   } else {
     newNode <- node
     newNode[[2]] <- qnode_toList(node[[2]])
