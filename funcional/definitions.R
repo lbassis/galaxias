@@ -165,43 +165,42 @@ distance_y <- function(node1, node2) (qnode_y(node1) - qnode_y(node2))
 
 # quad : data.frame
 #   top_left : point
-#   size : num
+#   bot_right : point
 new_quad <- function(top_left, size) data.frame(top_left=top_left, size=size)
 
 quad_from_input <- function(particles) {
-  big_size <- function(p, q) {
-    #print(p["point.x"])
-    #print(q["top_left.x"])
+  new_size <- function(top, bot) {
+    max(abs(top["x"] - bot["x"]), abs(top["y"] - bot["y"]))
     
-    print(abs(p["point.x"][[1]] - (q["top_left.x"][[1]] + q["size"][[1]])))
-    print(abs(p["point.y"][[1]] - (q["top_left.y"][[1]] + q["size"][[1]])))
-    
-    max(abs(p["point.x"][[1]] - (q["top_left.x"][[1]] + q["size"][[1]])),
-        abs(p["point.y"][[1]] - (q["top_left.y"][[1]] + q["size"][[1]])))
   }
   
-  toppest_point <- function(p,q) new_point(min(q["top_left.x"], p["point.x"]), min(q["top_left.y"], p["point.y"]))
+  best_point <- function(p,q,fun) new_point(fun(q["top_left.x"], p["point.x"]), fun(q["top_left.y"], p["point.y"]))
   
   points_from_particles <- function(particles) {
     l <- length(particles)
     
     if(l==0) list() else
-      c(list(particles[[1]]), points_from_particles(tail(particles, l-1)))
+      c(list(new_point(particles[[1]]["point.x"], particles[[1]]["point.y"])), points_from_particles(tail(particles, l-1)))
   }
   
   spread <- function (points, quad) {
     l <- length(points)
     tail <- tail(points, l-1)
     #    print(quad)
-    #    print(points)
+        print(points)
     #    print(h)
     #    print(h["point.x"][[1]])
     
     if (l == 0) quad else {
-      h <- points[[1]]
+      h <- new_point(points[[1]]["point.x"], points[[1]]["point.y"])
+      #print(h)
+      
+      old_bottest <- new_point(h["point.x"]+quad["size"], h["point.y"]+quad["size"])
+      toppest <- best_point(h, quad, min)
+      
       spread(tail, new_quad(
-        toppest_point(h, quad),
-        max(quad["size"], big_size(h, quad))
+        toppest,
+        new_size(toppest, old_bottest)
       ))
     }   
   }
