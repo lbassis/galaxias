@@ -26,13 +26,6 @@ qnode_childs <- function(node) if (!qnode_empty(node)) tail(node, length(node)-1
 qnode_degree <- function(node) Reduce("+", lapply(qnode_childs(node), function(c) as.integer(!qnode_empty(c))))
 qnode_external <- function(node) qnode_degree(node) == 0
 
-qnode_insert <- function(node, particle) {
-  if (qnode_empty(node)) data.frame(
-    origin = node$origin, shape = node$shape,
-    particle = particle
-  )
-}
-
 # recursively counts the number of particles in a quadrant
 qnode_nof_particles <- function(node) sum(unlist(lapply(qnode_childs(node), function(c) {
   if (length(c) == 0) 0
