@@ -24,6 +24,7 @@ new_qnode <- function(particle)
 qnode_empty <- function(node) length(node) == 0
 qnode_childs <- function(node) if (!qnode_empty(node)) tail(node, length(node)-1)
 qnode_degree <- function(node) Reduce("+", lapply(qnode_childs(node), function(c) as.integer(!qnode_empty(c))))
+qnode_external <- function(node) qnode_degree(node) == 0
 
 qnode_insert <- function(node, particle) {
   if (qnode_empty(node)) data.frame(
@@ -188,6 +189,13 @@ quad_from_input <- function(particles) {
   
   toppest_point <- function(p,q) new_point(min(q["top_left.x"], p["point.x"]), min(q["top_left.y"], p["point.y"]))
   
+  points_from_particles <- function(particles) {
+    l <- length(particles)
+    
+    if(l==0) list() else
+      c(list(particles[[1]]), points_from_particles(tail(particles, l-1)))
+  }
+  
   spread <- function (points, quad) {
     l <- length(points)
     tail <- tail(points, l-1)
@@ -205,6 +213,13 @@ quad_from_input <- function(particles) {
     }   
   }
   spread(points_from_particles(particles), new_quad(top_left=new_point(0,0), size=0))
+}
+
+# given a qnode, its quadrant info (top_left, size) and a particle
+#   returns a new qnode, with particle inserted at 
+qnode_insert <- function(qnode, rootquad, particle) {
+  if(qnode_empty(qnode)) new_qnode(particle) else 
+    list()
 }
 
 updatePositionAndVelocity <- function(node, deltaT) {
@@ -253,6 +268,7 @@ qnode_toList <- function (node) {
   if(qnode_empty(node)) list() else
     c(list(node[[1]]), qnode_toList(node[[2]]), qnode_toList(node[[3]]), qnode_toList(node[[4]]), qnode_toList(node[[5]]))
 }
+
 
 
 
