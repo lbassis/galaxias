@@ -324,6 +324,8 @@ qnode_qList <- function (node) {
     newNode[[5]] <- qnode_toList(node[[5]])
     c(newNode[[2]], newNode[[3]], newNode[[4]], newNode[[5]])
   }
+}
+
 # extracts a list of particles from a quadtree
 qnode_toList <- function (node) {
   if(qnode_empty(node)) list() else
