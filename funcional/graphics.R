@@ -1,6 +1,4 @@
 library(plotrix)
-library(functional)
-library(magrittr)
 
 draw_particle <- function(node) {
   draw.circle(qnode_x(node), qnode_y(node), qnode_mass(node), col="red", nv=1000, border = NA,lty=1,lwd=1)
@@ -37,18 +35,46 @@ update_positions <- function(nodes) {
 p1 <- new_particle(new_point(0.5, 0.5), 0.01, new_point(0.01, 0), new_point(0, 0), 0)
 print(p1)
 p2 <- new_particle(new_point(0.3, 0.2), 0.03, new_point(0.01, -0.01), new_point(0, 0), 0)
+p3 <- new_particle(new_point(0.1, 0.9), 0.05, new_point(-0.01, -0.01), new_point(0, 0), 0)
+p4 <- new_particle(new_point(0.0, 0.0), 0.03, new_point(-0.01, -0.01), new_point(0, 0), 0)
+p5 <- new_particle(new_point(0.7, 0.7), 0.07, new_point(-0.02, -0.01), new_point(0, 0), 0)
+p6 <- new_particle(new_point(0.2, 0.9), 0.02, new_point(-0.01, -0.01), new_point(0, 0), 0)
+
 n1 <- list(p1, list(), list(), list(), list())
 n2 <- list(p2, list(), list(), list(), list())
-particles <- c(n1, n2)
+n3 <- list(p3, list(), list(), list(), list())
+n4 <- list(p4, list(), list(), list(), list())
+n5 <- list(p5, list(), list(), list(), list())
+n6 <- list(p6, list(), list(), list(), list())
 
-plot.new() # [0, 1]²
-frame()
 
-drawing_loop <- function(particles) {
-  draw_particles(particles)
-  Sys.sleep(0.1)
-  erase_particles(particles)
-  drawing_loop(update_positions(particles))
-}
+particles <- c(n1, n2, n3, n4, n5, n6)
+
+
+drawing_loop <- function(particles, iteractions, name) {
   
-drawing_loop(particles)
+  if (iteractions == 0) {
+    system("convert -delay 10 *.jpg result.gif")
+    # cleaning up
+    file.remove(list.files(pattern=".jpg"))
+  }
+  
+  else {
+    name <- paste(name, "a")
+    filename <- paste(name, ".jpg")
+    png(filename = filename)
+    plot.new() # [0, 1]??
+    frame()
+    draw_particles(particles)
+    dev.off()
+    particles <- update_positions(particles)
+    drawing_loop(particles, iteractions-1, name)
+  }
+}
+
+draw <- function(particles, iteractions) {
+  #setwd("/projects/galaxias/gifs")
+  invisible(drawing_loop(particles, iteractions, "a"))
+}
+
+draw(particles, 60)
