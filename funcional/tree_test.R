@@ -45,5 +45,5 @@ p_list = qnode_toList(root)
 #print(nroot)
 
 nroot = list_toQnode(qnode_toList(root))
-print(nroot)
-print(qnode_toList(nroot))
+#print(nroot)
+#print(qnode_toList(nroot))

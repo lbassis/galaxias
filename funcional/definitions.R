@@ -49,7 +49,7 @@ quad_from_input <- function(particles) {
     if (l == 0) quad else {
       #h <- new_point(points[[1]]["point.x"], points[[1]]["point.y"])
       h <- new_point(points[[1]]["x"][[1]], points[[1]]["y"][[1]])
-      print(quad)
+      #print(quad)
       quad_top <- new_point(quad["top_left.x"][[1]], quad["top_left.y"][[1]])
 
       toppest <- best_point(h, quad_top, min)
@@ -64,8 +64,7 @@ quad_from_input <- function(particles) {
   p <- points_from_particles(particles)
   l <- length(p)
   if (l == 0) new_quad(top_left=new_point(0,0), size=0) else
-    print(p)
-  spread(p, new_quad(top_left=new_point(p[[1]]["x"][[1]], p[[1]]["y"][[1]]), size=0))
+    spread(p, new_quad(top_left=new_point(p[[1]]["x"][[1]], p[[1]]["y"][[1]]), size=0))
 }
 quad_sub <- function(quad, sub_index) {
   half_size <- quad["size"][[1]]/2
