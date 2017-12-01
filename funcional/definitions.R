@@ -333,6 +333,6 @@ simulationStep <- 1 # 1 second between each update
 # evaluates updatePositionAndVelocity for deltaT=simulationStep using Curry from library(functional)
 updatePositionAndVelocityForSimulationStep <- Curry(updatePositionAndVelocity, deltaT=simulationStep)
 # composes all functions of the COMPUTATION part into a single function, using Compose from library(functional)
-computation <- Compose(computeMassDistribution, computeForces, updatePositionAndVelocityForSimulationStep, qnode_toList)
+computation <- Compose(computeMassDistribution, computeForces, updatePositionAndVelocityForSimulationStep, qnode_toqList)
 
 groupingAndComputation <- Compose(list_toQnode, computation)

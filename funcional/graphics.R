@@ -1,4 +1,5 @@
 library(plotrix)
+source("funcional/definitions.R")
 
 draw_particle <- function(node) {
   draw.circle(qnode_x(node), qnode_y(node), qnode_mass(node), col="red", nv=1000, border = NA,lty=1,lwd=1)
@@ -51,7 +52,7 @@ n6 <- list(p6, list(), list(), list(), list())
 particles <- c(n1, n2, n3, n4, n5, n6)
 
 
-drawing_loop <- function(particles, iteractions, name) {
+drawing_loop <- function(particles, iteractions, name, updatePosAndVel) {
   
   if (iteractions == 0) {
     system("convert -delay 10 *.jpg result.gif")
@@ -66,14 +67,14 @@ drawing_loop <- function(particles, iteractions, name) {
     frame()
     draw_particles(particles)
     dev.off()
-    particles <- update_positions(particles)
+    particles <- updatePosAndVel(particles_toqList(particles))
     drawing_loop(particles, iteractions-1, name)
   }
 }
 
-draw <- function(particles, iteractions) {
+draw <- function(particles, iteractions, updatePosAndVel) {
   #setwd("/projects/galaxias/gifs")
-  invisible(drawing_loop(normalize_masses(particles), iteractions, "a"))
+  invisible(drawing_loop(normalize_masses(particles), iteractions, "a", updatePosAndVel))
 }
 
 greatest_mass <- function(particles, current_greatest) {
@@ -114,4 +115,4 @@ normalize_masses <- function(particles) {
 }
 
 #particles <- normalize_masses(particles)
-#draw(particles, 60)
+draw(particles, 60, groupingAndComputation)
