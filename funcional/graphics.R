@@ -33,12 +33,12 @@ update_positions <- function(nodes) {
   return(invisible(lapply(nodes, update_position)))
 }
 
-p1 <- new_particle(new_point(0.5, 0.5), 0.01, new_point(0.01, 0), new_point(0, 0), 0)
-p2 <- new_particle(new_point(0.3, 0.2), 0.03, new_point(0.01, -0.01), new_point(0, 0), 0)
-p3 <- new_particle(new_point(0.1, 0.9), 0.05, new_point(-0.01, -0.01), new_point(0, 0), 0)
-p4 <- new_particle(new_point(0.0, 0.0), 0.03, new_point(-0.01, -0.01), new_point(0, 0), 0)
-p5 <- new_particle(new_point(0.7, 0.7), 0.07, new_point(-0.02, -0.01), new_point(0, 0), 0)
-p6 <- new_particle(new_point(0.2, 0.9), 0.02, new_point(-0.01, -0.01), new_point(0, 0), 0)
+p1 <- new_particle(new_point(0.5, 0.5), 0.01, new_point(0.0, 0), new_point(0, 0), 0)
+p2 <- new_particle(new_point(0.3, 0.2), 0.03, new_point(0.0, -0.0), new_point(0, 0), 0)
+p3 <- new_particle(new_point(0.1, 0.9), 0.05, new_point(-0.0, -0.0), new_point(0, 0), 0)
+p4 <- new_particle(new_point(0.0, 0.0), 0.03, new_point(-0.0, -0.0), new_point(0, 0), 0)
+p5 <- new_particle(new_point(0.7, 0.7), 0.07, new_point(-0.0, -0.0), new_point(0, 0), 0)
+p6 <- new_particle(new_point(0.2, 0.9), 0.02, new_point(-0.0, -0.0), new_point(0, 0), 0)
 
 n1 <- list(p1, list(), list(), list(), list())
 n2 <- list(p2, list(), list(), list(), list())
@@ -54,7 +54,7 @@ particles <- list(n1, n2, n3, n4, n5, n6)
 drawing_loop <- function(particles, iteractions, name, updatePosAndVel) {
   
   if (iteractions == 0) {
-    system("convert -delay 100 *.jpg result.gif")
+    system("convert -delay 10 *.jpg result.gif")
     file.remove(list.files(pattern=".jpg"))
   }
   
