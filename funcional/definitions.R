@@ -310,7 +310,7 @@ updatePositionAndVelocity <- function(node, deltaT) {
 }
 
 # extracts a list of external qnodes from a quadtree
-qnode_qList <- function (node) {
+qnode_toqList <- function (node) {
   if (qnode_empty(node)) {
     list()
   } else if (qnode_degree(node) == 0) {
@@ -326,3 +326,13 @@ qnode_toList <- function (node) {
     if (qnode_external(node)) list(node[[1]]) else
     c(qnode_toList(node[[2]]), qnode_toList(node[[3]]), qnode_toList(node[[4]]), qnode_toList(node[[5]]))
 }
+
+particles_toqList <- function(particles) lapply(particles, new_qnode)
+
+simulationStep <- 1 # 1 second between each update
+# evaluates updatePositionAndVelocity for deltaT=simulationStep using Curry from library(functional)
+updatePositionAndVelocityForSimulationStep <- Curry(updatePositionAndVelocity, deltaT=simulationStep)
+# composes all functions of the COMPUTATION part into a single function, using Compose from library(functional)
+computation <- Compose(computeMassDistribution, computeForces, updatePositionAndVelocityForSimulationStep, qnode_toList)
+
+groupingAndComputation <- Compose(list_toQnode, computation)

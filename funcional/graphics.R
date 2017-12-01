@@ -73,7 +73,7 @@ drawing_loop <- function(particles, iteractions, name) {
 
 draw <- function(particles, iteractions) {
   #setwd("/projects/galaxias/gifs")
-  invisible(drawing_loop(particles, iteractions, "a"))
+  invisible(drawing_loop(normalize_masses(particles), iteractions, "a"))
 }
 
 greatest_mass <- function(particles, current_greatest) {
