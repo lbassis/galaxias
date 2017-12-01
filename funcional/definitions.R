@@ -78,7 +78,7 @@ quad_sub <- function(quad, sub_index) {
 new_particle <- function(point, mass, velocity, force, quadrantSize, ...) data.frame(point=point, mass=mass, velocity=velocity, force=force, quadrantSize=quadrantSize)
 
 # ba mas que inferno na moral
-particle_set_qsize = function(particle, qsize) new_particle(particle_to_point(particle), particle["mass"][[1]], new_point(particle["velocity.x"][[1]], particle["velocity.y"][[1]]), new_point(particle["force.x"][[1]], particle["force.y"][[1]]), qsize)
+particle_set_qsize = function(particle, qsize) new_particle(particle_to_point(particle), particle["mass"][[1]], new_point(particle["velocity.x"][[1]], particle["velocity.y"][[1]]), new_point(particle["force.x"][[1]], particle["force.y"][[1]]), qsize[[1]])
 particle_to_point <- function(particle) new_point(particle["point.x"][[1]], particle["point.y"][[1]])
 
 # hm eh de boas aninhar data.frame, desde que a dimensionalidade do valor de cada coluna ("chave")
