@@ -133,10 +133,10 @@ list_toQnode <- function(particles) {
 }
 
 # recursively counts the number of particles in a quadrant
-qnode_nof_particles <- function(node) sum(unlist(lapply(qnode_childs(node), function(c) {
-  if (length(c) == 0) 0
-  if(is.data.frame(c)) 1 else qnode_nof_particles(c)
-})))
+qnode_nof_particles <- function(node) lapply(qnode_childs(node), function(c) {
+  if (qnode_empty(c) == 0) 0
+  if (qnode_degree(node) == 0) 1 else qnode_nof_particles(c)
+})
 
 # gets the "data" column from node's data.frame
 qnode_data <- function(data, node){
@@ -219,12 +219,14 @@ computeForces <- function(root) {
     if (qnode_empty(node)) {
       new_point(0, 0)
     } else if (qnode_degree(node) == 0) {
+      #print("single")
       computeSingleForce(node[[1]], particle)
     } else {
       r <- distance(node, particle)
       d <- qnode_size(node)
       theta <- 1
       if (d/r < theta) {
+        #print("quadrant")
         computeSingleForce(node[[1]], particle)
       } else {
         f1 <- computeResultantForce(node[[2]], particle)
