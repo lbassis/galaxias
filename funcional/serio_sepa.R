@@ -25,6 +25,8 @@ print(qnode_nof_particles(root))
 ## PLOTTING: The particles' positions are plotted/updated
 ################ READ THIS ################
 
+## GROUPING :
+list_toQnode(qnode_toList(root))
 
 ## COMPUTATION :
 # defines the amount of time between each update
@@ -34,4 +36,4 @@ updatePositionAndVelocityForSimulationStep <- Curry(updatePositionAndVelocity, d
 # composes all functions of the COMPUTATION part into a single function, using Compose from library(functional)
 computation <- Compose(computeMassDistribution, computeForces, updatePositionAndVelocityForSimulationStep, qnode_toList)
 
-computation(root)
+#computation(root)

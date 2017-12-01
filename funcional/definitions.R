@@ -316,12 +316,7 @@ qnode_qList <- function (node) {
   } else if (qnode_degree(node) == 0) {
     list(node)
   } else {
-    newNode <- node
-    newNode[[2]] <- qnode_toList(node[[2]])
-    newNode[[3]] <- qnode_toList(node[[3]])
-    newNode[[4]] <- qnode_toList(node[[4]])
-    newNode[[5]] <- qnode_toList(node[[5]])
-    c(newNode[[2]], newNode[[3]], newNode[[4]], newNode[[5]])
+    c(qnode_qList(node[[2]]), qnode_qList(node[[3]]), qnode_qList(node[[4]]), qnode_qList(node[[5]]))
   }
 }
 
