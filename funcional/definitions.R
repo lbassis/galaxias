@@ -47,14 +47,12 @@ quad_from_input <- function(particles) {
     tail <- tail(points, l-1)
 
     if (l == 0) quad else {
-      #h <- new_point(points[[1]]["point.x"], points[[1]]["point.y"])
       h <- new_point(points[[1]]["x"][[1]], points[[1]]["y"][[1]])
-      #print(quad)
       quad_top <- new_point(quad["top_left.x"][[1]], quad["top_left.y"][[1]])
 
       toppest <- best_point(h, quad_top, min)
       bottest <- best_point(h, new_point(quad["size"][[1]]+toppest["x"][[1]], quad["size"][[1]]+toppest["y"][[1]]), max)
-
+      
       spread(tail, new_quad(
         toppest,
         new_size(toppest, bottest)
@@ -63,8 +61,8 @@ quad_from_input <- function(particles) {
   }
   p <- points_from_particles(particles)
   l <- length(p)
-  if (l == 0) new_quad(top_left=new_point(0,0), size=0) else
-    spread(p, new_quad(top_left=new_point(p[[1]]["x"][[1]], p[[1]]["y"][[1]]), size=0))
+  if (l == 0) new_quad(top_left=new_point(0,0), size=0) 
+  spread(p, new_quad(top_left=new_point(p[[1]]["x"][[1]], p[[1]]["y"][[1]]), size=0))
 }
 quad_sub <- function(quad, sub_index) {
   half_size <- quad["size"][[1]]/2
@@ -129,7 +127,7 @@ list_toQnode <- function(particles) {
   spread <- function(particles, rootquad) {
     l <- length(particles)
     t <- tail(particles, l-1)
-    if (l==0) list() else qnode_insert(list_toQnode(t), rootquad, particles[[1]])
+    if (l==0) list() else qnode_insert(spread(t, rootquad), rootquad, particles[[1]])
   }
   spread(particles, quad_from_input(particles))
 }
