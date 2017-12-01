@@ -49,7 +49,7 @@ n5 <- list(p5, list(), list(), list(), list())
 n6 <- list(p6, list(), list(), list(), list())
 
 
-particles <- c(n1, n2, n3, n4, n5, n6)
+particles <- list(n1, n2, n3, n4, n5, n6)
 
 
 drawing_loop <- function(particles, iteractions, name, updatePosAndVel) {
@@ -67,8 +67,11 @@ drawing_loop <- function(particles, iteractions, name, updatePosAndVel) {
     frame()
     draw_particles(particles)
     dev.off()
-    particles <- updatePosAndVel(particles_toqList(particles))
-    drawing_loop(particles, iteractions-1, name)
+    print(particles)
+    #print(qnode_toList(particles))
+    #particles <- updatePosAndVel(qnode_toList(particles))
+    #print(particles)
+    #drawing_loop(particles, iteractions-1, name)
   }
 }
 
@@ -80,9 +83,9 @@ draw <- function(particles, iteractions, updatePosAndVel) {
 greatest_mass <- function(particles, current_greatest) {
   
   if (length(particles) > 0) {
-    t <- tail(particles, length(particles)-5)
+    t <- tail(particles, length(particles)-1)
     current_mass <- qnode_mass(particles[[1]])
-    print(current_mass)
+    #print(current_mass)
     if (current_mass > current_greatest)
       return (greatest_mass(t, current_mass))
     else
