@@ -67,11 +67,11 @@ drawing_loop <- function(particles, iteractions, name, updatePosAndVel) {
     frame()
     draw_particles(particles)
     dev.off()
-    print(particles)
-    #print(qnode_toList(particles))
-    #particles <- updatePosAndVel(qnode_toList(particles))
     #print(particles)
-    #drawing_loop(particles, iteractions-1, name)
+    #print(qnode_toList(particles))
+    particles <- updatePosAndVel(qnode_toList(particles))
+    #print(particles)
+    drawing_loop(particles, iteractions-1, name, updatePosAndVel)
   }
 }
 
@@ -103,7 +103,7 @@ normalize_mass <- function(node, greatest) {
   f <- new_point(qnode_fx(node), qnode_fy(node))
   new_p <- new_particle(p, qnode_mass(node)/(10*greatest), v, f, qnode_size(node)) 
   new_n <- list(new_p, list(), list(), list(), list()) # tenho que ver como pega as listas!!!
-  return(new_n)
+  return(list(new_n))
 }
 
 wrapped_normalization <- function(particle) 
@@ -112,7 +112,7 @@ wrapped_normalization <- function(particle)
 normalize_masses <- function(particles) {
   
   if (length(particles) > 0)
-    return (c(wrapped_normalization(particles[[1]]), normalize_masses(tail(particles, length(particles)-5))))
+    return (c(wrapped_normalization(particles[[1]]), normalize_masses(tail(particles, length(particles)-1))))
   else
     return (list())
 }
