@@ -199,7 +199,7 @@ computeForces <- function(root) {
   }
   computeSingleForce <- function(node, particle) {
     #G <- 6.67408*(10^(-11))
-    G <- 6.67408*(10^(-3))
+    G <- 6.67408*(10^(-11))
     #G <- 1
     m1 <- qnode_mass(node)
     m2 <- qnode_mass(particle)
