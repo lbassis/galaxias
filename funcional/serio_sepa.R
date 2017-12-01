@@ -13,11 +13,6 @@ root[[5]][[4]][[3]] <- new_qnode(new_particle(new_point(6, 1), 6, new_point(0, 0
 root[[5]][[5]] <- new_qnode(new_particle(new_point(40, 40), 40, new_point(0, 0), new_point(0, 0), 64))
 root[[5]][[5]][[2]] <- new_qnode(new_particle(new_point(7, 3), 8, new_point(0, 0), new_point(0, 0), 0))
 
-# Verifies the number of particles in the tree
-print("Number of particles: ")
-print(qnode_nof_particles(root))
-
-
 ################ READ THIS ################
 ## The flow of this simulation is as follows:
 ## GROUPING: The quadtree is built with at maximum one particle per quadrant
@@ -26,7 +21,7 @@ print(qnode_nof_particles(root))
 ################ READ THIS ################
 
 ## GROUPING :
-list_toQnode(qnode_toList(root))
+root <- list_toQnode(qnode_toList(root))
 
 ## COMPUTATION :
 # defines the amount of time between each update
@@ -36,4 +31,4 @@ updatePositionAndVelocityForSimulationStep <- Curry(updatePositionAndVelocity, d
 # composes all functions of the COMPUTATION part into a single function, using Compose from library(functional)
 computation <- Compose(computeMassDistribution, computeForces, updatePositionAndVelocityForSimulationStep, qnode_toList)
 
-#computation(root)
+a <- computation(root)

@@ -78,7 +78,7 @@ quad_sub <- function(quad, sub_index) {
 new_particle <- function(point, mass, velocity, force, quadrantSize, ...) data.frame(point=point, mass=mass, velocity=velocity, force=force, quadrantSize=quadrantSize)
 
 # ba mas que inferno na moral
-particle_set_qsize = function(particle, qsize) new_particle(particle_to_point(particle), particle["mass"][[1]], new_point(particle["velocity.x"][[1]], particle["velocity.y"][[1]]), new_point(particle["force.x"][[1]], particle["force.y"][[1]]), qsize)
+particle_set_qsize = function(particle, qsize) new_particle(particle_to_point(particle), particle["mass"][[1]], new_point(particle["velocity.x"][[1]], particle["velocity.y"][[1]]), new_point(particle["force.x"][[1]], particle["force.y"][[1]]), qsize[[1]])
 particle_to_point <- function(particle) new_point(particle["point.x"][[1]], particle["point.y"][[1]])
 
 # hm eh de boas aninhar data.frame, desde que a dimensionalidade do valor de cada coluna ("chave")
@@ -133,10 +133,10 @@ list_toQnode <- function(particles) {
 }
 
 # recursively counts the number of particles in a quadrant
-qnode_nof_particles <- function(node) sum(unlist(lapply(qnode_childs(node), function(c) {
-  if (length(c) == 0) 0
-  if(is.data.frame(c)) 1 else qnode_nof_particles(c)
-})))
+qnode_nof_particles <- function(node) lapply(qnode_childs(node), function(c) {
+  if (qnode_empty(c) == 0) 0
+  if (qnode_degree(node) == 0) 1 else qnode_nof_particles(c)
+})
 
 # gets the "data" column from node's data.frame
 qnode_data <- function(data, node){
@@ -199,7 +199,8 @@ computeForces <- function(root) {
   }
   computeSingleForce <- function(node, particle) {
     #G <- 6.67408*(10^(-11))
-    G <- 1
+    G <- 6.67408*(10^(-11))
+    #G <- 1
     m1 <- qnode_mass(node)
     m2 <- qnode_mass(particle)
     d <- distance(node, particle)
@@ -219,12 +220,14 @@ computeForces <- function(root) {
     if (qnode_empty(node)) {
       new_point(0, 0)
     } else if (qnode_degree(node) == 0) {
+      #print("single")
       computeSingleForce(node[[1]], particle)
     } else {
       r <- distance(node, particle)
       d <- qnode_size(node)
       theta <- 1
       if (d/r < theta) {
+        #print("quadrant")
         computeSingleForce(node[[1]], particle)
       } else {
         f1 <- computeResultantForce(node[[2]], particle)
@@ -324,3 +327,13 @@ qnode_toList <- function (node) {
     if (qnode_external(node)) list(node[[1]]) else
     c(qnode_toList(node[[2]]), qnode_toList(node[[3]]), qnode_toList(node[[4]]), qnode_toList(node[[5]]))
 }
+
+qList_toParticles <- function(particles) lapply(particles, function(node) node[[1]])
+
+simulationStep <- 1 # 1 second between each update
+# evaluates updatePositionAndVelocity for deltaT=simulationStep using Curry from library(functional)
+updatePositionAndVelocityForSimulationStep <- Curry(updatePositionAndVelocity, deltaT=simulationStep)
+# composes all functions of the COMPUTATION part into a single function, using Compose from library(functional)
+computation <- Compose(computeMassDistribution, computeForces, updatePositionAndVelocityForSimulationStep, qnode_qList)
+
+groupingAndComputation <- Compose(list_toQnode, computation)
