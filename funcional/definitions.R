@@ -198,8 +198,8 @@ computeForces <- function(root) {
     new_particle(new_point(qnode_x(particle), qnode_y(particle)), qnode_mass(particle), new_point(qnode_vx(particle), qnode_vy(particle)), force, qnode_size(particle))
   }
   computeSingleForce <- function(node, particle) {
-    #G <- 6.67408*(10^(-11))
-    G <- 1
+    G <- 6.67408*(10^(-11))
+    #G <- 1
     m1 <- qnode_mass(node)
     m2 <- qnode_mass(particle)
     d <- distance(node, particle)
@@ -327,7 +327,7 @@ qnode_toList <- function (node) {
     c(qnode_toList(node[[2]]), qnode_toList(node[[3]]), qnode_toList(node[[4]]), qnode_toList(node[[5]]))
 }
 
-particles_toqList <- function(particles) lapply(particles, new_qnode)
+qList_toParticles <- function(particles) lapply(particles, function(node) node[[1]])
 
 simulationStep <- 1 # 1 second between each update
 # evaluates updatePositionAndVelocity for deltaT=simulationStep using Curry from library(functional)

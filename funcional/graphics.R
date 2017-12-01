@@ -34,7 +34,6 @@ update_positions <- function(nodes) {
 }
 
 p1 <- new_particle(new_point(0.5, 0.5), 0.01, new_point(0.01, 0), new_point(0, 0), 0)
-print(p1)
 p2 <- new_particle(new_point(0.3, 0.2), 0.03, new_point(0.01, -0.01), new_point(0, 0), 0)
 p3 <- new_particle(new_point(0.1, 0.9), 0.05, new_point(-0.01, -0.01), new_point(0, 0), 0)
 p4 <- new_particle(new_point(0.0, 0.0), 0.03, new_point(-0.01, -0.01), new_point(0, 0), 0)
@@ -55,7 +54,7 @@ particles <- list(n1, n2, n3, n4, n5, n6)
 drawing_loop <- function(particles, iteractions, name, updatePosAndVel) {
   
   if (iteractions == 0) {
-    system("convert -delay 10 *.jpg result.gif")
+    system("convert -delay 100 *.jpg result.gif")
     file.remove(list.files(pattern=".jpg"))
   }
   
@@ -68,8 +67,8 @@ drawing_loop <- function(particles, iteractions, name, updatePosAndVel) {
     draw_particles(particles)
     dev.off()
     #print(particles)
-    #print(qnode_toList(particles))
-    particles <- updatePosAndVel(qnode_toList(particles))
+    #print(qList_toParticles(particles))
+    particles <- updatePosAndVel(qList_toParticles(particles))
     #print(particles)
     drawing_loop(particles, iteractions-1, name, updatePosAndVel)
   }
