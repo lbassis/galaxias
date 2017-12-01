@@ -55,7 +55,6 @@ drawing_loop <- function(particles, iteractions, name) {
   
   if (iteractions == 0) {
     system("convert -delay 10 *.jpg result.gif")
-    # cleaning up
     file.remove(list.files(pattern=".jpg"))
   }
   
@@ -77,4 +76,42 @@ draw <- function(particles, iteractions) {
   invisible(drawing_loop(particles, iteractions, "a"))
 }
 
-draw(particles, 60)
+greatest_mass <- function(particles, current_greatest) {
+  
+  if (length(particles) > 0) {
+    t <- tail(particles, length(particles)-5)
+    current_mass <- qnode_mass(particles[[1]])
+    print(current_mass)
+    if (current_mass > current_greatest)
+      return (greatest_mass(t, current_mass))
+    else
+      return (greatest_mass(t, current_greatest))
+  }
+  
+  else
+    return (current_greatest)
+  
+}
+
+normalize_mass <- function(node, greatest) {
+  p <- new_point(qnode_x(node), qnode_y(node))
+  v <- new_point(qnode_vx(node), qnode_vy(node))
+  f <- new_point(qnode_fx(node), qnode_fy(node))
+  new_p <- new_particle(p, qnode_mass(node)/(10*greatest), v, f, qnode_size(node)) 
+  new_n <- list(new_p, list(), list(), list(), list()) # tenho que ver como pega as listas!!!
+  return(new_n)
+}
+
+wrapped_normalization <- function(particle) 
+  return (normalize_mass(particle, greatest_mass(particles, 0)))
+
+normalize_masses <- function(particles) {
+  
+  if (length(particles) > 0)
+    return (c(wrapped_normalization(particles[[1]]), normalize_masses(tail(particles, length(particles)-5))))
+  else
+    return (list())
+}
+
+#particles <- normalize_masses(particles)
+#draw(particles, 60)
