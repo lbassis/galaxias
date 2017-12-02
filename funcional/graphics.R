@@ -1,4 +1,5 @@
 library(plotrix)
+setwd("../../")
 source("funcional/definitions.R")
 
 draw_particle <- function(node) {
@@ -50,12 +51,15 @@ n6 <- list(p6, list(), list(), list(), list())
 
 #particles <- list(n2, n3, n4, n5, n6)
 
-particles <- list()
-i <- 0
-while(i < 20) {
-  p <- new_particle(new_point(runif(1, 0.01, 0.99), runif(1, 0.01, 0.99)), runif(1, 0.01, 0.99)*10^7, new_point(runif(1, 0.001, 0.01), runif(1, 0.001, 0.01)), new_point(0, 0), 0)
-  particles = c(particles, list(list(p, list(), list(), list(), list())))
-  i <- i+1
+random_plist <- function(N) {
+  particles <- list()
+  i <- 0
+  while(i < N) {
+    p <- new_particle(new_point(runif(1, 0.01, 0.99), runif(1, 0.01, 0.99)), runif(1, 0.01, 0.99)*10^7, new_point(runif(1, 0.001, 0.01), runif(1, 0.001, 0.01)), new_point(0, 0), 0)
+    particles = c(particles, list(list(p, list(), list(), list(), list())))
+    i <- i+1
+  }
+  return(particles)
 }
 #print(particles)
 
@@ -88,6 +92,7 @@ drawing_loop <- function(particles, iteractions, name, updatePosAndVel) {
 draw <- function(particles, iteractions, updatePosAndVel) {
   #setwd("/projects/galaxias/gifs")
   invisible(drawing_loop(particles, iteractions, "a", updatePosAndVel))
+  print("$")
 }
 
 greatest_mass <- function(particles, current_greatest) {
@@ -116,17 +121,20 @@ normalize_mass <- function(node, greatest) {
   return(list(new_n))
 }
 
-wrapped_normalization <- function(particle) 
+wrapped_normalization <- function(particles, particle) 
   return (normalize_mass(particle, greatest_mass(particles, 0)))
 
 normalize_masses <- function(particles) {
   
   if (length(particles) > 0)
-    return (c(wrapped_normalization(particles[[1]]), normalize_masses(tail(particles, length(particles)-1))))
+    return (c(wrapped_normalization(particles, particles[[1]]), normalize_masses(tail(particles, length(particles)-1))))
   else
     return (list())
 }
 
 #particles <- normalize_masses(particles)
-draw(particles, 50, groupingAndComputation)
-length(particles)
+#draw(particles, 50, groupingAndComputation)
+draw(random_plist(20), 50, groupingAndComputation)
+draw(random_plist(5), 50, groupingAndComputation)
+draw(random_plist(10), 50, groupingAndComputation)
+#length(particles)
