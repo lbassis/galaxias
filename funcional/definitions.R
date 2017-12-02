@@ -330,7 +330,7 @@ qnode_toList <- function (node) {
 
 qList_toParticles <- function(particles) lapply(particles, function(node) node[[1]])
 
-simulationStep <- 1 # 1 second between each update
+simulationStep <- 0.03 # 1 second between each update
 # evaluates updatePositionAndVelocity for deltaT=simulationStep using Curry from library(functional)
 updatePositionAndVelocityForSimulationStep <- Curry(updatePositionAndVelocity, deltaT=simulationStep)
 # composes all functions of the COMPUTATION part into a single function, using Compose from library(functional)
