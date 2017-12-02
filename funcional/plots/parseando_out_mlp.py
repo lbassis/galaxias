@@ -18,14 +18,17 @@ for txt_in in texts:
             if (len(line) > 0):
                 if '#' in line:
                     iterations += 1
+                elif '$' in line:
+                    samples.append((particles, comparisons, iterations))
+                    particles = None
+                    iterations = 0
+                    comparisons = 0
                 elif '"' in line:
                     comparisons += 1
                 else:
-                    #print(line)
                     particles = int(line.split()[-1])
 
-        #print(comparisons, iterations, particles)
-        samples.append((particles, comparisons, iterations))
+        
 #print(samples)
 
 
