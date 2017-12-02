@@ -1,11 +1,11 @@
 import sys
 
-texts = sys.argv[1:] if len(sys.argv) >= 2 else ["in_mlp.txt", "in_mlp2.txt"]
+texts = sys.argv[1:] if len(sys.argv) >= 2 else ["in_mlp.txt"]
 
 samples = []
 for txt_in in texts:
     comparisons = 0
-    iterations = 1
+    iterations = 0
     particles = None
     
     with open(txt_in, "r") as f:
@@ -14,11 +14,12 @@ for txt_in in texts:
 
         
         for line in txt.split('\n'):
+            #print(line)
             if (len(line) > 0):
-                if '"' in line:
-                    comparisons += 1
-                elif '#' == line[0]:
+                if '#' in line:
                     iterations += 1
+                elif '"' in line:
+                    comparisons += 1
                 else:
                     #print(line)
                     particles = int(line.split()[-1])
@@ -29,4 +30,4 @@ for txt_in in texts:
 
 
 for s in samples:
-    print("{}\t{}".format(s[0], s[1]))
+    print("{}\t{}".format(s[0], s[1]/s[2]))
