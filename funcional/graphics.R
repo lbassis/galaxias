@@ -48,8 +48,16 @@ n5 <- list(p5, list(), list(), list(), list())
 n6 <- list(p6, list(), list(), list(), list())
 
 
-particles <- list(n2, n3, n4, n5, n6)
+#particles <- list(n2, n3, n4, n5, n6)
 
+particles <- list()
+i <- 0
+while(i < 20) {
+  p <- new_particle(new_point(runif(1, 0.01, 0.99), runif(1, 0.01, 0.99)), runif(1, 0.01, 0.99)*10^7, new_point(runif(1, 0.001, 0.01), runif(1, 0.001, 0.01)), new_point(0, 0), 0)
+  particles = c(particles, list(list(p, list(), list(), list(), list())))
+  i <- i+1
+}
+#print(particles)
 
 drawing_loop <- function(particles, iteractions, name, updatePosAndVel) {
   
@@ -70,6 +78,7 @@ drawing_loop <- function(particles, iteractions, name, updatePosAndVel) {
     #print(qList_toParticles(particles))
     particles <- updatePosAndVel(qList_toParticles(particles))
     #print(particles)
+    #print("#")
     drawing_loop(particles, iteractions-1, name, updatePosAndVel)
   }
 }
@@ -100,7 +109,7 @@ normalize_mass <- function(node, greatest) {
   p <- new_point(qnode_x(node), qnode_y(node))
   v <- new_point(qnode_vx(node), qnode_vy(node))
   f <- new_point(qnode_fx(node), qnode_fy(node))
-  new_p <- new_particle(p, qnode_mass(node)/(10*greatest), v, f, qnode_size(node)) 
+  new_p <- new_particle(p, qnode_mass(node)/(30*greatest), v, f, qnode_size(node)) 
   new_n <- list(new_p, list(), list(), list(), list()) # tenho que ver como pega as listas!!!
   return(list(new_n))
 }
@@ -117,4 +126,5 @@ normalize_masses <- function(particles) {
 }
 
 #particles <- normalize_masses(particles)
-draw(particles, 100, groupingAndComputation)
+draw(particles, 50, groupingAndComputation)
+length(particles)
