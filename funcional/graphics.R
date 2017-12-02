@@ -69,6 +69,8 @@ drawing_loop <- function(particles, iteractions, name, updatePosAndVel) {
     #print(particles)
     #print(qList_toParticles(particles))
     particles <- updatePosAndVel(qList_toParticles(particles))
+    print("#")
+    print(length(particles))
     #print(particles)
     drawing_loop(particles, iteractions-1, name, updatePosAndVel)
   }

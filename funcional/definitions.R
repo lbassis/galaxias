@@ -220,14 +220,14 @@ computeForces <- function(root) {
     if (qnode_empty(node)) {
       new_point(0, 0)
     } else if (qnode_degree(node) == 0) {
-      #print("single")
+      print("single")
       computeSingleForce(node[[1]], particle)
     } else {
       r <- distance(node, particle)
       d <- qnode_size(node)
       theta <- 1
       if (d/r < theta) {
-        #print("quadrant")
+        print("quadrant")
         computeSingleForce(node[[1]], particle)
       } else {
         f1 <- computeResultantForce(node[[2]], particle)
