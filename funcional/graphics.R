@@ -33,21 +33,6 @@ update_positions <- function(nodes) {
   return(invisible(lapply(nodes, update_position)))
 }
 
-p1 <- new_particle(new_point(0.5, 0.5), 0.1*10^5, new_point(0.0, 0), new_point(0, 0), 0)
-p2 <- new_particle(new_point(0.3, 0.2), 0.3*10^5, new_point(0.0, -0.0), new_point(0, 0), 0)
-p3 <- new_particle(new_point(0.1, 0.9), 0.4*10^5, new_point(-0.0, -0.0), new_point(0, 0), 0)
-p4 <- new_particle(new_point(0.0, 0.0), 0.3*10^5, new_point(-0.0, -0.0), new_point(0, 0), 0)
-p5 <- new_particle(new_point(0.7, 0.7), 0.7*10^5, new_point(-0.0, -0.0), new_point(0, 0), 0)
-p6 <- new_particle(new_point(0.4, 0.9), 0.2*10^5, new_point(-0.0, -0.0), new_point(0, 0), 0)
-
-n1 <- list(p1, list(), list(), list(), list())
-n2 <- list(p2, list(), list(), list(), list())
-n3 <- list(p3, list(), list(), list(), list())
-n4 <- list(p4, list(), list(), list(), list())
-n5 <- list(p5, list(), list(), list(), list())
-n6 <- list(p6, list(), list(), list(), list())
-
-
 #particles <- list(n2, n3, n4, n5, n6)
 
 particles <- list()
