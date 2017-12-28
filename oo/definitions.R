@@ -55,9 +55,41 @@ new_particle <- setRefClass("new_particle",
                             fields = list(point = "new_point", mass = "numeric", velocity = "new_point",
                             force = "new_point", quadrant_size = "new_point"))
 
+new_particle$methods(particle_to_point = function() {
+  new_point(x = .self$point$x, y = .self$point$y)
+})
+
+new_particle$methods(particle_set_qsize = function(qsize) {
+  new_particle(point = particle_to_point(), mass = .self$mass, 
+              velocity = new_point(x = .self$velocity$x., y = .self$velocity$y), 
+              force = new_point(x = .self$force$x, y = .self$force$y),
+              quadrant_size = qsize[[1]])
+})
+
+########################################################################################################
+
 new_qnode <- setRefClass("new_qnode",
                          fields = list(particle = "new_particle", first_child = "list", second_child = "list",
                                        third_child = "list", fourth_child = "list"))
+
+new_qnode$methods(qnode_empty = function() length(.self) == 0)
+
+new_qnode$methods(qnode_childs = function() if (!.self$qnode_empty()) tail(.self, length(.self)-1))
+
+new_qnode$methods(qnode_degree = function() Reduce("+", lapply(.self$qnode_childs, function(c) as.integer(!c$qnode_empty()))))
+
+new_qnode$methods(qnode_external = function() .self$qnode_degree() == 0)
+
+new_qnode$methods(new_child <- function(index, child_index, child) if (index==child_index) child else .self[[index]])
+
+# given a qnode (parent), a child index [[2..5]], and another qnode (child)
+#   returns a qnode similar to the parent, overwriting the child_index with child
+new_qnode$methods(qnode_force_insert = function (child_index, child) {
+    list(.self[[1]], .self$new_child(2, child_index, child), .self$new_child(3, child_index, child), .self$new_child(4, child_index, child), .self$new_child(5, child_index, child))
+  })
+
+
+########################################################################################################
 
 
 # testando uns objetos aqui

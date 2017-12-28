@@ -1,29 +1,31 @@
 library(functional)
 
+# ok = implementado em oo
+
 
 # point (2D) : data.frame
 #   x : float, y : float
-new_point <- function(x, y) data.frame(x=x, y=y)
-point_bin_op <- function(p1, p2) new_point(op(p1["x"],p2["x"]), op(p1["x"], p2["x"]))
-point_quadrant_i <- function(point, quad_center)
+new_point <- function(x, y) data.frame(x=x, y=y)  # ok
+point_bin_op <- function(p1, p2) new_point(op(p1["x"],p2["x"]), op(p1["x"], p2["x"])) # ok? soma e sub
+point_quadrant_i <- function(point, quad_center) # ok
   if (point["x"][[1]] <= quad_center["x"][[1]]) {
     if(point["y"][[1]] <= quad_center["y"][[1]]) 1 else 2
   } else {
     if(point["y"][[1]] <= quad_center["y"][[1]]) 3 else 4
   }
-point_subquadrant <- function(point, quad) quad_sub(quad, point_quadrant_i(point, quad_center(quad)))
+point_subquadrant <- function(point, quad) quad_sub(quad, point_quadrant_i(point, quad_center(quad))) #ok
 
 # quad : data.frame
 #   top_left : point
 #   bot_right : point
-new_quad <- function(top_left, size) data.frame(top_left=top_left, size=size)
+new_quad <- function(top_left, size) data.frame(top_left=top_left, size=size) #ok
 
 # scale a quad preserving its center
-quad_scale <- function(quad, s) {
+quad_scale <- function(quad, s) { #ok
   shift <- (s-1)*quad["size"][[1]]
   new_quad(new_point(quad["top_left.x"][[1]]+shift, quad["top_left.y"][[1]]+shift) , s*quad["size"])
 }
-quad_center <- function(quad) {
+quad_center <- function(quad) { # ok
   shift <- quad["size"][[1]]/2
   new_point(quad["top_left.x"][[1]]+shift, quad["top_left.y"][[1]]+shift)
 
@@ -64,7 +66,8 @@ quad_from_input <- function(particles) {
   if (l == 0) new_quad(top_left=new_point(0,0), size=0) 
   spread(p, new_quad(top_left=new_point(p[[1]]["x"][[1]], p[[1]]["y"][[1]]), size=0))
 }
-quad_sub <- function(quad, sub_index) {
+
+quad_sub <- function(quad, sub_index) { #ok
   half_size <- quad["size"][[1]]/2
   if (sub_index==1) new_quad(new_point(quad["top_left.x"][[1]], quad["top_left.y"][[1]]), half_size) else
     if (sub_index==2) new_quad(new_point(quad["top_left.x"][[1]], half_size+quad["top_left.y"][[1]]), half_size) else
@@ -75,11 +78,11 @@ quad_sub <- function(quad, sub_index) {
 # particle : data.frame
 #   point : point,
 #   PHYSICIS STUFF
-new_particle <- function(point, mass, velocity, force, quadrantSize, ...) data.frame(point=point, mass=mass, velocity=velocity, force=force, quadrantSize=quadrantSize)
+new_particle <- function(point, mass, velocity, force, quadrantSize, ...) data.frame(point=point, mass=mass, velocity=velocity, force=force, quadrantSize=quadrantSize) #ok
 
 # ba mas que inferno na moral
-particle_set_qsize = function(particle, qsize) new_particle(particle_to_point(particle), particle["mass"][[1]], new_point(particle["velocity.x"][[1]], particle["velocity.y"][[1]]), new_point(particle["force.x"][[1]], particle["force.y"][[1]]), qsize[[1]])
-particle_to_point <- function(particle) new_point(particle["point.x"][[1]], particle["point.y"][[1]])
+particle_set_qsize = function(particle, qsize) new_particle(particle_to_point(particle), particle["mass"][[1]], new_point(particle["velocity.x"][[1]], particle["velocity.y"][[1]]), new_point(particle["force.x"][[1]], particle["force.y"][[1]]), qsize[[1]]) #ok
+particle_to_point <- function(particle) new_point(particle["point.x"][[1]], particle["point.y"][[1]]) #ok
 
 # hm eh de boas aninhar data.frame, desde que a dimensionalidade do valor de cada coluna ("chave")
 #   do data.frame tenha a mesma dimensionalidade
@@ -90,12 +93,12 @@ particle_to_point <- function(particle) new_point(particle["point.x"][[1]], part
 # quad_node : list
 #   [[1]] : point,
 #   [[2..4]] : quad_node
-new_qnode <- function(particle)
+new_qnode <- function(particle) # ok
   list(particle, list(), list(), list(), list())
-qnode_empty <- function(node) length(node) == 0
-qnode_childs <- function(node) if (!qnode_empty(node)) tail(node, length(node)-1)
-qnode_degree <- function(node) Reduce("+", lapply(qnode_childs(node), function(c) as.integer(!qnode_empty(c))))
-qnode_external <- function(node) qnode_degree(node) == 0
+qnode_empty <- function(node) length(node) == 0 # ok
+qnode_childs <- function(node) if (!qnode_empty(node)) tail(node, length(node)-1) # ok mas tem que fazer uma impementaçao mais oo
+qnode_degree <- function(node) Reduce("+", lapply(qnode_childs(node), function(c) as.integer(!qnode_empty(c)))) # ok mas igual acima
+qnode_external <- function(node) qnode_degree(node) == 0 # ok
 
 # given a qnode (parent), a child index [[2..5]], and another qnode (child)
 #   returns a qnode similar to the parent, overwriting the child_index with child
