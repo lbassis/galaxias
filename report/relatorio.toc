@@ -1,0 +1,40 @@
+\select@language {brazilian}
+\select@language {brazilian}
+\select@language {brazilian}
+\contentsline {chapter}{1~Introdu\IeC {\c c}\IeC {\~a}o}{3}{CHAPTER.1}
+\contentsline {section}{\numberline {1.1}Linguagem Escolhida: R}{3}{section.1.1}
+\contentsline {section}{\numberline {1.2}Problema escolhido: Gal\IeC {\'a}xias}{4}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Problema de N-corpos}{4}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}Algoritmo de Barnes-Hut}{5}{subsection.1.2.2}
+\contentsline {chapter}{2~Implementa\IeC {\c c}\IeC {\~a}o}{7}{CHAPTER.2}
+\contentsline {section}{\numberline {2.1}Implementa\IeC {\c c}\IeC {\~a}o F\IeC {\'\i }sica}{7}{section.2.1}
+\contentsline {section}{\numberline {2.2}Implementa\IeC {\c c}\IeC {\~a}o no Paradigma Funcional}{8}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Visualiza\IeC {\c c}\IeC {\~a}o Gr\IeC {\'a}fica}{8}{subsection.2.2.1}
+\contentsline {section}{\numberline {2.3}Aspectos funcionais}{9}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Elementos imut\IeC {\'a}veis}{9}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Fun\IeC {\c c}\IeC {\~o}es n\IeC {\~a}o nomeadas}{10}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}Currying}{10}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.4}Fun\IeC {\c c}\IeC {\~o}es de ordem superior pr\IeC {\'o}prias}{11}{subsection.2.3.4}
+\contentsline {subsection}{\numberline {2.3.5}Fun\IeC {\c c}\IeC {\~o}es de ordem superior prontas}{12}{subsection.2.3.5}
+\contentsline {subsection}{\numberline {2.3.6}Fun\IeC {\c c}\IeC {\~o}es como elemento de primeira ordem}{12}{subsection.2.3.6}
+\contentsline {subsection}{\numberline {2.3.7}Fun\IeC {\c c}\IeC {\~o}es com pattern matching}{13}{subsection.2.3.7}
+\contentsline {subsection}{\numberline {2.3.8}An\IeC {\'a}lise do algoritmo}{13}{subsection.2.3.8}
+\contentsline {subsection}{\numberline {2.3.9}An\IeC {\'a}lise da linguagem}{14}{subsection.2.3.9}
+\contentsline {subsubsection}{\numberline {2.3.9.1}Simplicidade}{14}{subsubsection.2.3.9.1}
+\contentsline {subsubsection}{\numberline {2.3.9.2}Ortogonalidade}{14}{subsubsection.2.3.9.2}
+\contentsline {subsubsection}{\numberline {2.3.9.3}Expressividade}{14}{subsubsection.2.3.9.3}
+\contentsline {subsubsection}{\numberline {2.3.9.4}Adequabilidade e variedade de estruturas de controle}{14}{subsubsection.2.3.9.4}
+\contentsline {subsubsection}{\numberline {2.3.9.5}Mecanismos de defini\IeC {\c c}\IeC {\~a}o de tipos}{14}{subsubsection.2.3.9.5}
+\contentsline {subsubsection}{\numberline {2.3.9.6}Suporte a abstra\IeC {\c c}\IeC {\~a}o de dados}{15}{subsubsection.2.3.9.6}
+\contentsline {subsubsection}{\numberline {2.3.9.7}Suporte a abstra\IeC {\c c}\IeC {\~a}o de processos}{15}{subsubsection.2.3.9.7}
+\contentsline {subsubsection}{\numberline {2.3.9.8}Modelo de tipos}{15}{subsubsection.2.3.9.8}
+\contentsline {subsubsection}{\numberline {2.3.9.9}Portabilidade}{15}{subsubsection.2.3.9.9}
+\contentsline {subsubsection}{\numberline {2.3.9.10}Reusabilidade}{15}{subsubsection.2.3.9.10}
+\contentsline {subsubsection}{\numberline {2.3.9.11}Suporte e documenta\IeC {\c c}\IeC {\~a}o}{15}{subsubsection.2.3.9.11}
+\contentsline {subsubsection}{\numberline {2.3.9.12}Tamanho de c\IeC {\'o}digo}{15}{subsubsection.2.3.9.12}
+\contentsline {subsubsection}{\numberline {2.3.9.13}Generalidade}{16}{subsubsection.2.3.9.13}
+\contentsline {subsubsection}{\numberline {2.3.9.14}Efici\IeC {\^e}ncia}{16}{subsubsection.2.3.9.14}
+\contentsline {subsubsection}{\numberline {2.3.9.15}Custo}{16}{subsubsection.2.3.9.15}
+\contentsline {chapter}{3~CONCLUS\IeC {\~A}O}{17}{CHAPTER.3}
+\contentsline {chapter}{4~Refer\IeC {\^e}ncias}{18}{CHAPTER.4}
+\contentsfinish 
