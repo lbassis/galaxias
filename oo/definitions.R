@@ -100,17 +100,17 @@ new_qnode <- setRefClass("new_qnode",
                                        third_child = "list", fourth_child = "list"))
 
 
-new_qnode$methods(initialize(.Object, ...) {
-  particle <- ...[1]
+new_qnode$methods(initialize = function(.Object, particle, ...) {
   .self$point = particle$get_point()
   .self$mass = particle$get_mass()
   .self$velocity = particle$get_velocity()
   .self$force = particle$get_force()
   .self$quadrant_size = particle$get_quadrant_size()
-  .self$first_child = first
-  .self$second_child = second_child
-  .self$third_child = third_child
-  .self$fourth_child = fourth_child
+  callSuper(...)
+  #.self$first_child = first
+  #.self$second_child = second
+  #.self$third_child = third
+  #.self$fourth_child = fourth
 })
 
 new_qnode$methods(get_first_child = function() return(.self$first_child))
