@@ -23,15 +23,15 @@
 \contentsline {subsubsection}{\numberline {2.3.9.1}Simplicidade}{14}{subsubsection.2.3.9.1}
 \contentsline {subsubsection}{\numberline {2.3.9.2}Ortogonalidade}{14}{subsubsection.2.3.9.2}
 \contentsline {subsubsection}{\numberline {2.3.9.3}Expressividade}{14}{subsubsection.2.3.9.3}
-\contentsline {subsubsection}{\numberline {2.3.9.4}Adequabilidade e variedade de estruturas de controle}{14}{subsubsection.2.3.9.4}
-\contentsline {subsubsection}{\numberline {2.3.9.5}Mecanismos de defini\IeC {\c c}\IeC {\~a}o de tipos}{14}{subsubsection.2.3.9.5}
+\contentsline {subsubsection}{\numberline {2.3.9.4}Adequabilidade e variedade de estruturas de controle}{15}{subsubsection.2.3.9.4}
+\contentsline {subsubsection}{\numberline {2.3.9.5}Mecanismos de defini\IeC {\c c}\IeC {\~a}o de tipos}{15}{subsubsection.2.3.9.5}
 \contentsline {subsubsection}{\numberline {2.3.9.6}Suporte a abstra\IeC {\c c}\IeC {\~a}o de dados}{15}{subsubsection.2.3.9.6}
 \contentsline {subsubsection}{\numberline {2.3.9.7}Suporte a abstra\IeC {\c c}\IeC {\~a}o de processos}{15}{subsubsection.2.3.9.7}
 \contentsline {subsubsection}{\numberline {2.3.9.8}Modelo de tipos}{15}{subsubsection.2.3.9.8}
 \contentsline {subsubsection}{\numberline {2.3.9.9}Portabilidade}{15}{subsubsection.2.3.9.9}
-\contentsline {subsubsection}{\numberline {2.3.9.10}Reusabilidade}{15}{subsubsection.2.3.9.10}
-\contentsline {subsubsection}{\numberline {2.3.9.11}Suporte e documenta\IeC {\c c}\IeC {\~a}o}{15}{subsubsection.2.3.9.11}
-\contentsline {subsubsection}{\numberline {2.3.9.12}Tamanho de c\IeC {\'o}digo}{15}{subsubsection.2.3.9.12}
+\contentsline {subsubsection}{\numberline {2.3.9.10}Reusabilidade}{16}{subsubsection.2.3.9.10}
+\contentsline {subsubsection}{\numberline {2.3.9.11}Suporte e documenta\IeC {\c c}\IeC {\~a}o}{16}{subsubsection.2.3.9.11}
+\contentsline {subsubsection}{\numberline {2.3.9.12}Tamanho de c\IeC {\'o}digo}{16}{subsubsection.2.3.9.12}
 \contentsline {subsubsection}{\numberline {2.3.9.13}Generalidade}{16}{subsubsection.2.3.9.13}
 \contentsline {subsubsection}{\numberline {2.3.9.14}Efici\IeC {\^e}ncia}{16}{subsubsection.2.3.9.14}
 \contentsline {subsubsection}{\numberline {2.3.9.15}Custo}{16}{subsubsection.2.3.9.15}

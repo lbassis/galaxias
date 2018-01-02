@@ -431,50 +431,96 @@ de partículas, enquanto o eixo Y representa o número de comparações.
 
 A seguir são atribuídas notas às diferentes características da linguagem R quando considerando uma implementação usando o paradigma funcional. As notas foram dadas em um intervalo [0,5].
 
+
+\begin{table}[ht]
+  \caption{Características da linguagem R}
+  \centering
+    \begin{tabular}{ c | c }
+        \hline
+        \textit{Característica} &
+        \textit{Nota [0, 5]} \\
+        \hline
+        Simplicidade & 3.5\\
+        \hline
+        Ortogonalidade & 4.5\\
+        \hline
+        Expressividade & 3.0\\
+        \hline
+        Adequabilidade e variedade de estruturas de controle & 4.0\\
+        \hline
+        Mecanismos de definição de tipos & 4.0\\
+        \hline
+        Suporte a abstração de dados & 3.0\\
+        \hline
+        Suporte a abstração de processos & 4.5\\
+        \hline
+        Modelo de tipos & 3.0\\
+        \hline
+        Portabilidade & 3.0\\
+        \hline
+        Reusabilidade & 4.5\\
+        \hline
+        Suporte e documentação & 3.0\\
+        \hline
+        Tamanho de código & 4.0\\
+        \hline
+        Generalidade & 3.0\\
+        \hline
+        Eficiência & 4.0\\
+        \hline
+        Custo & 2.5\\
+      \hline
+    \end{tabular}
+     \fonte{Autor}
+  \label{tab:caracteristicas}
+\end{table}
+
+A seguir, temos as análises que levaram a cada uma das notas mostradas na tabela.
+
 \subsubsection{Simplicidade}
-O operador <- vai contra a simplicidade da linguagem, já que ele implementa a atribuição, assim como o operador =. Nota 3.5.
+O operador <- vai contra a simplicidade da linguagem, já que ele implementa a atribuição, assim como o operador =.
 
 \subsubsection{Ortogonalidade}
-Diversas funções do programa alternam entre data.frames e listas, e a linguagem oferece suporte a isso naturalmente. Nota 4.5.
+Diversas funções do programa alternam entre data.frames e listas, e a linguagem oferece suporte a isso naturalmente.
 
 \subsubsection{Expressividade}
-A expressividade é adequada no geral, porém no acesso à listas, a necessidade de usar dois colchetes para recuperar um elemento torna o código menos expressivo do que ele poderia ser. Como alternativa, temos as funções \textit{head} e \textit{tail}, porém as duas também contam com um fator incomum que é a necessidade de especificar quantos elementos serão recuperados da lista. Nota 3.
+A expressividade é adequada no geral, porém no acesso à listas, a necessidade de usar dois colchetes para recuperar um elemento torna o código menos expressivo do que ele poderia ser. Como alternativa, temos as funções \textit{head} e \textit{tail}, porém as duas também contam com um fator incomum que é a necessidade de especificar quantos elementos serão recuperados da lista.
 
 \subsubsection{Adequabilidade e variedade de estruturas de controle}
-As estruturas de controle existem, mas a implementação funcional utiliza recursão em seu lugar. Apesar disso, alguns laços iterativos foram úteis para depuração do código. Nota 4.
+As estruturas de controle existem, mas a implementação funcional utiliza recursão em seu lugar. Apesar disso, alguns laços iterativos foram úteis para depuração do código.
 
 \subsubsection{Mecanismos de definição de tipos}
-O tipo data.frame, utilizado para representar tabelas, funciona como uma definição de estrutura e atendeu bem ao desejado no trabalho. Nota 4.
+O tipo data.frame, utilizado para representar tabelas, funciona como uma definição de estrutura e atendeu bem ao desejado no trabalho.
 
 \subsubsection{Suporte a abstração de dados}
-A linguagem fornece a estrutura data.frame, que equivale a uma tabela em que cada coluna pode ter um valor de diferentes tipos. No entanto, não é criada uma estrutura propriamente dita, com sua própria semântica. Nota 3.
+A linguagem fornece a estrutura data.frame, que equivale a uma tabela em que cada coluna pode ter um valor de diferentes tipos. No entanto, não é criada uma estrutura propriamente dita, com sua própria semântica.
 
 \subsubsection{Suporte a abstração de processos}
-Implementa funções recursivas e inclusive funções como elementos de primeira ordem, tornando o suporte a abstração de processos excelente. Nota 4.5.
+Implementa funções recursivas e inclusive funções como elementos de primeira ordem, tornando o suporte a abstração de processos excelente.
 
 \subsubsection{Modelo de tipos}
-Sendo uma linguagem dinamicamente tipada, o modelo de tipos deixa a desejar. Em alguns casos, houveram problemas de difícil identificação que, com um sistema de tipos mais robusto, seriam facilmente detectáveis. Nota 3.
+Sendo uma linguagem dinamicamente tipada, o modelo de tipos deixa a desejar. Em alguns casos, houveram problemas de difícil identificação que, com um sistema de tipos mais robusto, seriam facilmente detectáveis.
 
 \subsubsection{Portabilidade}
-A linguagem oferece diversos pacotes, mas todos os utilizados precisaram ser instalados posteriormente. Nota 3.
+A linguagem oferece diversos pacotes, mas todos os utilizados precisaram ser instalados posteriormente.
 
 \subsubsection{Reusabilidade}
-A utilização de funções como elementos de primeira ordem faz com que a linguagem possua uma ótima reusabilidade. Nota 4.5.
+A utilização de funções como elementos de primeira ordem faz com que a linguagem possua uma ótima reusabilidade.
 
 \subsubsection{Suporte e documentação}
-Especialmente para este trabalho, que não utiliza a linguagem em um contexto em que ela se destaca, foi difícil encontrar referências para várias funcionalidades. No entanto, isso talvez esteja mais relacionado com a natureza da aplicação desenvolvida do que com a linguagem em si. Nota 3.
+Especialmente para este trabalho, que não utiliza a linguagem em um contexto em que ela se destaca, foi difícil encontrar referências para várias funcionalidades. No entanto, isso talvez esteja mais relacionado com a natureza da aplicação desenvolvida do que com a linguagem em si.
 
 \subsubsection{Tamanho de código}
-Nada especialmente diferente do comum. A linguagem não tem o código muito longo nem notoriamente curto. Nota 4.
+Nada especialmente diferente do comum. A linguagem não tem o código muito longo nem notoriamente curto.
 
 \subsubsection{Generalidade}
-Apesar de ter sido usada satisfatoriamente nesse trabalho, a linguagem fornece muito mais recursos para algoritmos estatísticos e similares do que qualquer outra implementação. Nota 3.
+Apesar de ter sido usada satisfatoriamente nesse trabalho, a linguagem fornece muito mais recursos para algoritmos estatísticos e similares do que qualquer outra implementação.
 
 \subsubsection{Eficiência}
-Para que essa característica seja analisada apropriadamente, seria necessário implementar o mesmo algoritmo em outro paradigma/linguagem, portanto fica difícil avaliar sem ao menos concluir a implementação orientada a objeto. No entanto, pode-se observar que a maior parte do tempo que o algoritmo leva é na criação dos arquivos de imagem, indicando que as funções próprias são eficientes. Nota 4.
+Para que essa característica seja analisada apropriadamente, seria necessário implementar o mesmo algoritmo em outro paradigma/linguagem, portanto fica difícil avaliar sem ao menos concluir a implementação orientada a objeto. No entanto, pode-se observar que a maior parte do tempo que o algoritmo leva é na criação dos arquivos de imagem, indicando que as funções próprias são eficientes.
 
 \subsubsection{Custo}
-A curva de aprendizado é relativamente íngreme; além disso, o Rstudio eventualmente apresenta problemas em sua instalação e na instalação de seus pacotes. Por fim, para uma simulação física como a aqui apresentada, as estruturas nativas da linguagem e do ambiente não facilitam, portanto conclui-se que nesse caso o custo é alto. Nota 2.5.
+A curva de aprendizado é relativamente íngreme; além disso, o Rstudio eventualmente apresenta problemas em sua instalação e na instalação de seus pacotes. Por fim, para uma simulação física como a aqui apresentada, as estruturas nativas da linguagem e do ambiente não facilitam, portanto conclui-se que nesse caso o custo é alto.
 
 
 
