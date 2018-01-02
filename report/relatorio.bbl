@@ -1,0 +1,31 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{v-1.9.1 }
+
+\bibitem[Ansari 2016]{barnesHutImg}
+\abntrefinfo{Ansari}{ANSARI}{2016}
+{ANSARI, S. \textbf{Barnes-Hut N-body Simulation in HTML/Javascript}. 2016.
+Available from Internet:
+  \url{https://github.com/Elucidation/Barnes-Hut-Tree-N-body-Implementation-in-HTML-Js}.}
+
+\bibitem[Barnes e Hut 1986]{Barnes}
+\abntrefinfo{Barnes e Hut}{BARNES; HUT}{1986}
+{BARNES, J.; HUT, P. A hierarchical o(n log n) force-calculation algorithm.
+\textbf{Nature}, Nature Publishing Group SN -, v.~324, p. 446 EP --, Dec 1986.
+Available from Internet: \url{http://dx.doi.org/10.1038/324446a0}.}
+
+\bibitem[Berg 2017]{galaxySimulator}
+\abntrefinfo{Berg}{BERG}{2017}
+{BERG, I. \textbf{The Barnes-Hut Galaxy Simulator}. 2017.
+Available from Internet:
+  \url{http://beltoforion.de/article.php?a=barnes-hut-galaxy-simulator}.}
+
+\bibitem[The R Foundation 2017]{linguagemR}
+\abntrefinfo{The R Foundation}{THE R FOUNDATION}{2017}
+{THE R FOUNDATION. \textbf{R: What is R?} 2017.
+Available from Internet: \url{https://www.r-project.org/about.html}.}
+
+\end{thebibliography}

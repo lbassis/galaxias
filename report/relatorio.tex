@@ -146,7 +146,7 @@ O objetivo deste trabalho consiste em fornecer aos alunos a oportunidade de estu
 
 	A linguagem fornece uma grande variedade de ferramentas para estatística, como modelagem linear e não-linear, classificação, clustering, testes estatísticos. Um dos seus pontos fortes é a facilidade com que gráficos bem construídos e prontos para uso em publicações científicas podem ser gerados. Esses gráficos incluem formulas e símbolos matemáticos onde necessário.
 
-	Resumindo, R é um conjunto integrado de métodos para manipulação de dados, cálculos e display gráfico que inclui:
+	Resumindo, R é um conjunto integrado de métodos para manipulação de dados, cálculos e display gráfico que inclui \cite{linguagemR}:
 \begin{itemize}
 \item Uma série de operações sobre vetores, em particular matrizes;
 \item Uma extensa coleção de ferramentas intermediárias para análise de dados;
@@ -158,7 +158,7 @@ O objetivo deste trabalho consiste em fornecer aos alunos a oportunidade de estu
 
 	O problema consiste em implementar um simulador de partículas, considerando forças físicas de repulsão e atração. Serão utilizadas leis gravitacionais para simular órbitas de estrelas e planetas. Além disso, uma interface será criada para que seja possível acompanhar o movimento simulado.
 
-    Para suportar a simulação de muitos corpos, será utilizado o algoritmo de Barnes-Hut, que consiste em subdividir o espaço em quadrantes (no caso de um espaço bi-dimensional) recursivamente até atingir um dado limite de modo a simplificar o problema sem perdas consideráveis de precisão no modelo.
+    Para suportar a simulação de muitos corpos, será utilizado o algoritmo de Barnes-Hut \cite{Barnes}, que consiste em subdividir o espaço em quadrantes (no caso de um espaço bi-dimensional) recursivamente até atingir um dado limite de modo a simplificar o problema sem perdas consideráveis de precisão no modelo.
 
 \subsection{Problema de N-corpos}
 
@@ -197,7 +197,7 @@ s_{prox} = s_{atual} + v_{atual}*\Delta t + \frac{a}{2}*(\Delta t)^2
 
 O algoritmo de Barnes-Hut resolve o problema de N-corpos numa complexidade inferior àquela apresentada na seção anterior. Em vez de calcular todas as forças, uma aproximação baseada em árvores que divide o espaço em quadrantes é utilizada. Esse algoritmo tem complexidade igual a $O(N\,log(N))$
 
-O algoritmo de Barnes-Hut reduz o número de forças calculadas agrupando partículas. A aproximação utilizada é que um grupo de partículas distantes pode ser reduzido a uma única partícula de centro igual ao centro de massa do grupo. Dessa forma, só é necessário calcular as forças uma a uma para partículas muito próximas, enquanto que as distantes têm seu cálculo simplificado. A simplificação só é válida quando a distância da partícula ao grupo é grande em relação ao tamanho do quadrante do grupo. Para determinar se a razão entre o tamanho $d$ do quadrante do grupo e a distância $r$ é suficiente, utiliza-se o critério da equação \eqref{theta}. O algoritmo de Barnes-Hut aplica $\theta=1$ subdividindo recursivamente o espaço em quadrantes até que apenas uma partícula por quadrante exista, como visto na Figura \ref{fig:barneshut.png}.
+O algoritmo de Barnes-Hut reduz o número de forças calculadas agrupando partículas. A aproximação utilizada é que um grupo de partículas distantes pode ser reduzido a uma única partícula de centro igual ao centro de massa do grupo. Dessa forma, só é necessário calcular as forças uma a uma para partículas muito próximas, enquanto que as distantes têm seu cálculo simplificado. A simplificação só é válida quando a distância da partícula ao grupo é grande em relação ao tamanho do quadrante do grupo. Para determinar se a razão entre o tamanho $d$ do quadrante do grupo e a distância $r$ é suficiente, utiliza-se o critério da equação \eqref{theta}. O algoritmo de Barnes-Hut aplica $\theta=1$ subdividindo recursivamente o espaço em quadrantes até que apenas uma partícula por quadrante exista, como visto na Figura \ref{fig:barneshut.eps}.
 
 
 
@@ -205,9 +205,10 @@ O algoritmo de Barnes-Hut reduz o número de forças calculadas agrupando partí
     \centering
     \caption{Visualização do algoritmo de Barnes-Hut}
     \fbox{
-        \includegraphics[width=20cm,height=10cm,keepaspectratio]{images/barneshut.png}
+        \includegraphics[width=20cm,height=10cm,keepaspectratio]{images/barneshut.eps}
     }
-    \label{fig:barneshut.png}
+    \fonte{\cite{barnesHutImg}}
+    \label{fig:barneshut.eps}
 \end{figure}
 
 
@@ -215,16 +216,17 @@ O algoritmo de Barnes-Hut reduz o número de forças calculadas agrupando partí
 
 \section{Implementação Física}
 
-O algoritmo recebe como entrada uma lista de partículas com suas posições e suas velocidades. Começa-se subdivindindo o espaço recursivamente em quadrantes até que haja no máximo uma partícula por quadrante. Ao mesmo tempo que os quadrantes são divididos, popula-se uma $QuadTree$ hierarquicamente de modo que cada nodo folha seja uma partícula do espaço, como pode ser visto na Figura \ref{fig:quadtree.jpg}. Em um segundo momento, os centros de massa para cada quadrante são calculados. Após isso, calculam-se as forças resultantes para todas as partículas, reduzindo o número de forças calculadas quando um quadrante passa na regra da equação \eqref{theta}. Finalmente, as posições e velocidades das partículas são atualizadas considerando um passo de atualização que corresponde ao tempo percorrido entre uma etapa da simulação e a seguinte. A implementação em pseudocódigo pode ser vista no algoritmo \ref{barnesHutAlgorithm}.
+O algoritmo recebe como entrada uma lista de partículas com suas posições e suas velocidades. Começa-se subdivindindo o espaço recursivamente em quadrantes até que haja no máximo uma partícula por quadrante. Ao mesmo tempo que os quadrantes são divididos, popula-se uma $QuadTree$ hierarquicamente de modo que cada nodo folha seja uma partícula do espaço, como pode ser visto na Figura \ref{fig:quadtree.eps}. Em um segundo momento, os centros de massa para cada quadrante são calculados. Após isso, calculam-se as forças resultantes para todas as partículas, reduzindo o número de forças calculadas quando um quadrante passa na regra da equação \eqref{theta}. Finalmente, as posições e velocidades das partículas são atualizadas considerando um passo de atualização que corresponde ao tempo percorrido entre uma etapa da simulação e a seguinte. A implementação em pseudocódigo pode ser vista no algoritmo \ref{barnesHutAlgorithm}.
 
 
 \begin{figure}[htb]
     \centering
     \caption{Distribuição das partículas em seus quadrantes e $QuadTree$ correspondente.}
     \fbox{
-        \includegraphics[width=20cm,height=10cm,,keepaspectratio]{images/quadtree.jpeg}
+        \includegraphics[width=20cm,height=10cm,,keepaspectratio]{images/quadtree.eps}
     }
-    \label{fig:quadtree.jpg}
+    \label{fig:quadtree.eps}
+    \fonte{\cite{galaxySimulator}}
 \end{figure}
 
 
@@ -249,7 +251,7 @@ O algoritmo recebe como entrada uma lista de partículas com suas posições e s
 
 \subsection{Visualização Gráfica}
 
-	A visualização gráfica foi implementada utilizando o pacote \textit{plotrix} e a biblioteca \textit{ImageMagick}. Em cada iteração do algoritmo, isto é, em cada conjunto de posições calculado, gera-se um gráfico com círculos representando as partículas em um espaço bidimensional, conforme é mostrado na figura \ref{fig:particulas.jpg}.
+	A visualização gráfica foi implementada utilizando o pacote \textit{plotrix} e a biblioteca \textit{ImageMagick}. Em cada iteração do algoritmo, isto é, em cada conjunto de posições calculado, gera-se um gráfico com círculos representando as partículas em um espaço bidimensional, conforme é mostrado na figura \ref{fig:particulas.eps}.
     Em uma abordagem inicial, a ideia foi utilizar diversos gráficos carregados em sequência no ambiente \textit{Rstudio}, com um pequeno intervalo de espera entre cada geração. No entanto, a performance não foi satisfatória; apesar de, inicialmente e com um número pequeno de partículas, a animação ficasse fluída, com o passar do tempo o tempo entre as gerações é cada vez maior, tornando o algoritmo muito lento em pouco tempo.
 
     A partir daí, a ideia escolhida foi a de selecionar inicialmente um número de iterações; depois disso, são geradas todas as imagens necessárias para representar esse número e, por fim, as imagens são transformadas em um arquivo \textit{.gif}. Dessa maneira, o algoritmo perde a capacidade de ser demonstrado em tempo real, já que a duração da simulação é definida antes da execução da mesma. No entanto, dessa maneira foi possível obter uma animação adequada ao esperado e, portanto, essa foi a solução escolhida.
@@ -262,9 +264,9 @@ O algoritmo recebe como entrada uma lista de partículas com suas posições e s
     \centering
     \caption{Visualização das partículas em um grafo}
     \fbox{
-        \includegraphics[width=20cm,height=10cm,,keepaspectratio]{images/particulas.jpg}
+        \includegraphics[width=20cm,height=10cm,,keepaspectratio]{images/particulas.eps}
     }
-    \label{fig:particulas.jpg}
+    \label{fig:particulas.eps}
 \end{figure}
 
 
@@ -427,7 +429,7 @@ de partículas, enquanto o eixo Y representa o número de comparações.
     \centering
     \caption{Comparação força bruta com Barnes-Hut}
     \fbox{
-        \includegraphics[width=20cm,height=10cm,keepaspectratio]{images/grafico.png}
+        \includegraphics[width=20cm,height=10cm,keepaspectratio]{images/grafico.eps}
     }
     \label{fig:grafico}
 \end{figure}
@@ -552,17 +554,17 @@ orientada a objeto, acredita-se que esse problema terá sido tratado.
 % Referências
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-\chapter{Referências}
+%\chapter{Referências}
 \bibliographystyle{abntex2-alf}
 
 
-\bibliography{biblio} % arquivo que contém as referências (no formato bib). Colocar as suas lá (se tiver dúvida sobre como adicionar novas referências, usar o software JabRef ou Medley)
+\bibliography{biblio.bib} % arquivo que contém as referências (no formato bib). Colocar as suas lá (se tiver dúvida sobre como adicionar novas referências, usar o software JabRef ou Medley)
 
-\noindent SAMEER A. Barnes-Hut N-body Simulation in HTML/Javascript. Disponível em $<$https://github.com/Elucidation/Barnes-Hut-Tree-N-body-Implementation-in-HTML-Js$>$. Acesso em: nov. 2017.
+%\noindent SAMEER A. Barnes-Hut N-body Simulation in HTML/Javascript. Disponível em $<$https://github.com/Elucidation/Barnes-Hut-Tree-N-body-Implementation-in-HTML-Js$>$. Acesso em: nov. 2017.
 
-\noindent R: What is R? Disponível em $<$https://www.r-project.org/about.html$>$. Acesso em: nov. 2017.
+%\noindent R: What is R? Disponível em $<$https://www.r-project.org/about.html$>$. Acesso em: nov. 2017.
 
-\noindent BERG I. The Barnes-Hut Galaxy Simulator. Disponível em $<$http://beltoforion.de/article.php?a=barnes-hut-galaxy-simulator$>$. Acesso em: nov. 2017.
+%\noindent BERG I. The Barnes-Hut Galaxy Simulator. Disponível em $<$http://beltoforion.de/article.php?a=barnes-hut-galaxy-simulator$>$. Acesso em: nov. 2017.
 
 
 

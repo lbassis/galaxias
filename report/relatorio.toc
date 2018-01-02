@@ -37,5 +37,5 @@
 \contentsline {subsubsection}{\numberline {2.3.10.14}Efici\IeC {\^e}ncia}{16}{subsubsection.2.3.10.14}
 \contentsline {subsubsection}{\numberline {2.3.10.15}Custo}{17}{subsubsection.2.3.10.15}
 \contentsline {chapter}{3~CONCLUS\IeC {\~A}O}{18}{CHAPTER.3}
-\contentsline {chapter}{4~Refer\IeC {\^e}ncias}{19}{CHAPTER.4}
+\contentsline {chapter}{\xspace {}Refer{\^e}ncias}{19}{schapter.2}
 \contentsfinish 
