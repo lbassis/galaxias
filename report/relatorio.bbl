@@ -23,6 +23,11 @@ Available from Internet: \url{http://dx.doi.org/10.1038/324446a0}.}
 Available from Internet:
   \url{http://beltoforion.de/article.php?a=barnes-hut-galaxy-simulator}.}
 
+\bibitem[Free Software Foundation 2018]{GNU}
+\abntrefinfo{Free Software Foundation}{FREE SOFTWARE FOUNDATION}{2018}
+{FREE SOFTWARE FOUNDATION. \textbf{GNU Operating System}. 2018.
+Available from Internet: \url{https://www.gnu.org/}.}
+
 \bibitem[The R Foundation 2017]{linguagemR}
 \abntrefinfo{The R Foundation}{THE R FOUNDATION}{2017}
 {THE R FOUNDATION. \textbf{R: What is R?} 2017.
