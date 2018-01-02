@@ -18,23 +18,24 @@
 \contentsline {subsection}{\numberline {2.3.5}Fun\IeC {\c c}\IeC {\~o}es de ordem superior prontas}{12}{subsection.2.3.5}
 \contentsline {subsection}{\numberline {2.3.6}Fun\IeC {\c c}\IeC {\~o}es como elemento de primeira ordem}{12}{subsection.2.3.6}
 \contentsline {subsection}{\numberline {2.3.7}Fun\IeC {\c c}\IeC {\~o}es com pattern matching}{13}{subsection.2.3.7}
-\contentsline {subsection}{\numberline {2.3.8}An\IeC {\'a}lise do algoritmo}{13}{subsection.2.3.8}
-\contentsline {subsection}{\numberline {2.3.9}An\IeC {\'a}lise da linguagem}{14}{subsection.2.3.9}
-\contentsline {subsubsection}{\numberline {2.3.9.1}Simplicidade}{14}{subsubsection.2.3.9.1}
-\contentsline {subsubsection}{\numberline {2.3.9.2}Ortogonalidade}{14}{subsubsection.2.3.9.2}
-\contentsline {subsubsection}{\numberline {2.3.9.3}Expressividade}{14}{subsubsection.2.3.9.3}
-\contentsline {subsubsection}{\numberline {2.3.9.4}Adequabilidade e variedade de estruturas de controle}{15}{subsubsection.2.3.9.4}
-\contentsline {subsubsection}{\numberline {2.3.9.5}Mecanismos de defini\IeC {\c c}\IeC {\~a}o de tipos}{15}{subsubsection.2.3.9.5}
-\contentsline {subsubsection}{\numberline {2.3.9.6}Suporte a abstra\IeC {\c c}\IeC {\~a}o de dados}{15}{subsubsection.2.3.9.6}
-\contentsline {subsubsection}{\numberline {2.3.9.7}Suporte a abstra\IeC {\c c}\IeC {\~a}o de processos}{15}{subsubsection.2.3.9.7}
-\contentsline {subsubsection}{\numberline {2.3.9.8}Modelo de tipos}{15}{subsubsection.2.3.9.8}
-\contentsline {subsubsection}{\numberline {2.3.9.9}Portabilidade}{15}{subsubsection.2.3.9.9}
-\contentsline {subsubsection}{\numberline {2.3.9.10}Reusabilidade}{16}{subsubsection.2.3.9.10}
-\contentsline {subsubsection}{\numberline {2.3.9.11}Suporte e documenta\IeC {\c c}\IeC {\~a}o}{16}{subsubsection.2.3.9.11}
-\contentsline {subsubsection}{\numberline {2.3.9.12}Tamanho de c\IeC {\'o}digo}{16}{subsubsection.2.3.9.12}
-\contentsline {subsubsection}{\numberline {2.3.9.13}Generalidade}{16}{subsubsection.2.3.9.13}
-\contentsline {subsubsection}{\numberline {2.3.9.14}Efici\IeC {\^e}ncia}{16}{subsubsection.2.3.9.14}
-\contentsline {subsubsection}{\numberline {2.3.9.15}Custo}{16}{subsubsection.2.3.9.15}
-\contentsline {chapter}{3~CONCLUS\IeC {\~A}O}{17}{CHAPTER.3}
-\contentsline {chapter}{4~Refer\IeC {\^e}ncias}{18}{CHAPTER.4}
+\contentsline {subsection}{\numberline {2.3.8}Recurs\IeC {\~a}o}{13}{subsection.2.3.8}
+\contentsline {subsection}{\numberline {2.3.9}An\IeC {\'a}lise do algoritmo}{13}{subsection.2.3.9}
+\contentsline {subsection}{\numberline {2.3.10}An\IeC {\'a}lise da linguagem}{13}{subsection.2.3.10}
+\contentsline {subsubsection}{\numberline {2.3.10.1}Simplicidade}{14}{subsubsection.2.3.10.1}
+\contentsline {subsubsection}{\numberline {2.3.10.2}Ortogonalidade}{14}{subsubsection.2.3.10.2}
+\contentsline {subsubsection}{\numberline {2.3.10.3}Expressividade}{14}{subsubsection.2.3.10.3}
+\contentsline {subsubsection}{\numberline {2.3.10.4}Adequabilidade e variedade de estruturas de controle}{15}{subsubsection.2.3.10.4}
+\contentsline {subsubsection}{\numberline {2.3.10.5}Mecanismos de defini\IeC {\c c}\IeC {\~a}o de tipos}{15}{subsubsection.2.3.10.5}
+\contentsline {subsubsection}{\numberline {2.3.10.6}Suporte a abstra\IeC {\c c}\IeC {\~a}o de dados}{15}{subsubsection.2.3.10.6}
+\contentsline {subsubsection}{\numberline {2.3.10.7}Suporte a abstra\IeC {\c c}\IeC {\~a}o de processos}{15}{subsubsection.2.3.10.7}
+\contentsline {subsubsection}{\numberline {2.3.10.8}Modelo de tipos}{16}{subsubsection.2.3.10.8}
+\contentsline {subsubsection}{\numberline {2.3.10.9}Portabilidade}{16}{subsubsection.2.3.10.9}
+\contentsline {subsubsection}{\numberline {2.3.10.10}Reusabilidade}{16}{subsubsection.2.3.10.10}
+\contentsline {subsubsection}{\numberline {2.3.10.11}Suporte e documenta\IeC {\c c}\IeC {\~a}o}{16}{subsubsection.2.3.10.11}
+\contentsline {subsubsection}{\numberline {2.3.10.12}Tamanho de c\IeC {\'o}digo}{16}{subsubsection.2.3.10.12}
+\contentsline {subsubsection}{\numberline {2.3.10.13}Generalidade}{16}{subsubsection.2.3.10.13}
+\contentsline {subsubsection}{\numberline {2.3.10.14}Efici\IeC {\^e}ncia}{16}{subsubsection.2.3.10.14}
+\contentsline {subsubsection}{\numberline {2.3.10.15}Custo}{17}{subsubsection.2.3.10.15}
+\contentsline {chapter}{3~CONCLUS\IeC {\~A}O}{18}{CHAPTER.3}
+\contentsline {chapter}{4~Refer\IeC {\^e}ncias}{19}{CHAPTER.4}
 \contentsfinish 

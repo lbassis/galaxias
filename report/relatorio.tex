@@ -382,7 +382,7 @@ O algoritmo recebe como entrada uma lista de partículas com suas posições e s
     Em linguagens funcionais, é possível que funções sejam passadas como parâmetros de outras funções, funcionando como elementos de primeira ordem. Essa técnica foi utilizada no \textit{loop} que desenha as partículas para indicar qual a função que atualizaria suas posições, conforme mostrado no algoritmo \ref{drawing_loop}.
 
     \begin{algorithm}
-	\label{drawing_loop}
+	  \label{drawing_loop}
     \SetKwInOut{Input}{Input}
     \underline{drawing{\_}
 loop} $(particles, iteractions, name, updatePosAndVel)$\;
@@ -407,6 +407,13 @@ loop} $(particles, iteractions, name, updatePosAndVel)$\;
     \subsection{Funções com pattern matching}
 
     \textit{Pattern matching} é uma técnica que procura padrões dentro de sequências de valores, muito utilizada, por exemplo, em processamento de linguagens. Como esse trabalho é uma implementação que simula fenômenos físicos, o grupo não encontrou uma aplicação interessante para esse tipo de algoritmo, portanto não há nenhum exemplo a ser mostrado.
+
+    \subsection{Recursão}
+
+      A recursão foi utilizada frequentemente como iterador para que todos os elementos de uma lista
+      fossem devidamente processados. Um possível exemplo é o algoritmo~\ref{drawing_loop}
+      mostrado na sessão anterior. Ao final de cada iteração, diminui-se em uma unidade o número de iterações
+      restantes e a função \textit{drawing{\_}loop} é chamada novamente.
 
 \subsection{Análise do algoritmo}
 
