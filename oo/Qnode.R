@@ -106,6 +106,7 @@ Qnode <- setRefClass("Qnode",
     },
     compute_single_force = function(node) {
       G = 6.67408*(10^(-11))
+      # G = 1
       m1 = .self$get_mass()
       m2 = node$get_mass()
       d = .self$distance(node)
@@ -143,7 +144,7 @@ Qnode <- setRefClass("Qnode",
       fx = 0
       fy = 0
       while(!t$is_empty()) {
-        force <- t$pop()[[1]]
+        force <<- t$pop()[[1]]
         fx = fx + force$get_x()
         fy = fy + force$get_y()
       }
@@ -154,21 +155,54 @@ Qnode <- setRefClass("Qnode",
       for(qext in qnode_list){
         qext$compute_resultant_force(.self)
       }
+    },
+    compute_acceleration = function() {
+      mass <<- .self$get_mass()
+      if (mass != 0) {
+        ax = .self$get_fx()/mass
+        ay = .self$get_fy()/mass
+        .self$set_acceleration(Point$new(x=ax,y=ay))
+      }
+    },
+    compute_accelerations = function() {
+      qnode_list = .self$to_list()
+      for(qext in qnode_list){
+        qext$compute_acceleration()
+      }
+    },
+    update_position_and_velocity = function() {
+      t = 1
+      ax = .self$get_ax()
+      ay = .self$get_ay()
+      vx = .self$get_vx()
+      vy = .self$get_vy()
+      x <<- .self$get_x()
+      y <<- .self$get_y()
+      new_vx = vx + ax*t
+      new_vy = vy + ay*t
+      new_x = ax*(t^2)/2 + vx*t + x
+      new_y = ay*(t^2)/2 + vy*t + y
+      .self$set_velocity(Point$new(x=new_vx,y=new_vy))
+      .self$set_x(new_x)
+      .self$set_y(new_y)
+    },
+    update_state = function() {
+      qnode_list = .self$to_list()
+      for(qext in qnode_list){
+        qext$update_position_and_velocity()
+      }
     }
   )
 )
 
 ## TESTS
 qnode = Qnode$new(quadrant_size=40, first_child=list(Qnode$new(x=2,y=2,mass=2)), second_child=list(Qnode$new(x=3,y=2,mass=2)))
-qnode$external()
-childs = qnode$childs()
-for(i in childs){
-  print(i)
-}
-
 qnode2 = Qnode$new(quadrant_size=80, first_child=list(Qnode$new(x=1,y=2,mass=2), second_child=qnode))
+
 qnode2$compute_mass_distribution()
+qnode2$compute_forces()
+qnode2$compute_accelerations()
+qnode2$update_state()
+
 l = qnode2$to_list()
 
-qnode$compute_mass_distribution()
-qnode2$compute_forces()
