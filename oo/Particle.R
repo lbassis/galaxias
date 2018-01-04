@@ -30,8 +30,8 @@ Particle <- setRefClass("Particle",
       Point(x = .self$get_x(), y = .self$get_y())
     },
     set_mass = function(mass) .self$mass = mass,
-    set_velocity = function(velocity) .self$velocity = velocity,
-    set_force = function(force) .self$force = force,
+    set_velocity = function(velocity) .self$velocity = velocity$copy(),
+    set_force = function(force) .self$force = force$copy(),
     set_quadrant_size = function(quadrant_size) .self$quadrant_size = quadrant_size
   )
       
