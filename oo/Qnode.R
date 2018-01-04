@@ -56,6 +56,26 @@ Qnode <- setRefClass("Qnode",
         .self$set_x(total_x_times_mass/total_mass)
         .self$set_y(total_y_times_mass/total_mass)
       }
+    },
+    compute_mass_distribution = function() {
+      s <- Stack$new()
+      t <- Stack$new()
+      s$push(.self)
+      while (!s$is_empty()) {
+        node <- s$pop()[[1]]
+        children = node$childs()
+        t$push(node)
+        
+        for (i in children) {
+          if (!i$external()) {
+            s$push(i)
+          }
+        }
+      }
+      while(!t$is_empty()) {
+        node <- t$pop()[[1]]
+        node$compute_center_of_mass()
+      }
     }
   )
 )
@@ -67,4 +87,6 @@ childs = qnode$childs()
 for(i in childs){
   print(i)
 }
-qnode$compute_center_of_mass()
+
+qnode2 = Qnode$new(first_child=list(Qnode$new(x=2,y=2,mass=3), second_child=qnode))
+qnode2$compute_mass_distribution()
