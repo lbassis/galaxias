@@ -42,15 +42,29 @@ Qnode <- setRefClass("Qnode",
     },
 
     compute_center_of_mass = function() {
-
+      childs = .self$childs()
+      total_mass = 0
+      total_x_times_mass = 0
+      total_y_times_mass = 0
+      for(i in childs){
+        total_mass = total_mass + i$get_mass()
+        total_x_times_mass = total_x_times_mass + i$get_x()*i$get_mass()
+        total_y_times_mass = total_y_times_mass + i$get_y()*i$get_mass()
+      }
+      .self$set_mass(total_mass)
+      if (total_mass != 0) {
+        .self$set_x(total_x_times_mass/total_mass)
+        .self$set_y(total_y_times_mass/total_mass)
+      }
     }
   )
 )
 
 ## TESTS
-qnode = Qnode$new(first_child=list(Qnode$new()), second_child=list(Qnode$new()))
+qnode = Qnode$new(first_child=list(Qnode$new(x=2,y=2,mass=2)), second_child=list(Qnode$new(x=1,y=1,mass=1)))
 qnode$external()
 childs = qnode$childs()
 for(i in childs){
   print(i)
 }
+qnode$compute_center_of_mass()
