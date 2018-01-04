@@ -5,6 +5,10 @@ Point <- setRefClass("Point",
     y = "numeric"
   ),
   methods = list(
+    initialize = function(.Object,x=0,y=0) {
+      .self$x = x
+      .self$y = y
+    },
     get_x = function() return(.self$x),
     get_y = function() return(.self$y),
     sum_op = function(p) {
@@ -27,4 +31,3 @@ Point <- setRefClass("Point",
     set_y = function(y) .self$y = y
   )
 )
-

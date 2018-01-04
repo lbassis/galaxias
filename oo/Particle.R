@@ -10,6 +10,13 @@ Particle <- setRefClass("Particle",
     quadrant_size = "numeric"
   ),
   methods = list(
+    initialize = function(.Object,mass=0,velocity=Point$new(),force=Point$new(),quadrant_size=0,...) {
+      .self$mass = mass
+      .self$velocity = velocity$copy()
+      .self$force = force$copy()
+      .self$quadrant_size = quadrant_size
+      callSuper(...)
+    },
     get_mass = function() .self$mass,
     get_velocity = function() .self$velocity,
     get_force = function() .self$force,
@@ -18,6 +25,7 @@ Particle <- setRefClass("Particle",
     get_vy = function() .self$get_velocity()$get_y(),
     get_fx = function() .self$get_force()$get_x(),
     get_fy = function() .self$get_force()$get_y(),
+    get_quadrant_size = function() .self$quadrant_size,
     to_point = function() {
       Point(x = .self$get_x(), y = .self$get_y())
     },
