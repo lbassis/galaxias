@@ -29,9 +29,9 @@ Qnode <- setRefClass("Qnode",
     childs = function() {
       c(first_child, second_child, third_child, fourth_child)
     },
+    external = function() .self$empty(),
     ## QUEBRADO
     degree = function() Reduce("+", lapply(.self$childs, function(c) as.integer(!c$empty()))),
-    external = function() .self$empty(),
     ## QUEBRADO
     new_child = function(index, child_index, child) if (index==child_index) child else .self[[index]],
     # given a qnode (parent), a child index [[2..5]], and another qnode (child)
