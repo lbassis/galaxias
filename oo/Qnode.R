@@ -27,27 +27,21 @@ Qnode <- setRefClass("Qnode",
     set_second_child = function(child) .self$second_child <- list(child),
     set_third_child = function(child) .self$third_child <- child,
     set_fourth_child = function(child) .self$fourth_child <- child,
-    empty = function() {
-      length(.self$first_child) + length(.self$second_child) + length(.self$third_child) + length(.self$fourth_child) == 0
-    },
     childs = function() {
-      c(first_child, second_child, third_child, fourth_child)
+      c(.self$first_child, .self$second_child, .self$third_child, .self$fourth_child)
     },
-    external = function() .self$empty(),
-    ## QUEBRADO
-    degree = function() Reduce("+", lapply(.self$childs, function(c) as.integer(!c$empty()))),
-    ## QUEBRADO
-    new_child = function(child_index, child) {
+    external = function() .self$degree() == 0,
+    degree = function() {
+      #print(.self$childs());
+      return(length(.self$childs()))
+      #Reduce("+", lapply(list(.self$childs()), function(c) as.integer(TRUE))) #as.integer(!c[[1]]$empty()))),
+    },
+    force_insert = function(child_index, child) {
+      # overwrites
       if(child_index==1)       .self$set_first_child(child)
       else if (child_index==2) .self$set_second_child(child)
       else if (child_index==3) .self$set_third_child(child)
       else if (child_index==4) .self$set_fourth_child(child)
-    },
-    # given a qnode (parent), a child index [[2..5]], and another qnode (child)
-    #   returns a qnode similar to the parent, overwriting the child_index with child
-    ## QUEBRADO
-    force_insert = function (child_index, child) {
-      list(.self[[1]], .self$new_child(2, child_index, child), .self$new_child(3, child_index, child), .self$new_child(4, child_index, child), .self$new_child(5, child_index, child))
     },
     draw = function() {
       draw.circle(.self$get_x(), .self$get_y(), .self$get_mass(), col="red", nv=1000, border = NA,lty=1,lwd=1)
@@ -210,16 +204,17 @@ first_child=Qnode$new(x=2,y=2,mass=2)
 second_child=Qnode$new(x=3,y=2,mass=2)
 
 
-qnode$new_child(1, first_child)
-qnode$new_child(2, second_child)
-#print(qnode)
+qnode$force_insert(1, first_child)
+qnode$force_insert(2, second_child)
+print(qnode)
 
-#qnode2 = Qnode$new(quadrant_size=80, first_child=list(Qnode$new(x=1,y=2,mass=2), second_child=qnode))
+qnode2 = Qnode$new(quadrant_size=80, first_child=list(Qnode$new(x=1,y=2,mass=2), second_child=qnode))
 
 qnode2$compute_mass_distribution()
 qnode2$compute_forces()
 qnode2$compute_accelerations()
 qnode2$update_state()
 
+print(qnode$degree())
 l = qnode$to_list()
 print(l)
