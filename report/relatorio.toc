@@ -23,29 +23,29 @@
 \contentsline {subsection}{\numberline {2.4.2}Encapsulamento}{13}{subsection.2.4.2}
 \contentsline {subsection}{\numberline {2.4.3}Construtores}{15}{subsection.2.4.3}
 \contentsline {subsection}{\numberline {2.4.4}Destrutores}{15}{subsection.2.4.4}
-\contentsline {subsection}{\numberline {2.4.5}Espa\IeC {\c c}o}{15}{subsection.2.4.5}
-\contentsline {subsection}{\numberline {2.4.6}Heran\IeC {\c c}a}{15}{subsection.2.4.6}
-\contentsline {subsection}{\numberline {2.4.7}Inclus\IeC {\~a}o}{16}{subsection.2.4.7}
-\contentsline {subsection}{\numberline {2.4.8}Param\IeC {\'e}trico}{16}{subsection.2.4.8}
-\contentsline {subsection}{\numberline {2.4.9}Sobrecarga}{16}{subsection.2.4.9}
-\contentsline {subsection}{\numberline {2.4.10}Delegates}{16}{subsection.2.4.10}
-\contentsline {subsection}{\numberline {2.4.11}An\IeC {\'a}lise do algoritmo}{16}{subsection.2.4.11}
-\contentsline {subsection}{\numberline {2.4.12}An\IeC {\'a}lise da linguagem}{17}{subsection.2.4.12}
-\contentsline {subsubsection}{\numberline {2.4.12.1}Simplicidade}{17}{subsubsection.2.4.12.1}
-\contentsline {subsubsection}{\numberline {2.4.12.2}Ortogonalidade}{17}{subsubsection.2.4.12.2}
-\contentsline {subsubsection}{\numberline {2.4.12.3}Expressividade}{17}{subsubsection.2.4.12.3}
-\contentsline {subsubsection}{\numberline {2.4.12.4}Adequabilidade e variedade de estruturas de controle}{18}{subsubsection.2.4.12.4}
-\contentsline {subsubsection}{\numberline {2.4.12.5}Mecanismos de defini\IeC {\c c}\IeC {\~a}o de tipos}{18}{subsubsection.2.4.12.5}
-\contentsline {subsubsection}{\numberline {2.4.12.6}Suporte a abstra\IeC {\c c}\IeC {\~a}o de dados}{18}{subsubsection.2.4.12.6}
-\contentsline {subsubsection}{\numberline {2.4.12.7}Suporte a abstra\IeC {\c c}\IeC {\~a}o de processos}{18}{subsubsection.2.4.12.7}
-\contentsline {subsubsection}{\numberline {2.4.12.8}Modelo de tipos}{18}{subsubsection.2.4.12.8}
-\contentsline {subsubsection}{\numberline {2.4.12.9}Portabilidade}{18}{subsubsection.2.4.12.9}
-\contentsline {subsubsection}{\numberline {2.4.12.10}Reusabilidade}{19}{subsubsection.2.4.12.10}
-\contentsline {subsubsection}{\numberline {2.4.12.11}Suporte e documenta\IeC {\c c}\IeC {\~a}o}{19}{subsubsection.2.4.12.11}
-\contentsline {subsubsection}{\numberline {2.4.12.12}Tamanho de c\IeC {\'o}digo}{19}{subsubsection.2.4.12.12}
-\contentsline {subsubsection}{\numberline {2.4.12.13}Generalidade}{19}{subsubsection.2.4.12.13}
-\contentsline {subsubsection}{\numberline {2.4.12.14}Efici\IeC {\^e}ncia}{19}{subsubsection.2.4.12.14}
-\contentsline {subsubsection}{\numberline {2.4.12.15}Custo}{19}{subsubsection.2.4.12.15}
-\contentsline {chapter}{3~CONCLUS\IeC {\~A}O}{20}{CHAPTER.3}
-\contentsline {chapter}{\xspace {}Refer{\^e}ncias}{21}{schapter.2}
+\contentsline {subsection}{\numberline {2.4.5}Espa\IeC {\c c}o de Nomes}{15}{subsection.2.4.5}
+\contentsline {subsection}{\numberline {2.4.6}Heran\IeC {\c c}a}{16}{subsection.2.4.6}
+\contentsline {subsection}{\numberline {2.4.7}Polimorfismo por Inclus\IeC {\~a}o}{16}{subsection.2.4.7}
+\contentsline {subsection}{\numberline {2.4.8}Polimorfismo Param\IeC {\'e}trico}{16}{subsection.2.4.8}
+\contentsline {subsection}{\numberline {2.4.9}Polimorfismo por Sobrecarga}{16}{subsection.2.4.9}
+\contentsline {subsection}{\numberline {2.4.10}Delegates}{17}{subsection.2.4.10}
+\contentsline {subsection}{\numberline {2.4.11}An\IeC {\'a}lise do algoritmo}{17}{subsection.2.4.11}
+\contentsline {subsection}{\numberline {2.4.12}An\IeC {\'a}lise da linguagem}{18}{subsection.2.4.12}
+\contentsline {subsubsection}{\numberline {2.4.12.1}Simplicidade}{18}{subsubsection.2.4.12.1}
+\contentsline {subsubsection}{\numberline {2.4.12.2}Ortogonalidade}{18}{subsubsection.2.4.12.2}
+\contentsline {subsubsection}{\numberline {2.4.12.3}Expressividade}{19}{subsubsection.2.4.12.3}
+\contentsline {subsubsection}{\numberline {2.4.12.4}Adequabilidade e variedade de estruturas de controle}{19}{subsubsection.2.4.12.4}
+\contentsline {subsubsection}{\numberline {2.4.12.5}Mecanismos de defini\IeC {\c c}\IeC {\~a}o de tipos}{19}{subsubsection.2.4.12.5}
+\contentsline {subsubsection}{\numberline {2.4.12.6}Suporte a abstra\IeC {\c c}\IeC {\~a}o de dados}{19}{subsubsection.2.4.12.6}
+\contentsline {subsubsection}{\numberline {2.4.12.7}Suporte a abstra\IeC {\c c}\IeC {\~a}o de processos}{20}{subsubsection.2.4.12.7}
+\contentsline {subsubsection}{\numberline {2.4.12.8}Modelo de tipos}{20}{subsubsection.2.4.12.8}
+\contentsline {subsubsection}{\numberline {2.4.12.9}Portabilidade}{20}{subsubsection.2.4.12.9}
+\contentsline {subsubsection}{\numberline {2.4.12.10}Reusabilidade}{20}{subsubsection.2.4.12.10}
+\contentsline {subsubsection}{\numberline {2.4.12.11}Suporte e documenta\IeC {\c c}\IeC {\~a}o}{20}{subsubsection.2.4.12.11}
+\contentsline {subsubsection}{\numberline {2.4.12.12}Tamanho de c\IeC {\'o}digo}{20}{subsubsection.2.4.12.12}
+\contentsline {subsubsection}{\numberline {2.4.12.13}Generalidade}{21}{subsubsection.2.4.12.13}
+\contentsline {subsubsection}{\numberline {2.4.12.14}Efici\IeC {\^e}ncia}{21}{subsubsection.2.4.12.14}
+\contentsline {subsubsection}{\numberline {2.4.12.15}Custo}{21}{subsubsection.2.4.12.15}
+\contentsline {chapter}{3~CONCLUS\IeC {\~A}O}{22}{CHAPTER.3}
+\contentsline {chapter}{\xspace {}Refer{\^e}ncias}{23}{schapter.2}
 \contentsfinish 

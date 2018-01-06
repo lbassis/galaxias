@@ -486,6 +486,8 @@ loop} $(particles, iteractions, name, updatePosAndVel)$\;
  \textit{RefClasses}, apesar de permitirem a declaração de métodos que pertencem a classes, o que é uma
  forma de encapsulamento, não permitem que sejam especificados os níveis de acesso dos elementos de cada
  classe. Portanto, todos os atributos e métodos das classes utilizadas nessa implementação são públicos.
+ Apesar disso, todos os atributos contam com seus \textit{setters} e \textit{getters}, simulando uma
+ implementação com atributos privados.
 
  A \textit{R6Class}, outra possível implementação da linguagem, conta com a opção de níveis de acesso \cite{R6}.
  No entanto, dessa forma não haveria a designação dos tipos de cada atributo da classe e portanto o grupo
@@ -516,7 +518,11 @@ loop} $(particles, iteractions, name, updatePosAndVel)$\;
   \caption{Destrutor da classe Qnode}
   \end{algorithm}
 
-\subsection{Espaço}
+\subsection{Espaço de Nomes}
+
+    Os espaços de nomes presentes nessa implementação são apenas as classes implementadas. No entanto,
+    não há métodos com nomes iguais em classes diferentes, e por isso o resultado não seria diferente
+    caso houvesse um único espaço de nomes.
 
 \subsection{Herança}
 
@@ -525,13 +531,75 @@ loop} $(particles, iteractions, name, updatePosAndVel)$\;
     de posição, em vez de incluir esses parâmetros, optou-se por fazê-las herdarem-nos da classe \textit{Point},
     que contém apenas essas informações.
 
-\subsection{Inclusão}
+\subsection{Polimorfismo por Inclusão}
 
-\subsection{Paramétrico}
+\subsection{Polimorfismo Paramétrico}
 
-\subsection{Sobrecarga}
+    O polimorfismo paramétrico foi utilizado na classe \textit{Stack}. Na criação do objeto, é definida
+    a classe cujos objetos serão incluídos na pilha. A linguagem em si não fornece mecanismos nativos para
+    a verificação dos objetos incluídos, mas a implementação da função \textit{push} se encarrega disso. Caso
+    o usuário tente empilhar um objeto de uma classe diferente, uma exceção é acionada, conforme o algoritmo
+    \ref{parametric}.
+
+    \begin{algorithm}
+    \nosemic    push = function(e) {\{}
+  if (class(e) != type) {\{}
+    stop("Argument type should be ",type," but received argument has type ",class(e))
+  {\}} else {\{}
+    .self{\$}stack = c(e, .self{\&}stack)
+  {\}}
+{\}}
+\caption{Função \textit{push} da pilha que garante que os elementos empilhados são do tipo estabelecido na criação da pilha}
+\end{algorithm}
+
+    \label{parametric}
+
+
+
+\subsection{Polimorfismo por Sobrecarga}
+
+    A sobrecarga é utilizada para reescrever um método para alguma classe em especial. Isso foi utilizado
+    na classe \textit{Point} para que fosse possível utilizar o operador de soma entre dois objetos dessa
+    classe, somando suas componentes horizontais e verticais, resultando num novo ponto, conforme mostra
+    o algoritmo \ref{overload}.
+
+    \begin{algorithm}
+    \label{overload}
+    \nosemic setMethod("+", c("Point", "Point"), function(e1, e2) {\;
+    \nosemic  Point(x = e1{\$}get{\_}x() + e2{\$}get{\_}x(), y = e1{\$}get{\_}y() + e2{\$}get{\_}y())\;
+    \nosemic })\;
+
+    \caption{Sobrecarga da operação de soma}
+    \end{algorithm}
+
 
 \subsection{Delegates}
+
+    Delegates consistem em utilizar elementos para selecionar qual implementação dentre uma gama
+    de opções será utilizada.
+    A função \textit{compute{\_}single{\_}force}, mostrada no algoritmo \ref{delegate}, possui um
+    delegate que decide qual será a função de distância aplicada aos pontos computados. Nessa aplicação
+    a única opção utilizada é a distância euclidiana, mas o grupo optou por implementar a construção
+    mesmo assim para ilustrar sua utilização na linguagem.
+
+\begin{algorithm}
+\label{delegate}
+\nosemic compute{\_}single{\_}force = function(node, distance{\_}delegate) {\{}\;
+\nosemic  G = 6.67408*(10\string^(-11))\;
+\nosemic  m1 = .self{\$}get{\_}mass()\;
+\nosemic  m2 = node{\$}get{\_}mass()\;
+\nosemic  d = distance{\_}delegate(node)\;
+\nosemic  if (d > 0) {\{}\;
+\nosemic    dx = .self{\$}get{\_}x() - node{\$}get{\_}x()\;
+\nosemic    dy = .self{\$}get{\_}y() - node{\$}get{\_}y()\;
+\nosemic    f = (G*m1*m2)/d\string^2\;
+\nosemic    fx = f*dx/d\;
+\nosemic    fy = f*dy/d\;
+\nosemic    return(Point{\$}new(x=fx,y=fy))\;
+\nosemic  {\}}\;
+\nosemic {\}}\;
+\caption{Método que faz uso do delegate}
+\end{algorithm}
 
 
 \subsection{Análise do algoritmo}
