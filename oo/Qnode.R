@@ -54,7 +54,7 @@ Qnode <- setRefClass("Qnode",
       draw.circle(.self$get_x(), .self$get_y(), .self$get_mass(), col="red", nv=1000, border = NA,lty=1,lwd=1)
     },
     
-    distance = function(node) {
+    euclidean_distance = function(node) {
       ((.self$get_x() - node$get_x())^2 + (.self$get_y() - node$get_y())^2)^(1/2)
     },
     to_list = function() {
@@ -114,12 +114,12 @@ Qnode <- setRefClass("Qnode",
         node$compute_center_of_mass()
       }
     },
-    compute_single_force = function(node) {
+    compute_single_force = function(node, distance_delegate) {
       G = 6.67408*(10^(-11))
       # G = 1
       m1 = .self$get_mass()
       m2 = node$get_mass()
-      d = .self$distance(node)
+      d = distance_delegate(node)
       if (d > 0) {
         dx = .self$get_x() - node$get_x()
         dy = .self$get_y() - node$get_y()
@@ -136,13 +136,13 @@ Qnode <- setRefClass("Qnode",
       while (!s$is_empty()) {
         node <- s$pop()[[1]]
         if (node$external()){
-          t$push(.self$compute_single_force(node))
+          t$push(.self$compute_single_force(node, .self$euclidean_distance))
         } else {
-          r = .self$distance(node)
+          r = .self$euclidean_distance(node)
           d = node$get_quadrant_size()
           theta = 1
           if (d/r < theta) {
-            t$push(.self$compute_single_force(node))
+            t$push(.self$compute_single_force(node, .self$euclidean_distance))
           } else {
             children = node$childs()
             for (i in children) {
