@@ -19,6 +19,13 @@ Qnode <- setRefClass("Qnode",
       .self$fourth_child = fourth_child
       callSuper(...)
     },
+    finalize = function() {
+      set_first_child(list())
+      set_second_child(list())
+      set_third_child(list())
+      set_fourth_child(list())
+      print("objeto finalizado")
+    },
     get_first_child = function() .self$first_child,
     get_second_child = function() .self$second_child,
     get_third_child = function() .self$third_child,

@@ -28,9 +28,27 @@ Available from Internet:
 {FREE SOFTWARE FOUNDATION. \textbf{GNU Operating System}. 2018.
 Available from Internet: \url{https://www.gnu.org/}.}
 
+\bibitem[initialize-methods: Methods to Initialize New Objects from a Class
+  n.d.]{init_meth}
+\abntrefinfo{initialize-methods\ldots}{INITIALIZE-METHODS\ldots}{n.d.}
+{INITIALIZE-METHODS: Methods to Initialize New Objects from a Class. n.d.
+Available from Internet:
+  \url{https://rdrr.io/r/methods/initialize-methods.html}.}
+
+\bibitem[Introduction to R6 classes n.d.]{R6}
+\abntrefinfo{Introduction\ldots}{INTRODUCTION\ldots}{n.d.}
+{INTRODUCTION to R6 classes. n.d.
+Available from Internet:
+  \url{https://cran.r-project.org/web/packages/R6/vignettes/Introduction.html}.}
+
 \bibitem[The R Foundation 2017]{linguagemR}
 \abntrefinfo{The R Foundation}{THE R FOUNDATION}{2017}
 {THE R FOUNDATION. \textbf{R: What is R?} 2017.
 Available from Internet: \url{https://www.r-project.org/about.html}.}
+
+\bibitem[Wickham 2017]{RClasses}
+\abntrefinfo{Wickham}{WICKHAM}{2017}
+{WICKHAM, H. \textbf{OO field guide}. 2017.
+Available from Internet: \url{http://adv-r.had.co.nz/OO-essentials.html}.}
 
 \end{thebibliography}

@@ -44,6 +44,8 @@
 \usepackage[linesnumbered,ruled]{algorithm2e}
 \usepackage{amsmath}
 
+\makeatletter
+\newcommand{\nosemic}{\renewcommand{\@endalgocfline}{\relax}}% Drop semi-colon ;
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -248,18 +250,22 @@ O algoritmo recebe como entrada uma lista de partículas com suas posições e s
     \caption{Algoritmo de Barnes-Hut para simulação de N-corpos}
 \end{algorithm}
 
-\section{Implementação no Paradigma Funcional}
+\section{Implementação Gráfica}
 
-\subsection{Visualização Gráfica}
-
-	A visualização gráfica foi implementada utilizando o pacote \textit{plotrix} e a biblioteca \textit{ImageMagick}. Em cada iteração do algoritmo, isto é, em cada conjunto de posições calculado, gera-se um gráfico com círculos representando as partículas em um espaço bidimensional, conforme é mostrado na figura \ref{fig:particulas.eps}.
-    Em uma abordagem inicial, a ideia foi utilizar diversos gráficos carregados em sequência no ambiente \textit{Rstudio}, com um pequeno intervalo de espera entre cada geração. No entanto, a performance não foi satisfatória; apesar de, inicialmente e com um número pequeno de partículas, a animação ficasse fluída, com o passar do tempo o tempo entre as gerações é cada vez maior, tornando o algoritmo muito lento em pouco tempo.
+    Em uma abordagem inicial, a ideia foi utilizar diversos gráficos carregados em sequência no
+    ambiente \textit{Rstudio}, com um pequeno intervalo de espera entre cada geração.
+    No entanto, a performance não foi satisfatória; apesar de, inicialmente e com um número
+    pequeno de partículas, a animação ficasse fluída, com o passar do tempo o tempo
+    entre as gerações é cada vez maior, tornando o algoritmo muito lento em pouco tempo.
 
     A partir daí, a ideia escolhida foi a de selecionar inicialmente um número de iterações; depois disso, são geradas todas as imagens necessárias para representar esse número e, por fim, as imagens são transformadas em um arquivo \textit{.gif}. Dessa maneira, o algoritmo perde a capacidade de ser demonstrado em tempo real, já que a duração da simulação é definida antes da execução da mesma. No entanto, dessa maneira foi possível obter uma animação adequada ao esperado e, portanto, essa foi a solução escolhida.
 
-    A geração das imagens implementa um laço utilizando recursão. Enquanto um número de iterações (passado por parâmetro para a função) não for nulo, a recursão é chamada, reduzindo em uma unidade o número de iterações.
-    Dentro do laço, uma partícula é desenhada utilizando a função \textit{draw{\_}circle}, implementadas conforme mostrado no algoritmo \ref{draw_particle}. Depois disso, uma função \textit{lapply} mapeia esse algoritmo para que ele seja aplicado a todas as partículas de uma lista, desenhando todos os elementos.
-    Ao final da execução do laço, uma funçao da biblioteca \textit{ImageMagick} transforma as imagens geradas em um arquivo \textit{.gif} animado.
+    A geração das imagens é feita a partir de um laço. Na implementação funcional, por exemplo,
+    a função \textit{draw{\_}circle}, mostrada no algoritmo \ref{draw_particle}, desenha uma partícula na tela.
+    O laço itera por todas as partículas existentes, gerando um gráfico com todas elas desenhadas num
+    dado instante de tempo. Cada um desses gráficos é salvo para que, finalizado o número de iterações
+    definido pelo usuário, uma função da biblioteca \textit{ImageMagick} transforme o conjunto de imagens
+    em um arquivo \textit{.gif} animado.
 
 \begin{figure}[htb]
     \centering
@@ -280,9 +286,12 @@ O algoritmo recebe como entrada uma lista de partículas com suas posições e s
     \caption{Algoritmo que desenha uma partícula}
 \end{algorithm}
 
-\section{Aspectos funcionais}
+\section{Implementação no Paradigma Funcional}
 
-	Segue abaixo a descrição e demonstração de algumas técnicas tipicamente funcionais utilizadas na elaboração deste trabalho.
+    Nessa sessão, será realizada uma análise específica sobre a implementação do algoritmo de Barnes-Hut
+    e sua visualização gráfica utilizando conceitos do paradigma funcional.
+	Segue abaixo a descrição e demonstração de algumas técnicas tipicamente funcionais
+    utilizadas na elaboração deste trabalho.
 
     \subsection{Elementos imutáveis}
 
@@ -417,6 +426,113 @@ loop} $(particles, iteractions, name, updatePosAndVel)$\;
       fossem devidamente processados. Um possível exemplo é o algoritmo~\ref{drawing_loop}
       mostrado na sessão anterior. Ao final de cada iteração, diminui-se em uma unidade o número de iterações
       restantes e a função \textit{drawing{\_}loop} é chamada novamente.
+
+
+\section{Implementação no Paradigma Orientado a Objetos}
+
+\subsection{Classes}
+
+    A construção base da orientação a objetos foi obviamente utilizada na elaboração deste trabalho.
+    Foram utilizadas classes para representar pontos, quadrantes, partículas, nodos da árvore, pilhas e
+    o universo como um todo.
+
+    A linguagem R fornece diversas implementações de classes \cite{RClasses} com níveis de detalhamento diferentes.
+    Essa implementação utiliza a \textit{RefClass}, que conta com objetos mutáveis e envio de mensagens
+    entre objetos.
+
+    Abaixo, o algoritmo \ref{point_class} mostra a implementação da classe \textit{Point} usando \textit{RefClass}.
+
+\begin{algorithm}
+  \label{point_class}
+\nosemic Point <- setRefClass("Point",\;
+\nosemic  fields = list(\;
+\nosemic    x = "numeric",\;
+\nosemic    y = "numeric"\;
+\nosemic  ),\;
+\nosemic  methods = list(\;
+\nosemic    initialize = function(.Object,x=0,y=0) {\{} \;
+\nosemic      .self{\$}x = x{\$}\;
+\nosemic      .self{\$}y = y{\$}\;
+\nosemic    {\}}, \;
+\nosemic    get{\_}x = function() return(.self{\$}x),\;
+\nosemic    get{\_}y = function() return(.self{\$}y),\;
+\nosemic    sum{\_}op = function(p) {\{}\;
+\nosemic      Point(x = .self{\$}x + p{\$}x, y = .self{\$}y + p{\$}y)\;
+\nosemic    {\}},\;
+\nosemic    sub{\_}op = function(p) {\{}\;
+\nosemic      Point(x = .self{\$}x - p{\$}x, y = .self{\$}y - p{\$}y)\;
+\nosemic    {\}},\;
+\nosemic    quadrant{\_}i = function(quad{\_}center) {\{}\;
+\nosemic      if (.self{\$}x <= quad{\_}center{\$}x) {\{}\;
+\nosemic        if(.self{\$}y <= quad{\_}center{\$}y) 1 else 2\;
+\nosemic      {\}} else {\{}\;
+\nosemic        if(.self{\$}y <= quad{\_}center{\$}y) 3 else 4\;
+\nosemic      {\}}\;
+\nosemic    {\}},\;
+\nosemic    subquadrant = function(quad) {\{}\;
+\nosemic      quad{\$}quad{\_}sub(.self{\$}quadrant{\_}i(quad{\$}quad{\_}center()))\;
+\nosemic    {\}},\;
+\nosemic    set{\_}x = function(x) .self{\$}x = x,\;
+\nosemic    set{\_}y = function(y) .self{\$}y = y\;
+\nosemic  )\;
+\nosemic )\;
+
+\caption{Definição da classe Point}
+\end{algorithm}
+
+
+\subsection{Encapsulamento}
+
+ \textit{RefClasses}, apesar de permitirem a declaração de métodos que pertencem a classes, o que é uma
+ forma de encapsulamento, não permitem que sejam especificados os níveis de acesso dos elementos de cada
+ classe. Portanto, todos os atributos e métodos das classes utilizadas nessa implementação são públicos.
+
+ A \textit{R6Class}, outra possível implementação da linguagem, conta com a opção de níveis de acesso \cite{R6}.
+ No entanto, dessa forma não haveria a designação dos tipos de cada atributo da classe e portanto o grupo
+ preferiu utilizar uma \textit{RefClasses}.
+
+\subsection{Construtores}
+
+    Conforme pode ser visto no algoritmo \ref{point_class} na função \textit{initialize}, é possível
+    especificar os construtores das classes criadas. O parâmetro \textit{.Object}, presente em todos
+    os construtores, é o objeto protótipo da classe \cite{init_meth}.
+
+\subsection{Destrutores}
+
+    A única classe em que se faz útil um destrutor é a \textit{Qnode}, que conta com quatro listas
+    de filhos. Portanto, o método \ref{destructor}, parte da implementação da classe, remove os elementos dessas listas assim que o
+    \textit{garbage collector} é invocado na execução do programa (isso pode ser feito forçadamente
+    através do comando \textit{gc()}).
+
+\begin{algorithm}
+\label{destructor}
+  \nosemic finalize = function() {\{} \;
+ \nosemic set{\_}first{\_}child(list()) \;
+  \nosemic set{\_}second{\_}child(list()) \;
+  \nosemic set{\_}third{\_}child(list()) \;
+ \nosemic set{\_}fourth{\_}child(list()) \;
+  \nosemic print("objeto finalizado") \;
+  \nosemic {\}} \;
+  \caption{Destrutor da classe Qnode}
+  \end{algorithm}
+
+\subsection{Espaço}
+
+\subsection{Herança}
+
+    O conceito de herança foi utilizado nas classes \textit{Qnode} e \textit{Particle}, sendo ambas
+    especializações da classe \textit{Point}. Como as duas classes especializadas compartilham informação
+    de posição, em vez de incluir esses parâmetros, optou-se por fazê-las herdarem-nos da classe \textit{Point},
+    que contém apenas essas informações.
+
+\subsection{Inclusão}
+
+\subsection{Paramétrico}
+
+\subsection{Sobrecarga}
+
+\subsection{Delegates}
+
 
 \subsection{Análise do algoritmo}
 
