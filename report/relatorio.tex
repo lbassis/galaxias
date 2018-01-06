@@ -623,7 +623,9 @@ de partículas, enquanto o eixo Y representa o número de comparações.
 
 \subsection{Análise da linguagem}
 
-A seguir são atribuídas notas às diferentes características da linguagem R quando considerando uma implementação usando o paradigma funcional. As notas foram dadas em um intervalo [0,5].
+A seguir são atribuídas notas às diferentes características da linguagem R
+considerando as duas implementações realizadas.
+As notas foram dadas em um intervalo [0,5].
 
 
 \begin{table}[ht]
@@ -634,25 +636,25 @@ A seguir são atribuídas notas às diferentes características da linguagem R q
         \textit{Característica} &
         \textit{Nota [0, 5]} \\
         \hline
-        Simplicidade & 3.5\\
+        Simplicidade & 3.0\\
         \hline
         Ortogonalidade & 4.5\\
         \hline
         Expressividade & 3.0\\
         \hline
-        Adequabilidade e variedade de estruturas de controle & 4.0\\
+        Adequabilidade e variedade de estruturas de controle & 3.5\\
         \hline
         Mecanismos de definição de tipos & 4.0\\
         \hline
-        Suporte a abstração de dados & 3.0\\
+        Suporte a abstração de dados & 3.5\\
         \hline
         Suporte a abstração de processos & 4.5\\
         \hline
-        Modelo de tipos & 3.0\\
+        Modelo de tipos & 3.5\\
         \hline
         Portabilidade & 3.0\\
         \hline
-        Reusabilidade & 4.5\\
+        Reusabilidade & 4.0\\
         \hline
         Suporte e documentação & 3.0\\
         \hline
@@ -673,33 +675,42 @@ A seguir, temos as análises que levaram a cada uma das notas mostradas na tabel
 
 \subsubsection{Simplicidade}
 O operador <- vai contra a simplicidade da linguagem, já que ele implementa a atribuição, assim como o operador =.
+Além disso, existem diversas implementações de classes, o que dificulta na elaboração do projeto do algoritmo.
 
 \subsubsection{Ortogonalidade}
 Diversas funções do programa alternam entre data.frames e listas, e a linguagem oferece suporte a isso naturalmente.
 
 \subsubsection{Expressividade}
-A expressividade é adequada no geral, porém no acesso à listas, a necessidade de usar dois colchetes para recuperar um elemento torna o código menos expressivo do que ele poderia ser. Como alternativa, temos as funções \textit{head} e \textit{tail}, porém as duas também contam com um fator incomum que é a necessidade de especificar quantos elementos serão recuperados da lista.
+A expressividade é adequada no geral, porém no acesso à listas, a necessidade de usar dois colchetes para recuperar um elemento torna o código menos expressivo
+do que ele poderia ser. Como alternativa, temos as funções \textit{head} e \textit{tail}, porém as duas também contam com um fator incomum:
+a necessidade de especificar quantos elementos serão recuperados da lista.
 
 \subsubsection{Adequabilidade e variedade de estruturas de controle}
-As estruturas de controle existem, mas a implementação funcional utiliza recursão em seu lugar. Apesar disso, alguns laços iterativos foram úteis para depuração do código.
+As estruturas de controle existem, mas a implementação funcional utiliza recursão em seu lugar e na
+implementação orientada a objeto foi necessário implementar uma pilha.
+Apesar disso, alguns laços iterativos foram úteis para depuração do código.
 
 \subsubsection{Mecanismos de definição de tipos}
 O tipo data.frame, utilizado para representar tabelas, funciona como uma definição de estrutura e atendeu bem ao desejado no trabalho.
 
 \subsubsection{Suporte a abstração de dados}
 A linguagem fornece a estrutura data.frame, que equivale a uma tabela em que cada coluna pode ter um valor de diferentes tipos. No entanto, não é criada uma estrutura propriamente dita, com sua própria semântica.
+Já na orientação a objetos, as opções de implementação de classes, apesar de diminuirem a simplicidade,
+fornecem mais opções de abstração de dados.
 
 \subsubsection{Suporte a abstração de processos}
 Implementa funções recursivas e inclusive funções como elementos de primeira ordem, tornando o suporte a abstração de processos excelente.
 
 \subsubsection{Modelo de tipos}
 Sendo uma linguagem dinamicamente tipada, o modelo de tipos deixa a desejar. Em alguns casos, houveram problemas de difícil identificação que, com um sistema de tipos mais robusto, seriam facilmente detectáveis.
+No entanto, na implementação orientada a objeto foram utilizados recursos para checagem de tipos, como no algoritmo \ref{parametric}.
 
 \subsubsection{Portabilidade}
 A linguagem oferece diversos pacotes, mas todos os utilizados precisaram ser instalados posteriormente.
 
 \subsubsection{Reusabilidade}
-A utilização de funções como elementos de primeira ordem faz com que a linguagem possua uma ótima reusabilidade.
+A utilização de funções como elementos de primeira ordem faz com que a linguagem possua uma ótima reusabilidade; já as
+múltiplas implementações de classes impactam negativamente nesse aspecto.
 
 \subsubsection{Suporte e documentação}
 Especialmente para este trabalho, que não utiliza a linguagem em um contexto em que ela se destaca, foi difícil encontrar referências para várias funcionalidades. No entanto, isso talvez esteja mais relacionado com a natureza da aplicação desenvolvida do que com a linguagem em si.
@@ -716,7 +727,18 @@ Para que essa característica seja analisada apropriadamente, seria necessário 
 \subsubsection{Custo}
 A curva de aprendizado é relativamente íngreme; além disso, o Rstudio eventualmente apresenta problemas em sua instalação e na instalação de seus pacotes. Por fim, para uma simulação física como a aqui apresentada, as estruturas nativas da linguagem e do ambiente não facilitam, portanto conclui-se que nesse caso o custo é alto.
 
+\section{Implementação funcional x Implementação orientada a objetos}
 
+A implementação funcional, em geral, foi mais adequada para a elaboração desse trabalho, possivelmente
+devido ao seu aspecto matemático. A utilização de recursão para iterar entre os elementos pareceu mais
+natural, até porque na versão orientada a objetos foi necessário uma nova classe para realizar as iterações.
+
+No entanto, a abstração de dados na orientação a objetos foi muito melhor. Enquanto na funcional haviam \textit{dataframes},
+que nada mais eram que tabelas se comportando como estruturas, na OO haviam classes propriamente ditas. A existência dos
+métodos específicos de cada classe deixou o código muito mais legível e claro.
+
+Com isso, o grupo conclui que, apesar da implementação funcional ter sido melhor, a verdadeira melhor opção seria
+uma combinação entre os dois paradigmas que fizesse uso dos melhores aspectos de cada um deles.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Conclusões
