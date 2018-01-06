@@ -1,11 +1,16 @@
 
 Stack <- setRefClass("Stack",
   fields = list(
-    stack = "list"
+    stack = "list",
+    type = "character"
   ),
   methods = list(
     push = function(e) {
-      .self$stack = c(e, .self$stack)
+      if (class(e) != type) {
+        stop("Argument type should be ",type," but received argument has type ",class(e))
+      } else {
+        .self$stack = c(e, .self$stack)
+      }
     },
     pop = function() {
       first = head(.self$stack, 1)

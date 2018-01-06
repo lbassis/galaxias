@@ -58,8 +58,8 @@ Qnode <- setRefClass("Qnode",
       ((.self$get_x() - node$get_x())^2 + (.self$get_y() - node$get_y())^2)^(1/2)
     },
     to_list = function() {
-      s <- Stack$new()
-      t <- Stack$new()
+      s <- Stack$new(type="Qnode")
+      t <- Stack$new(type="Qnode")
       s$push(.self)
       while (!s$is_empty()) {
         node <- s$pop()[[1]]
@@ -96,8 +96,8 @@ Qnode <- setRefClass("Qnode",
       }
     },
     compute_mass_distribution = function() {
-      s <- Stack$new()
-      t <- Stack$new()
+      s <- Stack$new(type="Qnode")
+      t <- Stack$new(type="Qnode")
       s$push(.self)
       while (!s$is_empty()) {
         node <- s$pop()[[1]]
@@ -127,11 +127,13 @@ Qnode <- setRefClass("Qnode",
         fx = f*dx/d
         fy = f*dy/d
         return(Point$new(x=fx,y=fy))
+      } else {
+        return(Point$new())
       }
     },
     compute_resultant_force = function(root) {
-      s <- Stack$new()
-      t <- Stack$new()
+      s <- Stack$new(type="Qnode")
+      t <- Stack$new(type="Point")
       s$push(root)
       while (!s$is_empty()) {
         node <- s$pop()[[1]]
