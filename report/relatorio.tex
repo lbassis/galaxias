@@ -738,7 +738,7 @@ Para que essa característica seja analisada apropriadamente, seria necessário 
 \subsubsection{Custo}
 A curva de aprendizado é relativamente íngreme; além disso, o Rstudio eventualmente apresenta problemas em sua instalação e na instalação de seus pacotes. Por fim, para uma simulação física como a aqui apresentada, as estruturas nativas da linguagem e do ambiente não facilitam, portanto conclui-se que nesse caso o custo é alto.
 
-\section{Implementação funcional x Implementação orientada a objetos}
+\section{Funcional x Orientada a objetos}
 
 A implementação funcional, em geral, foi mais adequada para a elaboração desse trabalho, possivelmente
 devido ao seu aspecto matemático. A utilização de recursão para iterar entre os elementos pareceu mais
@@ -756,16 +756,40 @@ uma combinação entre os dois paradigmas que fizesse uso dos melhores aspectos 
 %
 \chapter{CONCLUSÃO}
 
-Ao final deste trabalho, foi possível formar uma opinião sobre várias das construções da programação funcional que o grupo nunca havia implementado. No entanto, se tratando de uma simulação física, também foi confirmado que R não é a linguagem mais adequada para construir esse tipo de programa.
-O algoritmo implementado demonstra uma possibilidade de simular diversas partículas com uma complexidade reduzida. Contudo, devido à dificuldade para gerar casos de teste, só foram criadas simulações com um número pequeno de partículas, não aproveitando o potencial total do algoritmo. Por esse motivo, o grupo optou por elaborar o gráfico que demonstra a eficiência do algoritmo em relação à uma implementação em força bruta.
+Ao concluir este trabalho, foi possível realizar uma boa comparação entre uma implementação
+funcional e uma orientada a objetos. Enquanto a implementação funcional, no geral, parece mais
+coerente com a aplicação em questão, a organização e abstração da orientação a objetos revelou
+uma implementação mais compreensível.
 
-Houve algumas dificuldades iniciais para definir as estruturas da implementação, já que foi necessário encapsular
-as partículas juntamente com os subquadrantes.
+No entanto, por R ser uma linguagem tipicamente funcional, a documentação em relação a esse paradigma
+é muito mais rica e, portanto, sua implementação foi mais natural.
+
+As principais facilidades que a linguagem ofereceu foram no paradigma funcional; as funções
+\textit{lapply}, por exemplo (entre outras de alta ordem) facilitaram bastante a implementação.
+Além disso, o grupo considerou mais apropriado iterar sobre os elementos utilizando recursão, outro ponto
+em que o paradigma funcional se destaca.
+
+As limitações, ao contrário, apareceram mais no paradigma orientado a objeto. Não foi possível
+criar atributos e métodos com níveis diferentes de acessos e, por exemplo, a implementação do polimorfismo
+paramétrico foi uma adaptação do grupo, já que a linguagem não suportava nenhuma construção semelhante. No
+entanto, como já foi citado anteriormente, a abstração de dados foi muito superior nessa abordagem e, portanto,
+não se pode desmerecer a face orientada a objetos da linguagem.
+
+O algoritmo implementado demonstra uma possibilidade de simular diversas partículas com
+uma complexidade reduzida. Contudo, devido à dificuldade para gerar casos de teste,
+só foram criadas simulações com um número pequeno de partículas, não aproveitando o
+potencial total do algoritmo. Por esse motivo, o grupo optou por elaborar o
+gráfico que demonstra a eficiência do algoritmo em relação à uma implementação em força bruta.
+
+Também é importante citar que o grupo ainda não havia trabalhado com \textit{LaTeX} e
+houve um enorme aprendizado utilizando essa ferramenta, sendo um significativo empecilho a necessidade de
+escapar diversos dos caracteres que são frequentemente utilizados em R (como o {\$}, por exemplo). Mesmo
+assim, a ferramenta colaborou significativamente na construção do relatório e os resultados finais foram
+extremamente satisfatórios.
 
 Por fim, um problema que foi detectado no final da implementação foi que o grupo não implementou colisões.
-Dessa maneira, assim que duas partículas ficam muito próximas uma da outra, as suas acelerações crescem até que elas sejam "arremessadas" com uma velocidade irreal. No entanto, até a conclusão da implementação
-orientada a objeto, acredita-se que esse problema terá sido tratado.
-
+Dessa maneira, assim que duas partículas ficam muito próximas uma da outra, as suas acelerações crescem até que elas sejam "arremessadas"
+com uma velocidade irreal.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

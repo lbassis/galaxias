@@ -46,7 +46,7 @@
 \contentsline {subsubsection}{\numberline {2.4.12.13}Generalidade}{21}{subsubsection.2.4.12.13}
 \contentsline {subsubsection}{\numberline {2.4.12.14}Efici\IeC {\^e}ncia}{21}{subsubsection.2.4.12.14}
 \contentsline {subsubsection}{\numberline {2.4.12.15}Custo}{21}{subsubsection.2.4.12.15}
-\contentsline {section}{\numberline {2.5}Implementa\IeC {\c c}\IeC {\~a}o funcional x Implementa\IeC {\c c}\IeC {\~a}o orientada a objetos}{21}{section.2.5}
+\contentsline {section}{\numberline {2.5}Funcional x Orientada a objetos}{21}{section.2.5}
 \contentsline {chapter}{3~CONCLUS\IeC {\~A}O}{22}{CHAPTER.3}
 \contentsline {chapter}{\xspace {}Refer{\^e}ncias}{23}{schapter.2}
 \contentsfinish 
