@@ -39,7 +39,7 @@ Quad <- setRefClass("Quad",
       if (sub_index==1) Quad(top_left = Point(x = .self$get_top_left()$get_x(), y = .self$get_top_left()$get_y()), size = half_size) else
         if (sub_index==2) Quad(top_left = Point(x = .self$get_top_left()$get_x(), y = half_size+.self$get_top_left()$get_y()), size = half_size) else
           if (sub_index==3) Quad(top_left = Point(x = half_size+.self$get_top_left()$get_x(), y = .self$get_top_left()$get_y()), size = half_size) else
-            if (sub_index==4) Quad(top_left = oint(x = half_size+P.self$get_top_left()$get_x(), y = half_size+.self$get_top_left()$get_y()), size = half_size)
+            if (sub_index==4) Quad(top_left = Point(x = half_size+.self$get_top_left()$get_x(), y = half_size+.self$get_top_left()$get_y()), size = half_size)
     },
     fit_point = function(point) {
       bottom = .self$bottom_point();
