@@ -149,7 +149,19 @@ As implementações, tanto funcional quanto orientada a objeto, e relatório est
 
 	A linguagem fornece uma grande variedade de ferramentas para estatística, como modelagem linear e não-linear, classificação, clustering, testes estatísticos. Um dos seus pontos fortes é a facilidade com que gráficos bem construídos e prontos para uso em publicações científicas podem ser gerados. Esses gráficos incluem formulas e símbolos matemáticos onde necessário.
 
-	Resumindo, R é um conjunto integrado de métodos para manipulação de dados, cálculos e display gráfico que inclui \cite{linguagemR}:
+    Como foi descrito anteriormente, a linguagem é especialmente útil em aplicações estatísticas. Um exemplo possível é
+    a análise de equipes de \textit{hockey} disponível em \url{https://github.com/lbassis/hockey_analysis}. Nesse exemplo, fica fácil de
+    perceber a simplicidade com a qual a linguagem  manipula dados organizados em tabelas com observações em cada linha.
+    Essa facilidade vem majoritariamente das funções nativas da linguagem para esse tipo de aplicação, como por exemplo
+    \textit{filter}, \textit{select}, \textit{summarise}, entre outras.
+    A imutabilidade característica de linguagens funcionais funciona como uma maneira de manter os dados originais
+    constantes, mesmo realizando diversas operações para visualizá-los sob diferentes óticas. Além disso,
+    existem diversas bibliotecas que enriquecem a geração de gráficos, como por exemplo a \textit{ggplot}, tornando
+    os resultados ainda mais satisfatórios.
+
+    Resumindo, R é um conjunto integrado de métodos para manipulação de dados, cálculos e display gráfico que inclui \cite{linguagemR}:
+
+
 \begin{itemize}
 \item Uma série de operações sobre vetores, em particular matrizes;
 \item Uma extensa coleção de ferramentas intermediárias para análise de dados;
@@ -607,14 +619,13 @@ loop} $(particles, iteractions, name, updatePosAndVel)$\;
 O grupo teve dificuldade em encontrar valores de variáveis adequados para realizar as simulações. Portanto,
 não foi gerado nenhum caso de teste grande o suficiente para comprovar a eficiência do algoritmo em relação
 à uma solução em força bruta. Por isso, foi elaborado o gráfico \ref{fig:grafico} a partir do caso de teste elaborado, comparando
-a quantidade de comparações do algoritmo de força bruta com a solução implementada. O eixo X representa o número
-de partículas, enquanto o eixo Y representa o número de comparações.
+a quantidade de comparações do algoritmo de força bruta com a solução implementada.
 
 \begin{figure}[htb]
     \centering
     \caption{Comparação força bruta com Barnes-Hut}
     \fbox{
-        \includegraphics[width=20cm,height=10cm,keepaspectratio]{images/grafico.eps}
+        \includegraphics[width=20cm,height=10cm,keepaspectratio]{images/barnesPlot.eps}
     }
     \label{fig:grafico}
 \end{figure}
@@ -766,13 +777,5 @@ orientada a objeto, acredita-se que esse problema terá sido tratado.
 
 
 \bibliography{biblio.bib} % arquivo que contém as referências (no formato bib). Colocar as suas lá (se tiver dúvida sobre como adicionar novas referências, usar o software JabRef ou Medley)
-
-%\noindent SAMEER A. Barnes-Hut N-body Simulation in HTML/Javascript. Disponível em $<$https://github.com/Elucidation/Barnes-Hut-Tree-N-body-Implementation-in-HTML-Js$>$. Acesso em: nov. 2017.
-
-%\noindent R: What is R? Disponível em $<$https://www.r-project.org/about.html$>$. Acesso em: nov. 2017.
-
-%\noindent BERG I. The Barnes-Hut Galaxy Simulator. Disponível em $<$http://beltoforion.de/article.php?a=barnes-hut-galaxy-simulator$>$. Acesso em: nov. 2017.
-
-
 
 \end{document}
