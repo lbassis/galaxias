@@ -11,12 +11,6 @@ Point <- setRefClass("Point",
     },
     get_x = function() return(.self$x),
     get_y = function() return(.self$y),
-    sum_op = function(p) {
-      Point(x = .self$x + p$x, y = .self$y + p$y)
-    },
-    sub_op = function(p) {
-      Point(x = .self$x - p$x, y = .self$y - p$y)
-    },
     quadrant_i = function(quad_center) {# supondo que quad_center é um ponto tb
       if (.self$x <= quad_center$x) {
         if(.self$y <= quad_center$y) 1 else 2
@@ -31,3 +25,11 @@ Point <- setRefClass("Point",
     set_y = function(y) .self$y = y
   )
 )
+
+setMethod("+", c("Point", "Point"), function(e1, e2) {
+  Point(x = e1$get_x() + e2$get_x(), y = e1$get_y() + e2$get_y())
+})
+
+setMethod("-", c("Point", "Point"), function(e1, e2) {
+  Point(x = e1$get_x() - e2$get_x(), y = e1$get_y() - e2$get_y())
+})
