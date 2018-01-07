@@ -11,6 +11,20 @@ Point <- setRefClass("Point",
     },
     get_x = function() return(.self$x),
     get_y = function() return(.self$y),
+
+    get_max = function() return(max(.self$x, .self$y)),
+    pointwise_op_bin = function(p, op) { # returns new
+      return(Point$new(
+        x=op(.self$get_x(), p$get_x()),
+        y=op(.self$get_y(), p$get_y())
+      ))
+    },
+    pointwise_op_un = function(op) {
+      return(Point$new(
+        x=op(.self$get_x()),
+        y=op(.self$get_y())
+      ))
+    },
     quadrant_i = function(quad_center) {# supondo que quad_center é um ponto tb
       if (.self$x <= quad_center$x) {
         if(.self$y <= quad_center$y) 1 else 2
