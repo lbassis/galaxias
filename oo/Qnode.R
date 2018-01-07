@@ -42,13 +42,13 @@ Qnode <- setRefClass("Qnode",
         callSuper(...)
       }
     },
-    finalize = function() {
-      set_first_child(list())
-      set_second_child(list())
-      set_third_child(list())
-      set_fourth_child(list())
-      print("objeto finalizado")
-    },
+   # finalize = function() {
+      #set_first_child(list())
+      #set_second_child(list())
+      #set_third_child(list())
+      #set_fourth_child(list())
+    #  print("objeto finalizado")
+    #},
     
     get_first_child = function() .self$first_child,
     get_second_child = function() .self$second_child,
@@ -130,8 +130,8 @@ Qnode <- setRefClass("Qnode",
       }
     },
    
-    draw = function() {
-      draw.circle(.self$get_x(), .self$get_y(), .self$get_mass(), col="red", nv=1000, border = NA,lty=1,lwd=1)
+    draw = function(greatest) {
+      draw.circle(.self$get_x(), .self$get_y(), .self$get_mass()/greatest, col="red", nv=1000, border = NA,lty=1,lwd=1)
     },
     
     euclidean_distance = function(node) {
