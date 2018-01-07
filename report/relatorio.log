@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.1)  7 JAN 2018 18:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.1)  7 JAN 2018 18:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1899,50 +1899,53 @@ l.542 \subsection{Herança}
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 542.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 549.
+(babel)             in language  on input line 553.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 554.
+(babel)             in language  on input line 558.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 577.
+(babel)             in language  on input line 581.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 591.
+(babel)             in language  on input line 587.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 591.
+(babel)             in language  on input line 587.
  [17pdfTeX warning (ext4): destination with the same identifier (name{algocf.12
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.591     \end{algorithm}
-                         ]
+l.587 
+      ]
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 594.
+(babel)             in language  on input line 598.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 622.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 646.
+(babel)             in language  on input line 626.
 
 Underfull \hbox (badness 10000) has occurred while \output is active
 \T1/ptm/m/n/10.95 18
  []
 
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 652.
+(babel)             in language  on input line 632.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 652.
+(babel)             in language  on input line 632.
 [18pdfTeX warning (ext4): destination with the same identifier (name{algocf.13}
 ) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.652 
+l.632 
       pdfTeX warning (ext4): destination with the same identifier (name{algocf.
 14}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.652 
+l.632 
       ]
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 650.
 Package epstopdf Info: Source file: <images/barnesPlot.eps>
 (epstopdf)                    date: 2018-01-06 22:23:13
 (epstopdf)                    size: 9733 bytes
@@ -1951,37 +1954,42 @@ Package epstopdf Info: Source file: <images/barnesPlot.eps>
 (epstopdf)                    size: 11633 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/barnesPlot-eps-conv
 erted-to.pdf images/barnesPlot.eps>
-(epstopdf)             \includegraphics on input line 658.
+(epstopdf)             \includegraphics on input line 662.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/barnesPlot-eps-converted-to.pdf, id=548, 365.365pt x 288.07625pt>
+<images/barnesPlot-eps-converted-to.pdf, id=547, 365.365pt x 288.07625pt>
 File: images/barnesPlot-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/barnesPlot-eps-converted-to.pdf>
 Package pdftex.def Info: images/barnesPlot-eps-converted-to.pdf used on input l
-ine 658.
+ine 662.
 (pdftex.def)             Requested size: 360.8762pt x 284.537pt.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 664.
+(babel)             in language  on input line 668.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 716.
+(babel)             in language  on input line 720.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 716.
+(babel)             in language  on input line 724.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 727.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 727.
  [19pdfTeX warning (ext4): destination with the same identifier (name{algocf.15
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.716 \subsubsection{Simplicidade}
-                                   <./images/barnesPlot-eps-converted-to.pdf>]
+l.727 \subsubsection{Expressividade}
+                                    ]
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 716.
+(babel)             in language  on input line 727.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 720.
+(babel)             in language  on input line 732.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 723.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 728.
+(babel)             in language  on input line 737.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1991,40 +1999,36 @@ Underfull \hbox (badness 10000) has occurred while \output is active
  []
 
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 732.
+(babel)             in language  on input line 740.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 732.
-[20]
+(babel)             in language  on input line 740.
+[20 <./images/barnesPlot-eps-converted-to.pdf>]
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 733.
+(babel)             in language  on input line 740.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 736.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 741.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 744.
+(babel)             in language  on input line 745.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 748.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 751.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 754.
+(babel)             in language  on input line 751.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 754.
+(babel)             in language  on input line 751.
  [21]
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 752.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 755.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 758.
+(babel)             in language  on input line 759.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 761.
+(babel)             in language  on input line 762.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 764.
+(babel)             in language  on input line 765.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 767.
+(babel)             in language  on input line 768.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -2039,70 +2043,78 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 770.
 [22]
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 770.
+(babel)             in language  on input line 771.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 783.
+(babel)             in language  on input line 774.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 787.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 804.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 804.
  [23]
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 804.
- (./relatorio.bbl
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 Underfull \hbox (badness 10000) has occurred while \output is active
 \T1/ptm/m/n/10.95 24
  []
 
 Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 808.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 808.
+[24]
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 808.
+ (./relatorio.bbl
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 3.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 3.
-[24
+ [25
 
 ]
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 3.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 3.
- [25]
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 3.
-) 
-AED: lastpage setting LastPage
-
 Underfull \hbox (badness 10000) has occurred while \output is active
 \T1/ptm/m/n/10.95 26
  []
 
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 853.
+(babel)             in language  on input line 3.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 853.
-[26
+(babel)             in language  on input line 3.
+[26]
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 3.
+) 
+AED: lastpage setting LastPage
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 857.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 857.
+[27
 
 ]
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 853.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 853.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 853.
+(babel)             in language  on input line 857.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 857.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 857.
  (./relatorio.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 853.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 853.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 857.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 857.
 Package rerunfilecheck Info: File `relatorio.out' has not changed.
 (rerunfilecheck)             Checksum: C24D140DEBF4B44D315AC907879E18BD;10416.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 853.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 857.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 23073 strings out of 492995
- 373236 string characters out of 6132704
+ 23074 strings out of 492995
+ 373243 string characters out of 6132704
  478747 words of memory out of 5000000
  26125 multiletter control sequences out of 15000+600000
  39817 words of font info for 61 fonts, out of 8000000 for 9000
@@ -2117,10 +2129,10 @@ xlive/2017/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/local/texlive/2017/
 texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2017/texmf-dist
 /fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/typ
 e1/urw/times/utmri8a.pfb>
-Output written on relatorio.pdf (26 pages, 256590 bytes).
+Output written on relatorio.pdf (27 pages, 257185 bytes).
 PDF statistics:
- 690 PDF objects out of 1000 (max. 8388607)
- 638 compressed objects within 7 object streams
- 229 named destinations out of 1000 (max. 500000)
+ 694 PDF objects out of 1000 (max. 8388607)
+ 641 compressed objects within 7 object streams
+ 230 named destinations out of 1000 (max. 500000)
  429 words of extra memory for PDF output out of 10000 (max. 10000000)
 

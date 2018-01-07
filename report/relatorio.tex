@@ -546,6 +546,10 @@ loop} $(particles, iteractions, name, updatePosAndVel)$\;
     informações espaciais definidas na classe \textit{Point}, assim como a classe \textit{Qnode} herda as informações físicas
     de uma partícula.
 
+    Além disso, foi implementada a classe abstrata \textit{PointAbs}, da qual a classe \textit{Point}
+    herda. Com essa classe, a implementação já fica pronta para uma simulação com pontos em
+    três dimensões, uma possível extensão da aplicação atual.
+
 \subsection{Polimorfismo por Inclusão}
 
     O grupo não encontrou uma maneira de realizar o \textit{cast} de uma \textit{RefClass} e, portanto,
@@ -793,7 +797,7 @@ o número de iterações e a função que realiza o agrupamento conforme o algor
 e a computação das forças.
 
 Para testar a versão orientada a objeto é necessário executar, respectivamente, os códigos
-\textit{Stack.r}, \textit{Point.r}, \textit{Quad.r}, \textit{Particle.R}, \textit{Qnode.R} e
+\textit{Stack.r}, \textit{PointAbs.R}, \textit{Point.r}, \textit{Quad.r}, \textit{Particle.R}, \textit{Qnode.R} e
 \textit{Universe.r}, presentes em \textit{home/galaxias/oo}. Nessa implementação, o método
 \textit{start}, da classe \textit{Universe} recebe o número de iterações e realiza todos os procedimentos.
 O resultado é armazenado no arquivo \textit{home/galaxias/oo/result.gif}.
