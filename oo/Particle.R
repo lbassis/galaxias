@@ -12,6 +12,9 @@ Particle <- setRefClass("Particle",
   ),
   methods = list(
     initialize = function(.Object,mass=0,velocity=Point$new(),force=Point$new(),acceleration=Point$new(),quadrant_size=0,...) {
+      if (mass < 0) {
+        stop("attribute mass must be greater than 0")
+      }
       .self$mass = mass
       .self$velocity = velocity$copy()
       .self$force = force$copy()
