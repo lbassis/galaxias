@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.1)  7 JAN 2018 18:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.12.1)  7 JAN 2018 18:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2066,38 +2066,48 @@ Package babel Info: Redefining portuges shorthand "|
 ]
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 3.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 3.
+ [25]
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 3.
 ) 
 AED: lastpage setting LastPage
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+\T1/ptm/m/n/10.95 26
+ []
+
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 852.
+(babel)             in language  on input line 853.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 852.
-[25
+(babel)             in language  on input line 853.
+[26
 
 ]
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 852.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 852.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 852.
+(babel)             in language  on input line 853.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 853.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 853.
  (./relatorio.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 852.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 852.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 853.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 853.
 Package rerunfilecheck Info: File `relatorio.out' has not changed.
 (rerunfilecheck)             Checksum: C24D140DEBF4B44D315AC907879E18BD;10416.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 852.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 853.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 23072 strings out of 492995
- 373229 string characters out of 6132704
+ 23073 strings out of 492995
+ 373236 string characters out of 6132704
  478747 words of memory out of 5000000
  26125 multiletter control sequences out of 15000+600000
  39817 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 48i,12n,45p,10365b,3533s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 48i,12n,45p,10365b,3531s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc
 }</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
 </usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></
@@ -2107,10 +2117,10 @@ xlive/2017/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/local/texlive/2017/
 texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2017/texmf-dist
 /fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/typ
 e1/urw/times/utmri8a.pfb>
-Output written on relatorio.pdf (25 pages, 256243 bytes).
+Output written on relatorio.pdf (26 pages, 256590 bytes).
 PDF statistics:
- 685 PDF objects out of 1000 (max. 8388607)
- 634 compressed objects within 7 object streams
- 228 named destinations out of 1000 (max. 500000)
+ 690 PDF objects out of 1000 (max. 8388607)
+ 638 compressed objects within 7 object streams
+ 229 named destinations out of 1000 (max. 500000)
  429 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -834,9 +834,10 @@ escapar diversos dos caracteres que são frequentemente utilizados em R (como o 
 assim, a ferramenta colaborou significativamente na construção do relatório e os resultados finais foram
 extremamente satisfatórios.
 
-Por fim, um problema que foi detectado no final da implementação foi que o grupo não implementou colisões.
-Dessa maneira, assim que duas partículas ficam muito próximas uma da outra, as suas acelerações crescem até que elas sejam "arremessadas"
-com uma velocidade irreal.
+Por fim, ao finalizar a implementação funcional foi percebido que o simulador não previa colisões.
+Para minimizar esse problema, a versão orientada a objetos conta com um algoritmo que faz com que
+partículas muito próximas umas das outras exerçam uma repulsão umas nas outras. No entanto, apesar disso
+amenizar o problema, partícular com velocidades muito altas ainda podem vir a colidir.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

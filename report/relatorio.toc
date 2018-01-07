@@ -50,5 +50,5 @@
 \contentsline {section}{\numberline {2.5}Funcional x Orientada a objetos}{23}{section.2.5}
 \contentsline {section}{\numberline {2.6}Execu\IeC {\c c}\IeC {\~a}o do algoritmo}{23}{section.2.6}
 \contentsline {chapter}{3~CONCLUS\IeC {\~A}O}{24}{CHAPTER.3}
-\contentsline {chapter}{\xspace {}Refer{\^e}ncias}{25}{schapter.2}
+\contentsline {chapter}{\xspace {}Refer{\^e}ncias}{26}{schapter.2}
 \contentsfinish 
