@@ -518,6 +518,9 @@ loop} $(particles, iteractions, name, updatePosAndVel)$\;
     \textit{garbage collector} é invocado na execução do programa (isso pode ser feito forçadamente
     através do comando \textit{gc()}).
 
+    Apesar desse método ter sido implementado, ele era invocado em momentos inesperados e, portanto, ele foi
+    comentado no código. No entanto, sua implementação permanece nesse relatório para demonstrar seu uso.
+
 \begin{algorithm}
 \label{destructor}
   \nosemic finalize = function() {\{} \;
@@ -538,12 +541,15 @@ loop} $(particles, iteractions, name, updatePosAndVel)$\;
 
 \subsection{Herança}
 
-    O conceito de herança foi utilizado nas classes \textit{Qnode} e \textit{Particle}, sendo ambas
-    especializações da classe \textit{Point}. Como as duas classes especializadas compartilham informação
-    de posição, em vez de incluir esses parâmetros, optou-se por fazê-las herdarem-nos da classe \textit{Point},
-    que contém apenas essas informações.
+    O conceito de herança foi utilizado nas classes \textit{Qnode} e \textit{Particle}, sendo a primeira uma especialização
+    da segunda e a segunda uma especialização da classe \textit{Point}. Sendo assim, a classe \textit{Particle} herda as
+    informações espaciais definidas na classe \textit{Point}, assim como a classe \textit{Qnode} herda as informações físicas
+    de uma partícula.
 
 \subsection{Polimorfismo por Inclusão}
+
+    O grupo não encontrou uma maneira de realizar o \textit{cast} de uma \textit{RefClass} e, portanto,
+    não implementou nenhum método com polimorfismo por inclusão.
 
 \subsection{Polimorfismo Paramétrico}
 
@@ -613,6 +619,29 @@ loop} $(particles, iteractions, name, updatePosAndVel)$\;
 \caption{Método que faz uso do delegate}
 \end{algorithm}
 
+\subsection{Validação de parâmetros}
+
+    Se tratando de uma simulação física, é necessário que alguns valores sejam condizentes com a realidade.
+    Para que isso seja garantido, foram incluídas algumas exceções que garantem que a simulação não se comportará
+    de maneira inadequada. O algoritmo \ref{exception} ilusta a exceção que impede a criação de uma partícula
+    com massa negativa.
+
+    \begin{algorithm}
+        \label{exception}
+        \nosemic initialize = function(.Object,mass=0,velocity=Point{\$}new(),
+        \nosemic force=Point{\$}new(),acceleration=Point{\$}new(),quadrant{\_}size=0,...) {\{}
+        \nosemic if (mass < 0) {\{}
+        \nosemic stop("attribute mass must be greater than 0")
+        \nosemic {\}}
+        \nosemic .self{\$}mass = mass
+        \nosemic .self{\$}velocity = velocity{\$}copy()
+        \nosemic .self{\$}force = force{\$}copy()
+        \nosemic .self{\$}acceleration = acceleration{\$}copy()
+        \nosemic .self{\$}quadrant{\_}size = quadrant{\_}size
+        \nosemic callSuper(...)
+        \nosemic {\}}
+        \caption{Construtor da classe \textit{Particle}}
+    \end{algorithm}
 
 \subsection{Análise do algoritmo}
 
@@ -753,12 +782,21 @@ uma combinação entre os dois paradigmas que fizesse uso dos melhores aspectos 
 
 \section{Execução do algoritmo}
 
-Para testar a versão funcional utilizando a máquina virtual fornecida, basta executar os códigos
-presentes em \textit{home/galaxias/funcional/definitions.R} e
-\textit{home/galaxias/funcional/graphics.R} respectivamente. O resultado atualmente é armazenado
-no arquivo \textit{home/result.gif}.
+Para executar o código desenvolvido, foi elaborada uma máquina virtual enviada ao professor
+através do \textit{FileSender}.
 
-Para testar a versão orientada a objeto, [COMPLETAR AQUI AAAAA]
+A versão funcional exige que sejam executados, respectivamente, os códigos presentes em
+\textit{home/galaxias/funcional/definitions.R} e \textit{home/galaxias/funcional/graphics.R}.
+O resultado é armazenado no arquivo \textit{home/result.gif}. Nessa versão, a função \textit{draw}, presente
+no arquivo \textit{graphics.R}, é a principal, tendo como parâmetros a lista de partículas,
+o número de iterações e a função que realiza o agrupamento conforme o algoritmo de \textit{Barnes-Hut}
+e a computação das forças.
+
+Para testar a versão orientada a objeto é necessário executar, respectivamente, os códigos
+\textit{Stack.r}, \textit{Point.r}, \textit{Quad.r}, \textit{Particle.R}, \textit{Qnode.R} e
+\textit{Universe.r}, presentes em \textit{home/galaxias/oo}. Nessa implementação, o método
+\textit{start}, da classe \textit{Universe} recebe o número de iterações e realiza todos os procedimentos.
+O resultado é armazenado no arquivo \textit{home/galaxias/oo/result.gif}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Conclusões
