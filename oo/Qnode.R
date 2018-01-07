@@ -72,12 +72,13 @@ Qnode <- setRefClass("Qnode",
     },
     force_quad_insert = function(quad, child) {
       child_index = child$quadrant_i(quad$quad_center())
+      child$set_quadrant_size(quad$size * 0.5)
       .self$force_insert(child_index, child)
     },
     intern_node = function(quad) {
       if (.self$external()) {
         child = .self$init_from_particle(.self)
-        child$set_quadrant_size(quad$size/2)
+        child$set_quadrant_size(quad$size/2.0)
         
         force_quad_insert(quad, child)
       }
@@ -91,12 +92,9 @@ Qnode <- setRefClass("Qnode",
         while(qnode_ptr$external() == FALSE) { # attempts to insert at every internal node, untils stalemate
             quad_index = particle$quadrant_i(quad_ptr$quad_center());
             possible_child = qnode_ptr$get_child_from_index(quad_index)
-            
-            print("Possible child")
-            #print(possible_child)
-            
+
             if(length(possible_child)==0) { # succesful attempt
-              print("Empty child, inserting")
+              #print("Empty child, inserting")
               print(possible_child)
               qnode_ptr$force_quad_insert(quad_ptr, particle)
               
@@ -104,25 +102,12 @@ Qnode <- setRefClass("Qnode",
             }
             
             else { # stalemate
-              print("ACTUALLY ADVANCING")
+              #print("ACTUALLY ADVANCING")
               qnode_ptr <- possible_child[[1]]
-              #print(qnode_ptr)
-              #print(quad_ptr)
-              #print(particle)
-              
-              #print(quad_ptr)
               quad_ptr <- particle$subquadrant(quad_ptr)
-              #print(quad_ptr)
-              
-              print("ptr degree")
-              print(qnode_ptr$degree())
-              print("self degree")
-              print(.self$degree())
-              
             }
         }
-      
-        print("--END OF first ADVANCE")
+
         if(found == FALSE) { # solves stalemate and try again
           print(" internalizing--")
           print(qnode_ptr$degree())
@@ -135,7 +120,7 @@ Qnode <- setRefClass("Qnode",
     from_list = function(particles) { 
       root_quad = Quad$new(top_left=Point$new(x=0, y=0), size=0)
       for (p in particles) { root_quad$fit_point(p$to_point())}
-      print(root_quad)
+      #print(root_quad)
       
       if (length(particles) > 0) {
         p_head = particles[[1]]
@@ -144,21 +129,9 @@ Qnode <- setRefClass("Qnode",
         p_tail = tail(particles, n=length(particles)-1)
         qnode = Qnode$new()
         qnode = qnode$init_from_particle(p_head)
-        #qnode$set_quadrant_size(root_quad$size)
-        
-        #print(qnode)
-        #qnode$intern_node(root_quad)
-        #print(qnode)
-        #print(p_head$quadrant_i(root_quad$quad_center()))
-        for (p in p_tail) { 
-          qnode$quad_insert(root_quad, p) 
-          
-          #print(length(p_tail))
-          #print(length(qnode$to_list()))
-          print("---------------END OF INSERT----------------")
-          print(p$mass)
-        }
-        
+
+        for (p in p_tail) qnode$quad_insert(root_quad, p) 
+  
         return(qnode)
         
       }
@@ -329,33 +302,19 @@ third_child = Particle$new(x=-2, y=4, mass=3)
 
 childs = c(first_child, second_child, third_child)
 
-root_quad = Quad$new(top_left=Point$new(x=0, y=0), size=0)
-#root_quad$fit_point(first_child)
-#print(root_quad)
-#root_quad$fit_point(second_child)
-#print(root_quad)
-#root_quad$fit_point(third_child)
-#print(root_quad)
-
-print(length(qnode$from_list(childs)))
+# load childs
 qnode = qnode$from_list(childs)
 
 
-#qnode$force_insert(1, first_child)
-#qnode$force_insert(2, second_child)
-#print(qnode)
+#qnode2 = Qnode$new(quadrant_size=80, first_child=list(Qnode$new(x=1,y=2,mass=2), second_child=qnode))
 
-qnode2 = Qnode$new(quadrant_size=80, first_child=list(Qnode$new(x=1,y=2,mass=2), second_child=qnode))
+# physics test
+qnode$compute_mass_distribution()
+qnode$compute_forces()
+qnode$compute_accelerations()
+qnode$update_state()
 
-qnode2$compute_mass_distribution()
-qnode2$compute_forces()
-qnode2$compute_accelerations()
-qnode2$update_state()
-
-#print(qnode$degree())
 l = qnode$to_list()
 print(l); 
-print(length(l));
+print(length(l))
 
-qzin = Qnode$new()
-#qzin$empty();
