@@ -13,12 +13,34 @@ Qnode <- setRefClass("Qnode",
     fourth_child = "list"
    ),
   methods = list(
-    initialize = function(.Object, first_child=list(), second_child=list(), third_child=list(), fourth_child=list(), ...) {
-      .self$first_child = first_child
-      .self$second_child = second_child
-      .self$third_child = third_child
-      .self$fourth_child = fourth_child
-      callSuper(...)
+    initialize = function(.Object, initial_list=list(), first_child=list(), second_child=list(), third_child=list(), fourth_child=list(), ...) {
+
+      if (length(initial_list) > 0) { # from_list
+        particles = initial_list
+        
+        root_quad = Quad$new(top_left=Point$new(x=0, y=0), size=0)
+        for (p in particles) { root_quad$fit_point(p$to_point())}
+        #print(root_quad)
+        
+        
+        p_head = particles[[1]]
+        p_head$set_quadrant_size(root_quad$size)
+        .self <<- p_head$copy()
+        #print(.self)
+        
+        p_tail = tail(particles, n=length(particles)-1)
+        #print(length(p_tail))
+        
+        for (p in p_tail) .self$quad_insert(root_quad, p) 
+      }
+      else { # keyword init      
+        .self$first_child = first_child
+        .self$second_child = second_child
+        .self$third_child = third_child
+        .self$fourth_child = fourth_child
+      
+        callSuper(...)
+      }
     },
     finalize = function() {
       set_first_child(list())
@@ -85,7 +107,7 @@ Qnode <- setRefClass("Qnode",
 
             if(length(possible_child)==0) { # succesful attempt
               #print("Empty child, inserting")
-              print(possible_child)
+              #print(possible_child)
               qnode_ptr$force_quad_insert(quad_ptr, particle)
               
               found = TRUE
@@ -99,32 +121,15 @@ Qnode <- setRefClass("Qnode",
         }
 
         if(found == FALSE) { # solves stalemate and try again
-          print(" internalizing--")
-          print(qnode_ptr$degree())
-          print(quad_ptr)
+          #print(" internalizing--")
+          #print(qnode_ptr$degree())
+          #print(quad_ptr)
           
           qnode_ptr$intern_node(quad_ptr)
         }
       }
     },
-    from_list = function(particles) { 
-      root_quad = Quad$new(top_left=Point$new(x=0, y=0), size=0)
-      for (p in particles) { root_quad$fit_point(p$to_point())}
-      #print(root_quad)
-      
-      if (length(particles) > 0) {
-        p_head = particles[[1]]
-        p_head$set_quadrant_size(root_quad$size)
-        qnode = p_head$copy()
-        
-        p_tail = tail(particles, n=length(particles)-1)
-        for (p in p_tail) qnode$quad_insert(root_quad, p) 
-  
-        return(qnode)
-        
-      }
-    },
-    
+   
     draw = function() {
       draw.circle(.self$get_x(), .self$get_y(), .self$get_mass(), col="red", nv=1000, border = NA,lty=1,lwd=1)
     },
@@ -303,7 +308,7 @@ third_child = Qnode$new(x=-2, y=4, mass=3)
 childs = c(first_child, second_child, third_child)
 
 # load childs
-qnode = qnode$from_list(childs)
+qnode = Qnode$new(initial_list=childs)
 
 
 #qnode2 = Qnode$new(quadrant_size=80, first_child=list(Qnode$new(x=1,y=2,mass=2), second_child=qnode))
