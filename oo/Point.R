@@ -1,9 +1,12 @@
 # definiçao da classe
+source("PointAbs.R")
+
 Point <- setRefClass("Point",
   fields = list(
     x = "numeric",
     y = "numeric"
   ),
+  contains="PointAbs",
   methods = list(
     initialize = function(.Object,x=0,y=0) {
       .self$x = x
