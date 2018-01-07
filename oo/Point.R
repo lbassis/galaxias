@@ -11,6 +11,7 @@ Point <- setRefClass("Point",
     },
     get_x = function() return(.self$x),
     get_y = function() return(.self$y),
+    get_max = function() return(max(.self$x, .self$y)),
     sum_op = function(p) {
       Point(x = .self$x + p$x, y = .self$y + p$y)
     },
