@@ -145,10 +145,12 @@ Qnode <- setRefClass("Qnode",
         node <- s$pop()[[1]]
         children = node$childs()
         for (i in children) {
-          if (!i$external()) {
-            s$push(i)
-          } else {
-            t$push(i)
+          if (class(i) == "Qnode") {
+            if (!i$external()) {
+              s$push(i)
+            } else {
+              t$push(i)
+            }
           }
         }
       }
@@ -184,8 +186,10 @@ Qnode <- setRefClass("Qnode",
         children = node$childs()
         t$push(node)
         for (i in children) {
-          if (!i$external()) {
-            s$push(i)
+          if (class(i) == "Qnode") {
+            if (!i$external()) {
+              s$push(i)
+            }
           }
         }
       }
@@ -203,9 +207,13 @@ Qnode <- setRefClass("Qnode",
       if (d > 0) {
         dx = .self$get_x() - node$get_x()
         dy = .self$get_y() - node$get_y()
-        f = (G*m1*m2)/d^2
+        f = -(G*m1*m2)/d^2
         fx = f*dx/d
         fy = f*dy/d
+        if (d < 0.05) {
+          fx = -fx
+          fy = -fy
+        }
         return(Point$new(x=fx,y=fy))
       } else {
         return(Point$new())
@@ -263,7 +271,7 @@ Qnode <- setRefClass("Qnode",
       }
     },
     update_position_and_velocity = function() {
-      t = 1
+      t = 0.09
       ax = .self$get_ax()
       ay = .self$get_ay()
       vx = .self$get_vx()

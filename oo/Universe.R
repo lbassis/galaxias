@@ -22,6 +22,7 @@ Universe <- setRefClass("Universe",
     greatest_mass = function(qnode_list) {
       
       greatest = 0
+      i <- 0
       for (q in qnode_list) {
         mass = q$get_mass()
 
@@ -53,7 +54,7 @@ Universe <- setRefClass("Universe",
       qnode_list = list()
       i <- 0
       while(i < 20) {
-        q = Qnode$new(x=runif(1,0.01,0.99),y=runif(1,0.01,0.99),mass=runif(1, 0.01, 0.99)*10^7,velocity=Point$new(x=runif(1, 0.001, 0.01),y=runif(1, 0.001, 0.01)))
+        q = Qnode$new(x=runif(1,0.01,0.99),y=runif(1,0.01,0.99),mass=runif(1, 0.01, 0.99)*10^7)
         qnode_list = c(qnode_list, q)
         i <- i+1
       }
@@ -78,4 +79,4 @@ Universe <- setRefClass("Universe",
 )
 
 u = Universe$new()
-u$start(10)
+u$start(30)
