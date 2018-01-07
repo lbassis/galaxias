@@ -20,16 +20,6 @@ Qnode <- setRefClass("Qnode",
       .self$fourth_child = fourth_child
       callSuper(...)
     },
-    init_from_particle = function(particle) {
-      return(Qnode$new(x = particle$x,
-                       y = particle$y,
-                       mass=particle$mass, 
-                       velocity=particle$velocity,
-                       force=particle$force,
-                       acceleration=particle$acceleration,
-                       quadrant_size=particle$quadrant_size
-      ))
-    },
     finalize = function() {
       set_first_child(list())
       set_second_child(list())
@@ -64,7 +54,7 @@ Qnode <- setRefClass("Qnode",
     },
     force_insert = function(child_index, child) {
       # overwrites
-      child = .self$init_from_particle(child)
+
       if(child_index==1)       .self$set_first_child(child)
       else if (child_index==2) .self$set_second_child(child)
       else if (child_index==3) .self$set_third_child(child)
@@ -77,7 +67,7 @@ Qnode <- setRefClass("Qnode",
     },
     intern_node = function(quad) {
       if (.self$external()) {
-        child = .self$init_from_particle(.self)
+        child = .self$copy()
         child$set_quadrant_size(quad$size/2.0)
         
         force_quad_insert(quad, child)
@@ -125,11 +115,9 @@ Qnode <- setRefClass("Qnode",
       if (length(particles) > 0) {
         p_head = particles[[1]]
         p_head$set_quadrant_size(root_quad$size)
+        qnode = p_head$copy()
         
         p_tail = tail(particles, n=length(particles)-1)
-        qnode = Qnode$new()
-        qnode = qnode$init_from_particle(p_head)
-
         for (p in p_tail) qnode$quad_insert(root_quad, p) 
   
         return(qnode)
@@ -308,9 +296,9 @@ Particle$methods(to_qnode = function() {
 
 ## TESTS
 qnode = Qnode$new(quadrant_size=40)
-first_child=Particle$new(x=1,y=3,mass=1)
-second_child=Particle$new(x=2,y=-2,mass=2)
-third_child = Particle$new(x=-2, y=4, mass=3)
+first_child=Qnode$new(x=1,y=3,mass=1)
+second_child=Qnode$new(x=2,y=-2,mass=2)
+third_child = Qnode$new(x=-2, y=4, mass=3)
 
 childs = c(first_child, second_child, third_child)
 
