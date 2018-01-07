@@ -294,6 +294,18 @@ Qnode <- setRefClass("Qnode",
   )
 )
 
+Particle$methods(to_qnode = function() {
+  Qnode$new(
+    x=.self$get_x(),
+    y=.self$get_y(),
+    mass=.self$get_mass(),
+    velocity=.self$get_velocity(),
+    force=.self$get_force(),
+    acceleration=.self$get_acceleration(),
+    quadrant_size=.self$get_quadrant_size()
+  )
+})
+
 ## TESTS
 qnode = Qnode$new(quadrant_size=40)
 first_child=Particle$new(x=1,y=3,mass=1)

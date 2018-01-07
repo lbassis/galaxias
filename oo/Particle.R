@@ -38,7 +38,8 @@ Particle <- setRefClass("Particle",
     set_velocity = function(velocity) .self$velocity = velocity$copy(),
     set_force = function(force) .self$force = force$copy(),
     set_acceleration = function(acceleration) .self$acceleration = acceleration$copy(),
-    set_quadrant_size = function(quadrant_size) .self$quadrant_size = quadrant_size
+    set_quadrant_size = function(quadrant_size) .self$quadrant_size = quadrant_size,
+    to_qnode = function() {}
   )
       
 )
