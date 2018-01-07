@@ -1,5 +1,6 @@
 library(plotrix)
 source("Particle.R")
+source("Stack.R")
 
 # o qnode herdando de particle faz com que nao precise mais que ele tenha o atributo particle
 
@@ -19,6 +20,16 @@ Qnode <- setRefClass("Qnode",
       .self$fourth_child = fourth_child
       callSuper(...)
     },
+    init_from_particle = function(particle) {
+      return(Qnode$new(x = particle$x,
+                       y = particle$y,
+                       mass=particle$mass, 
+                       velocity=particle$velocity,
+                       force=particle$force,
+                       acceleration=particle$acceleration,
+                       quadrant_size=particle$quadrant_size
+      ))
+    },
     finalize = function() {
       set_first_child(list())
       set_second_child(list())
@@ -26,17 +37,25 @@ Qnode <- setRefClass("Qnode",
       set_fourth_child(list())
       print("objeto finalizado")
     },
+    
     get_first_child = function() .self$first_child,
     get_second_child = function() .self$second_child,
     get_third_child = function() .self$third_child,
     get_fourth_child = function() .self$fourth_child,
+    get_child_from_index = function(index) {
+      if(index==1) return(.self$get_first_child());
+      if(index==2) return(.self$get_second_child());
+      if(index==3) return(.self$get_third_child());
+      if(index==4) return(.self$get_fourth_child());
+    },
     set_first_child = function(child) .self$first_child <- list(child),
     set_second_child = function(child) .self$second_child <- list(child),
-    set_third_child = function(child) .self$third_child <- child,
-    set_fourth_child = function(child) .self$fourth_child <- child,
+    set_third_child = function(child) .self$third_child <- list(child),
+    set_fourth_child = function(child) .self$fourth_child <- list(child),
     childs = function() {
       c(.self$first_child, .self$second_child, .self$third_child, .self$fourth_child)
     },
+    
     external = function() .self$degree() == 0,
     degree = function() {
       #print(.self$childs());
@@ -45,11 +64,106 @@ Qnode <- setRefClass("Qnode",
     },
     force_insert = function(child_index, child) {
       # overwrites
+      child = .self$init_from_particle(child)
       if(child_index==1)       .self$set_first_child(child)
       else if (child_index==2) .self$set_second_child(child)
       else if (child_index==3) .self$set_third_child(child)
       else if (child_index==4) .self$set_fourth_child(child)
     },
+    force_quad_insert = function(quad, child) {
+      child_index = child$quadrant_i(quad$quad_center())
+      .self$force_insert(child_index, child)
+    },
+    intern_node = function(quad) {
+      if (.self$external()) {
+        child = .self$init_from_particle(.self)
+        child$set_quadrant_size(quad$size/2)
+        
+        force_quad_insert(quad, child)
+      }
+    },
+    quad_insert = function(root_quad, particle) {
+      qnode_ptr <- .self
+      quad_ptr <- root_quad
+      found = FALSE
+      
+      while(found == FALSE) {
+        while(qnode_ptr$external() == FALSE) { # attempts to insert at every internal node, untils stalemate
+            quad_index = particle$quadrant_i(quad_ptr$quad_center());
+            possible_child = qnode_ptr$get_child_from_index(quad_index)
+            
+            print("Possible child")
+            #print(possible_child)
+            
+            if(length(possible_child)==0) { # succesful attempt
+              print("Empty child, inserting")
+              print(possible_child)
+              qnode_ptr$force_quad_insert(quad_ptr, particle)
+              
+              found = TRUE
+            }
+            
+            else { # stalemate
+              print("ACTUALLY ADVANCING")
+              qnode_ptr <- possible_child[[1]]
+              #print(qnode_ptr)
+              #print(quad_ptr)
+              #print(particle)
+              
+              #print(quad_ptr)
+              quad_ptr <- particle$subquadrant(quad_ptr)
+              #print(quad_ptr)
+              
+              print("ptr degree")
+              print(qnode_ptr$degree())
+              print("self degree")
+              print(.self$degree())
+              
+            }
+        }
+      
+        print("--END OF first ADVANCE")
+        if(found == FALSE) { # solves stalemate and try again
+          print(" internalizing--")
+          print(qnode_ptr$degree())
+          print(quad_ptr)
+          
+          qnode_ptr$intern_node(quad_ptr)
+        }
+      }
+    },
+    from_list = function(particles) { 
+      root_quad = Quad$new(top_left=Point$new(x=0, y=0), size=0)
+      for (p in particles) { root_quad$fit_point(p$to_point())}
+      print(root_quad)
+      
+      if (length(particles) > 0) {
+        p_head = particles[[1]]
+        p_head$set_quadrant_size(root_quad$size)
+        
+        p_tail = tail(particles, n=length(particles)-1)
+        qnode = Qnode$new()
+        qnode = qnode$init_from_particle(p_head)
+        #qnode$set_quadrant_size(root_quad$size)
+        
+        #print(qnode)
+        #qnode$intern_node(root_quad)
+        #print(qnode)
+        #print(p_head$quadrant_i(root_quad$quad_center()))
+        for (p in p_tail) { 
+          qnode$quad_insert(root_quad, p) 
+          
+          #print(length(p_tail))
+          #print(length(qnode$to_list()))
+          print("---------------END OF INSERT----------------")
+          print(p$mass)
+        }
+        
+        return(qnode)
+        
+      }
+    },
+    
     draw = function() {
       draw.circle(.self$get_x(), .self$get_y(), .self$get_mass(), col="red", nv=1000, border = NA,lty=1,lwd=1)
     },
@@ -209,13 +323,27 @@ Qnode <- setRefClass("Qnode",
 
 ## TESTS
 qnode = Qnode$new(quadrant_size=40)
-first_child=Qnode$new(x=2,y=2,mass=2)
-second_child=Qnode$new(x=3,y=2,mass=2)
+first_child=Particle$new(x=1,y=3,mass=1)
+second_child=Particle$new(x=2,y=-2,mass=2)
+third_child = Particle$new(x=-2, y=4, mass=3)
+
+childs = c(first_child, second_child, third_child)
+
+root_quad = Quad$new(top_left=Point$new(x=0, y=0), size=0)
+#root_quad$fit_point(first_child)
+#print(root_quad)
+#root_quad$fit_point(second_child)
+#print(root_quad)
+#root_quad$fit_point(third_child)
+#print(root_quad)
+
+print(length(qnode$from_list(childs)))
+qnode = qnode$from_list(childs)
 
 
-qnode$force_insert(1, first_child)
-qnode$force_insert(2, second_child)
-print(qnode)
+#qnode$force_insert(1, first_child)
+#qnode$force_insert(2, second_child)
+#print(qnode)
 
 qnode2 = Qnode$new(quadrant_size=80, first_child=list(Qnode$new(x=1,y=2,mass=2), second_child=qnode))
 
@@ -224,6 +352,10 @@ qnode2$compute_forces()
 qnode2$compute_accelerations()
 qnode2$update_state()
 
-print(qnode$degree())
+#print(qnode$degree())
 l = qnode$to_list()
-print(l)
+print(l); 
+print(length(l));
+
+qzin = Qnode$new()
+#qzin$empty();
