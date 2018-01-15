@@ -50,10 +50,10 @@ Universe <- setRefClass("Universe",
       print(filename)
     },
     
-    start = function(iterations) {
+    start = function(iterations, n_particles, out_file) {
       qnode_list = list()
       i <- 0
-      while(i < 20) {
+      while(i < n_particles) {
         q = Qnode$new(x=runif(1,0.01,0.99),y=runif(1,0.01,0.99),mass=runif(1, 0.01, 0.99)*10^7)
         qnode_list = c(qnode_list, q)
         i <- i+1
@@ -71,7 +71,7 @@ Universe <- setRefClass("Universe",
         i <- i+1
       }
       
-      system("convert -delay 10 *.jpg result.gif")
+      system(paste("convert -delay 10 *.jpg ", out_file, ".gif", sep=""))
       file.remove(list.files(pattern=".jpg"))
       
     }
@@ -79,4 +79,5 @@ Universe <- setRefClass("Universe",
 )
 
 u = Universe$new()
-u$start(30)
+u$start(3, 20, "result1")
+u$start(30, 10, "result2")
